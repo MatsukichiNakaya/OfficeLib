@@ -286,3 +286,9 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/LibTester/LibTester.csproj
+/exe/LibTester.vshost.exe.manifest
+/exe/LibTester.vshost.exe.config
+/exe/LibTester.vshost.exe
+/exe/LibTester.exe.config
+/exe/LibTester.exe
