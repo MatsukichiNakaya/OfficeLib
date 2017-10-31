@@ -87,16 +87,16 @@ namespace OfficeLib.XLS
         /// <param name="row">Row number of the sheet</param>
         public Object[] this[Int32 row]
         {
-            get { return EntireField.Data[row]; }
-            set { EntireField.Data[row] = value; }
+            get { return this.EntireField.Data[row]; }
+            set { this.EntireField.Data[row] = value; }
         }
 
         /// <summary>Get cell value</summary>
         /// <param name="address">Sheet address</param>
         public Object this[Address address]
         {
-            get { return EntireField.Data[address.Row - 1][address.Column - 1]; }
-            set { EntireField.Data[address.Row - 1][address.Column - 1] = value; }
+            get { return this.EntireField.Data[address.Row - 1][address.Column - 1]; }
+            set { this.EntireField.Data[address.Row - 1][address.Column - 1] = value; }
         }
 
         /// <summary>Get Values in the specified range</summary>
@@ -107,7 +107,7 @@ namespace OfficeLib.XLS
             get
             {
                 Int32 width = Math.Abs((Int32)(startAddress.Column - endAddress.Column));
-                return EntireField.Data.RangeTake
+                return this.EntireField.Data.RangeTake
                         ((Int32)startAddress.Row - 1, (Int32)endAddress.Row,
                         (Int32)startAddress.Column - 1, width + 1).ToJagArray();
             }
@@ -142,7 +142,7 @@ namespace OfficeLib.XLS
         {
             if (!excel.SelectSheet(this.Name))
             {
-                throw new Exception(String.Format("{0} is Nothing. Can not Read.", this, Name));
+                throw new Exception(String.Format("{0} is Nothing. Can not Read.", this, this.Name));
             }
             // Start "A1" from there Get the maximum amount of data
             this.EntireField = new Field<Object>(
@@ -250,11 +250,11 @@ namespace OfficeLib.XLS
         {
             if (!excel.SelectSheet(this.Name))
             {
-                throw new Exception(String.Format("{0} is Nothing. Can not write.", this, Name));
+                throw new Exception(String.Format("{0} is Nothing. Can not write.", this, this.Name));
             }
             if(this.EntireField == null) { return; }
 
-            Write(excel, EntireField.Data, "A1".ToAddress());
+            Write(excel, this.EntireField.Data, "A1".ToAddress());
         }
 
         /// <summary>

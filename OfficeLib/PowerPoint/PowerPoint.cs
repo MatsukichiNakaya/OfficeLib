@@ -55,12 +55,7 @@ namespace OfficeLib.PPT
                                                        MsoTriState.msoFalse,    // Title is filename
                                                        MsoTriState.msoFalse }); // Hidden
             }
-            catch (Exception ex)
-            {
-                //this.LastErrorLog = String.Format("Open:{0}\r\n{1}",
-                //                                    ex.Message, ex.StackTrace);
-                return false;
-            }
+            catch (Exception) { throw; }
             return true;
         }
 
@@ -75,12 +70,7 @@ namespace OfficeLib.PPT
             {
 
             }
-            catch (Exception ex)
-            {
-                //this.LastErrorLog = String.Format("Open:{0}\r\n{1}",
-                //                                    ex.Message, ex.StackTrace);
-                return false;
-            }
+            catch (Exception) { throw; }
             return true;
         }
         #endregion
@@ -111,11 +101,7 @@ namespace OfficeLib.PPT
                 ClosePresentation();
                 QuitAplication();
             }
-            catch (Exception ex)
-            {
-                //this.LastErrorLog = String.Format("Close:{0}\r\n{1}",
-                //                                     ex.Message, ex.StackTrace);
-            }
+            catch (Exception) { throw; }
         }
 
         /// <summary>

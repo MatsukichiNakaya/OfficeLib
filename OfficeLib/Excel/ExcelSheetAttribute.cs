@@ -19,8 +19,8 @@ namespace OfficeLib.XLS
         /// <summary>Constructor</summary>
         public ExcelSheetAttribute(EnumSheetPermission SheetParm) : base(SheetParm)
         {
-            RowMax = DEF_ROW_MAX;
-            ColMax = DEF_COL_MAX;
+            this.RowMax = DEF_ROW_MAX;
+            this.ColMax = DEF_COL_MAX;
         }
     }
 }

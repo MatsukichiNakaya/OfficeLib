@@ -32,7 +32,7 @@ namespace OfficeLib.XLS
         {
             this.WorkSheets = new Dictionary<String, WorkSheet>();
             this.Name = String.Empty;
-            _sheetNames = new HashSet<String>();
+            this._sheetNames = new HashSet<String>();
         }
 
         /// <summary>Constructor</summary>
@@ -42,7 +42,7 @@ namespace OfficeLib.XLS
             this.Path = filePath;
             this.Name = System.IO.Path.GetFileNameWithoutExtension(filePath);
             this.WorkSheets = new Dictionary<String, WorkSheet>();
-            _sheetNames = new HashSet<String>();
+            this._sheetNames = new HashSet<String>();
         }
         #endregion
 
@@ -75,9 +75,9 @@ namespace OfficeLib.XLS
                 }
                 foreach (var name in excel.SheetNames)
                 {
-                    if (!WorkSheets.ContainsKey(name))
+                    if (!this.WorkSheets.ContainsKey(name))
                     {   // Add unconfigured sheet
-                        WorkSheets.Add(name, new WorkSheet(name));
+                        this.WorkSheets.Add(name, new WorkSheet(name));
                     }
                 }
                 // Read data on each sheet
@@ -267,7 +267,7 @@ namespace OfficeLib.XLS
         /// </summary>
         private IEnumerable<String> GetKeys()
         {
-            foreach (var key in WorkSheets.Keys)
+            foreach (var key in this.WorkSheets.Keys)
             {
                 yield return key;
             }

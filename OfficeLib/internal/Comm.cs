@@ -17,9 +17,8 @@ namespace OfficeLib
         /// <summary>
         /// Is it an array containing keys
         /// </summary>
-        /// <param name="values"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
+        /// <param name="values">value</param>
+        /// <param name="key">key</param>
         public static Boolean Contains<T>(this T[] values, T key)
         {
             var checker = new HashSet<T>(values);
@@ -30,8 +29,7 @@ namespace OfficeLib
         /// <summary>
         /// String is null or empty
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">value</param>
         public static Boolean IsNullOrEmpty(this String value)
         {
             return value == null || value == String.Empty;

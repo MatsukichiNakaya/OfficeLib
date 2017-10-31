@@ -28,7 +28,7 @@ namespace OfficeLib
                                 srcTable?.Length ?? 0 : joinTable?.Length ?? 0;
                 result = Join(srcTable, joinTable, rows);
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             return result;
         }
 
@@ -54,7 +54,7 @@ namespace OfficeLib
                                 srcTable?.Length ?? 0 : joinTable?.Length ?? 0;
                 result = Join(srcTable, joinTable, rows);
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             return result;
         }
 
@@ -86,7 +86,7 @@ namespace OfficeLib
                     if (row < joinTable.Length) { joinTable[row]?.CopyTo(result[row], colSrc); }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             return result;
         }
 
@@ -101,18 +101,18 @@ namespace OfficeLib
         /// </remarks>
         public static T[][] Union<T>(this T[][] srcTable, params T[][][] unionTable)
         {
-            List<T[]> result = new List<T[]>();
+            var result = new List<T[]>();
             try
-            {
-                List<T[][]> list = new List<T[][]>();
-                list.Add(srcTable);        // ベースと追加要素を
-                list.AddRange(unionTable); // ひとつのコレクションに集約
+            {   // ベースと追加要素を
+                var list = new List<T[][]> { srcTable };
+                // ひとつのコレクションに集約
+                list.AddRange(unionTable); 
                 foreach (T[][] rows in list)
                 {
                     foreach (T[] row in rows) { result.Add(row); }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             return result.ToArray();
         }
         #endregion
@@ -124,7 +124,7 @@ namespace OfficeLib
         /// <param name="dividCount">分割数</param>
         public static T[][][] VDividingArray<T>(this T[][] src, Int32 dividCount)
         {
-            List<T[][]> result = new List<T[][]>();
+            var result = new List<T[][]>();
             try
             {
                 Int32 colLength = src.ColumnsMax();
@@ -137,7 +137,7 @@ namespace OfficeLib
 
                 while (pos < colLength)
                 {
-                    List<T[]> tables = new List<T[]>();
+                    var tables = new List<T[]>();
                     for (var row = 0; row < src.Length; row++)
                     {
                         try     // 指定位置から指定数の要素を取得
@@ -148,7 +148,7 @@ namespace OfficeLib
                     pos += dividCol;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             return result.ToArray();
         }
 
@@ -158,7 +158,7 @@ namespace OfficeLib
         /// <param name="divid">分割数</param>
         public static T[][][] HDividingArray<T>(this T[][] src, Int32 divid)
         {
-            List<T[][]> result = new List<T[][]>();
+            var result = new List<T[][]>();
 
             Int32 dividRow = src.Length / divid;
             // 割り切れない場合は終了
@@ -166,10 +166,10 @@ namespace OfficeLib
             // 無限ループになるため終了
             if (dividRow <= 0) { return new T[][][] { src }; }
 
-            Queue<T[]> rowQueue = new Queue<T[]>(src);
+            var rowQueue = new Queue<T[]>(src);
             while (rowQueue.Count > 0)
             {
-                List<T[]> row = new List<T[]>();
+                var row = new List<T[]>();
                 for (var i = 0; i < dividRow; i++) // 要素数ごとの塊を作成
                 {   // 一行ずつ配列を格納
                     try { row.Add(rowQueue.Dequeue()); }
@@ -206,7 +206,7 @@ namespace OfficeLib
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             return result;
         }
 
@@ -234,7 +234,7 @@ namespace OfficeLib
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             return result;
         }
         #endregion
@@ -323,7 +323,7 @@ namespace OfficeLib
         /// <param name="src">配列の配列</param>
         public static T[] ToSingleArray<T>(this IEnumerable<IEnumerable<T>> src)
         {
-            List<T> result = new List<T>();
+            var result = new List<T>();
             foreach (IEnumerable<T> row in src)
             {   // 順繰りに配列へ格納していく
                 result.AddRange(row);

@@ -118,7 +118,7 @@ namespace OfficeLib.XLS
         /// <summary>Sheet names in the Book</summary>
         public String[] SheetNames
         {   // When not yet acquired : When acquired
-            get { return _sheetNames ?? GetWorkBookSheetNames(); }
+            get { return this._sheetNames ?? GetWorkBookSheetNames(); }
         }
         #endregion
 
@@ -126,7 +126,7 @@ namespace OfficeLib.XLS
         /// <summary>
         /// Constructor
         /// </summary>
-        public Excel() : base(PROG_ID) { _sheetNames = null; }
+        public Excel() : base(PROG_ID) { this._sheetNames = null; }
         #endregion
 
         #region --- Open ---
@@ -172,7 +172,7 @@ namespace OfficeLib.XLS
         {
             try
             {
-                _sheetNames = null;
+                this._sheetNames = null;
                 this.Path = System.IO.Path.GetFullPath(options[0] as String ?? "");
 
                 if (!System.IO.File.Exists(this.Path)) { return false; }
@@ -193,10 +193,7 @@ namespace OfficeLib.XLS
                 // By setting it to "saved", the save dialog is not displayed at the end.
                 this.Book.SetProperty(PROP_SAVED, new Object[] { MsoTriState.msoTrue });
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            catch (Exception) { throw; }
             return true;
         }
 
@@ -251,10 +248,7 @@ namespace OfficeLib.XLS
                 // By setting it to "saved", the save dialog is not displayed at the end.
                 this.Book.SetProperty(PROP_SAVED, new Object[] { MsoTriState.msoTrue });
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            catch (Exception) { throw; }
             return true;
         }
         #endregion
@@ -271,7 +265,7 @@ namespace OfficeLib.XLS
         {
             try
             {   // Sheet list clear
-                _sheetNames = null;
+                this._sheetNames = null;
 
                 if (this.Book != null)
                 {   // Close the Book
@@ -280,7 +274,7 @@ namespace OfficeLib.XLS
                 // Quit the Application
                 QuitAplication();
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             finally
             {   // free the sheet, book and work area
                 ReleaseObjects(this.Sheet, this.Book, this.WorkArea);
@@ -319,7 +313,7 @@ namespace OfficeLib.XLS
             {   // Get number of sheets
                 sheets = this.Book?.GetProperty(OBJECT_SHEET);
                 Object countObject = sheets?.GetProperty(PROP_COUNT); 
-                Int32 count = Convert.ToInt32(countObject ?? 0);
+                var count = Convert.ToInt32(countObject ?? 0);
                 Object sheet = null;
                 result = new String[count];
 
@@ -330,7 +324,7 @@ namespace OfficeLib.XLS
                     result[i] = sheet?.GetProperty(PROP_NAME) as String;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             finally { ReleaseObject(sheets); }
             return result;
         }
@@ -410,7 +404,7 @@ namespace OfficeLib.XLS
                 }
                 return null;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             finally
             {
                 values = null;
@@ -465,17 +459,8 @@ namespace OfficeLib.XLS
         /// <param name="startCell">Start Address</param>
         public Boolean SetCellValue(Object[,] values, String startCell)
         {
-            try
-            {
-                var startAddress = startCell.ToAddress();
-                return SetCellValue(values, startAddress.Row, startAddress.Column);
-            }
-            catch (Exception ex)
-            {
-                //this.LastErrorLog = String.Format("SetCellValue:{0}\r\n{1}",
-                //                                    ex.Message, ex.StackTrace);
-            }
-            return false;
+            var startAddress = startCell.ToAddress();
+            return SetCellValue(values, startAddress.Row, startAddress.Column);
         }
 
         /// <summary> 
@@ -486,19 +471,10 @@ namespace OfficeLib.XLS
         /// <param name="startCol">Start column</param>
         public Boolean SetCellValue(Object[,] values, UInt32 startRow, UInt32 startCol)
         {
-            try
-            {
-                UInt32 endRow = startRow + (UInt32)values.GetLength(0) - 1;
-                UInt32 endCol = startCol + (UInt32)values.GetLength(1) - 1;
+            UInt32 endRow = startRow + (UInt32)values.GetLength(0) - 1;
+            UInt32 endCol = startCol + (UInt32)values.GetLength(1) - 1;
 
-                return SetCellValue(values, startRow, startCol, endRow, endCol);
-            }
-            catch (Exception ex)
-            {
-                //this.LastErrorLog = String.Format("SetCellValue:{0}\r\n{1}",
-                //                                    ex.Message, ex.StackTrace);
-            }
-            return false;
+            return SetCellValue(values, startRow, startCol, endRow, endCol);
         }
 
         /// <summary>
@@ -510,19 +486,10 @@ namespace OfficeLib.XLS
         public Boolean SetCellValue(Object[,] values, String startAddressString,
                                                       String endAddressString)
         {
-            try
-            {
-                var startAddress = startAddressString.ToAddress();
-                var endAddress = endAddressString.ToAddress();
-                return SetCellValue(values, startAddress.Row, startAddress.Column,
-                                            endAddress.Row, endAddress.Column);
-            }
-            catch (Exception ex)
-            {
-                //this.LastErrorLog = String.Format("SetCellValue:{0}\r\n{1}",
-                //                                  ex.Message, ex.StackTrace);
-            }
-            return false;
+            var startAddress = startAddressString.ToAddress();
+            var endAddress = endAddressString.ToAddress();
+            return SetCellValue(values, startAddress.Row, startAddress.Column,
+                                        endAddress.Row, endAddress.Column);
         }
 
         /// <summary>
@@ -544,12 +511,7 @@ namespace OfficeLib.XLS
                                                            endRow, endCol);
                 range.SetProperty(PROP_VALUE2, new Object[] { setValue });
             }
-            catch (Exception ex)
-            {
-                //this.LastErrorLog = String.Format("SetCellValue:{0}\r\n{1}",
-                //                                  ex.Message, ex.StackTrace);
-                return false;
-            }
+            catch (Exception) { throw; }
             finally
             {
                 ReleaseObject(range);
@@ -581,7 +543,7 @@ namespace OfficeLib.XLS
                     this.Book.Method(METHOD_SAVE);
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
         }
 
         /// <summary>
@@ -596,7 +558,7 @@ namespace OfficeLib.XLS
                 this.Book.Method(METHOD_SAVE_AS,
                                  new Object[] { System.IO.Path.GetFullPath(file) });
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
         }
         #endregion
 
@@ -636,7 +598,7 @@ namespace OfficeLib.XLS
                 // return cell range
                 return this.Sheet.GetProperty(OBJECT_RANGE, new Object[] { stCell, edCell });
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
         }
 
         /// <summary>

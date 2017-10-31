@@ -13,7 +13,7 @@ namespace OfficeLib.XLS
         public Int32 Column { get; private set; }
 
         /// <summary>Table Row length</summary>
-        public Int32 Row { get { return Data.Length; } }
+        public Int32 Row { get { return this.Data.Length; } }
 
         /// <summary>Table data</summary>
         /// <remarks>
@@ -108,7 +108,7 @@ namespace OfficeLib.XLS
         private void SetProperties(T[][] value, Address address)
         {
             this.Data = value;
-            this.Column = Data.Length <= 0 ? 0 : Data[0].Length;
+            this.Column = this.Data.Length <= 0 ? 0 : this.Data[0].Length;
 
             this.StartAddress = address;
             this.EndAddress = Address.Shift(this.StartAddress, this.Column, this.Row);
@@ -119,7 +119,7 @@ namespace OfficeLib.XLS
         /// <summary>
         /// Get by specifying the row of the table
         /// </summary>
-        public T[] this[Int32 row] { get { return Data[row]; } }
+        public T[] this[Int32 row] { get { return this.Data[row]; } }
 
         /// <summary>
         /// Get the cell Value
@@ -221,7 +221,7 @@ namespace OfficeLib.XLS
                     result[i] = new Field<T>(val[i]);
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             return result;
         }
 
@@ -240,7 +240,7 @@ namespace OfficeLib.XLS
                     result[i] = new Field<T>(val[i]);
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception) { throw; }
             return result;
         }
         
@@ -266,7 +266,7 @@ namespace OfficeLib.XLS
         /// Extract values vertically from the table
         /// </summary>
         public IEnumerable<T> TakeVertical(Int32 column)
-            => Data.TakeVertical(column);
+            => this.Data.TakeVertical(column);
 
         /// <summary>
         /// Convert table contents to specified type
@@ -280,8 +280,8 @@ namespace OfficeLib.XLS
         /// </summary>
         private Object GetCellValue(Address range)
         {
-            UInt32 col = range.Column - StartAddress.Column;
-            UInt32 row = range.Row - StartAddress.Row;
+            UInt32 col = range.Column - this.StartAddress.Column;
+            UInt32 row = range.Row - this.StartAddress.Row;
 
             // out of range
             if (col < 0 || this.Column <= col) { return null; }
