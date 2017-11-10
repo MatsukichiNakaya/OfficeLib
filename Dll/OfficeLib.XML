@@ -478,6 +478,11 @@
             Get the cell Value
             </summary>
         </member>
+        <member name="P:OfficeLib.XLS.Field`1.Item(OfficeLib.XLS.Address,OfficeLib.XLS.Address)">
+            <summary>
+            Get the cell Value and Set the cell Value
+            </summary>
+        </member>
         <member name="M:OfficeLib.XLS.Field`1.op_BitwiseAnd(OfficeLib.XLS.Field{`0},OfficeLib.XLS.Field{`0})">
             <summary>
             Joining tables(Horizontally)
@@ -867,7 +872,7 @@
             </summary>
             <param name="startAddrStr">Satart Position</param>
             <param name="endAddrStr">End Position</param>
-            <returns>表データ</returns>
+            <returns>Table data</returns>
             <remarks>
             * Points to note when specifying the range.
             It will never be acquired beyond the scope of the Field variable that is acquired in advance
@@ -900,31 +905,39 @@
         </member>
         <member name="M:OfficeLib.XLS.WorkSheet.SetTable``1(OfficeLib.XLS.Excel,``0[][],OfficeLib.XLS.Address)">
             <summary>
-            表データ設定処理
+            Table data setting
             </summary>
             <typeparam name="T"></typeparam>
             <param name="excel">Excel instance</param>
-            <param name="value">設定値</param>
-            <param name="startAddress">開始位置</param>
+            <param name="value">Setting value</param>
+            <param name="startAddress">Satart Position</param>
         </member>
         <member name="M:OfficeLib.XLS.WorkSheet.SetTable``1(OfficeLib.XLS.Excel,``0[][],OfficeLib.XLS.Address,OfficeLib.XLS.Address)">
             <summary>
-            表データ設定処理
+            Table data setting
             </summary>
             <typeparam name="T"></typeparam>
             <param name="excel">Excel instance</param>
-            <param name="value">設定値</param>
-            <param name="startAddress">開始位置</param>
-            <param name="endAddress">終了位置</param>
+            <param name="value">Setting value</param>
+            <param name="startAddress">Satart Position</param>
+            <param name="endAddress">End Position</param>
         </member>
         <member name="M:OfficeLib.XLS.WorkSheet.AddTable(System.String,OfficeLib.XLS.Field{System.Object})">
-            <summary>テーブルの追加</summary>
+            <summary>Add table</summary>
+            <param name="key">Table name</param>
+            <param name="table">Table data</param>
         </member>
         <member name="M:OfficeLib.XLS.WorkSheet.AddTable(System.String,OfficeLib.XLS.Address,OfficeLib.XLS.Address)">
-            <summary>テーブルの追加</summary>
+            <summary>Add table</summary>
+            <param name="key">Table name</param>
+            <param name="startAddress">Start Position</param>
+            <param name="endAddress">End Position</param>
         </member>
         <member name="M:OfficeLib.XLS.WorkSheet.AddTable(System.String,System.String,System.String)">
-            <summary>テーブルの追加</summary>
+            <summary>Add table</summary>
+            <param name="key">Table name</param>
+            <param name="startAddress">Start Position(String)</param>
+            <param name="endAddress">End Position(String)</param>
         </member>
         <member name="T:OfficeLib.EML.EMail">
             <summary>
@@ -1203,16 +1216,14 @@
             <summary>
             Is it an array containing keys
             </summary>
-            <param name="values"></param>
-            <param name="key"></param>
-            <returns></returns>
+            <param name="values">value</param>
+            <param name="key">key</param>
         </member>
         <member name="M:OfficeLib.Comm.IsNullOrEmpty(System.String)">
             <summary>
             String is null or empty
             </summary>
-            <param name="value"></param>
-            <returns></returns>
+            <param name="value">value</param>
         </member>
         <member name="T:OfficeLib.ConvertExtention">
             <summary>値の型変換に関する拡張関数クラス</summary>

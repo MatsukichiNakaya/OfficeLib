@@ -42,8 +42,8 @@ namespace OfficeLib.XLS
         /// <param name="value">Data handled as a table</param>
         public Field(T[][] value)
         {
-            SetProperties(value?.ToRectLikeJagArray() ??
-                                new T[][] { new T[] { default(T) } },
+            SetProperties(value?.ToRectLikeJagArray()
+                                 ?? new T[][] { new T[] { default(T) } },
                           "A1".ToAddress());
         }
 
@@ -54,8 +54,8 @@ namespace OfficeLib.XLS
         /// <param name="startAddress">Start address</param>
         public Field(T[][] value, Address startAddress)
         {
-            SetProperties(value?.ToRectLikeJagArray() ??
-                                new T[][] { new T[] { default(T) } },
+            SetProperties(value?.ToRectLikeJagArray()
+                                 ?? new T[][] { new T[] { default(T) } },
                           startAddress);
         }
 
@@ -87,7 +87,7 @@ namespace OfficeLib.XLS
         {
             if(value == null) { return null; }
 
-            T[][] result = new T[value.GetLength(0)][];
+            var result = new T[value.GetLength(0)][];
             Int32 col = value.GetLength(1);
             for (var r = 0; r < result.Length; r++)
             {
@@ -124,12 +124,41 @@ namespace OfficeLib.XLS
         /// <summary>
         /// Get the cell Value
         /// </summary>
-        public Object this[Address range] { get { return GetCellValue(range); } }
+        public T this[Address range] { get { return GetCellValue(range); } }
 
         /// <summary>
         /// Get the cell Value
         /// </summary>
-        public Object this[String range] { get { return GetCellValue(range.ToAddress()); } }
+        public T this[String range] { get { return GetCellValue(range.ToAddress()); } }
+
+        /// <summary>
+        /// Get the cell Value and Set the cell Value
+        /// </summary>
+        public T[][] this[Address startAddress, Address endAddress]
+        {
+            get
+            {
+                Int32 width = Math.Abs((Int32)(startAddress.Column - endAddress.Column));
+                return this.Data.RangeTake
+                        ((Int32)startAddress.Row - 1, (Int32)endAddress.Row,
+                        (Int32)startAddress.Column - 1, width + 1).ToJagArray();
+            }
+
+            set
+            {
+                UInt32 row = (endAddress.Row - startAddress.Row) + 1;
+                UInt32 col = (endAddress.Column - startAddress.Column) + 1;
+                for (var r = 0; r < row; r++)
+                {
+                    if (value.Length <= r) { break; }
+                    for (var c = 0; c < col; c++)
+                    {
+                        if (value[r].Length <= c) { break; }
+                        this.Data[r + startAddress.Row][c + startAddress.Column] = value[r][c];
+                    }
+                }
+            }
+        }
         #endregion
 
         #region --- operator ---
@@ -179,7 +208,7 @@ namespace OfficeLib.XLS
             Int32 len = baseTable.Data.Length - minus;
             len = len < 0 ? 0 : len;
 
-            T[][] newTable = new T[len][];
+            var newTable = new T[len][];
             for (var i = minus; i < len + minus; i++)
             {
                 newTable[i - minus] = new T[baseTable.Column];
@@ -197,7 +226,7 @@ namespace OfficeLib.XLS
             Int32 len = baseTable.Data.Length - minus;
             len = len < 0 ? 0 : len;
 
-            T[][] newTable = new T[len][];
+            var newTable = new T[len][];
             for (var i = 0; i < newTable.Length; i++)
             {
                 newTable[i] = new T[baseTable.Column];
@@ -211,7 +240,7 @@ namespace OfficeLib.XLS
         /// </summary>
         public static Field<T>[] operator /(Field<T> baseTable, Int32 divid)
         {
-            Field<T>[] result = new Field<T>[divid];
+            var result = new Field<T>[divid];
             try
             {
                 T[][][] val = baseTable.Data.VDividingArray(divid);
@@ -230,7 +259,7 @@ namespace OfficeLib.XLS
         /// </summary>
         public static Field<T>[] operator %(Field<T> baseTable, Int32 divid)
         {
-            Field<T>[] result = new Field<T>[divid];
+            var result = new Field<T>[divid];
             try
             {
                 T[][][] val = baseTable.Data.HDividingArray(divid);
@@ -278,14 +307,14 @@ namespace OfficeLib.XLS
         /// <summary>
         /// Get the cell Value
         /// </summary>
-        private Object GetCellValue(Address range)
+        private T GetCellValue(Address range)
         {
             UInt32 col = range.Column - this.StartAddress.Column;
             UInt32 row = range.Row - this.StartAddress.Row;
 
             // out of range
-            if (col < 0 || this.Column <= col) { return null; }
-            if (row < 0 || this.Row <= row) { return null; }
+            if (col < 0 || this.Column <= col) { return default(T); }
+            if (row < 0 || this.Row <= row) { return default(T); }
 
             return this.Data[row][col];
         }

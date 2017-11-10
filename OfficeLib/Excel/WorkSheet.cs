@@ -72,8 +72,7 @@ namespace OfficeLib.XLS
             UInt32 col = maxColumns;
 
             // Initialize field
-            Object[][] tableRange = null;
-            tableRange = new Object[row][];
+            var tableRange = new Object[row][];
             for (var r = 0; r < tableRange.Length; r++)
             {
                 tableRange[r] = new Object[col];
@@ -104,13 +103,8 @@ namespace OfficeLib.XLS
         /// <param name="endAddress">End cell</param>
         public Object[][] this[Address startAddress, Address endAddress]
         {
-            get
-            {
-                Int32 width = Math.Abs((Int32)(startAddress.Column - endAddress.Column));
-                return this.EntireField.Data.RangeTake
-                        ((Int32)startAddress.Row - 1, (Int32)endAddress.Row,
-                        (Int32)startAddress.Column - 1, width + 1).ToJagArray();
-            }
+            get { return this.EntireField[startAddress, endAddress]; }
+            set { this.EntireField[startAddress, endAddress] = value; }
         }
 
         /// <summary>Get Values in the specified range</summary>
@@ -119,6 +113,7 @@ namespace OfficeLib.XLS
         public Object[][] this[String startAddrStr, String endAddrStr]
         {
             get { return this[startAddrStr.ToAddress(), endAddrStr.ToAddress()]; }
+            set { this[startAddrStr.ToAddress(), endAddrStr.ToAddress()] = value; }
         }
 
         /// <summary>Get table</summary>
@@ -191,7 +186,7 @@ namespace OfficeLib.XLS
         /// </summary>
         /// <param name="startAddrStr">Satart Position</param>
         /// <param name="endAddrStr">End Position</param>
-        /// <returns>表データ</returns>
+        /// <returns>Table data</returns>
         /// <remarks>
         /// * Points to note when specifying the range.
         /// It will never be acquired beyond the scope of the Field variable that is acquired in advance
@@ -270,25 +265,25 @@ namespace OfficeLib.XLS
         }
 
         /// <summary>
-        /// 表データ設定処理
+        /// Table data setting
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="excel">Excel instance</param>
-        /// <param name="value">設定値</param>
-        /// <param name="startAddress">開始位置</param>
+        /// <param name="value">Setting value</param>
+        /// <param name="startAddress">Satart Position</param>
         protected virtual void SetTable<T>(Excel excel, T[][] value, Address startAddress)
         {
             excel.SetCellValue(Excel.ConvertSetValue(value), startAddress.ReferenceString);
         }
 
         /// <summary>
-        /// 表データ設定処理
+        /// Table data setting
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="excel">Excel instance</param>
-        /// <param name="value">設定値</param>
-        /// <param name="startAddress">開始位置</param>
-        /// <param name="endAddress">終了位置</param>
+        /// <param name="value">Setting value</param>
+        /// <param name="startAddress">Satart Position</param>
+        /// <param name="endAddress">End Position</param>
         protected virtual void SetTable<T>(Excel excel, T[][] value, 
                                             Address startAddress, Address endAddress)
         {
@@ -298,20 +293,28 @@ namespace OfficeLib.XLS
         }
         #endregion
 
-        #region シートにテーブルの定義追加
-        /// <summary>テーブルの追加</summary>
+        #region --- Added table definition ---
+        /// <summary>Add table</summary>
+        /// <param name="key">Table name</param>
+        /// <param name="table">Table data</param>
         protected virtual void AddTable(String key, Field<Object> table)
         {
             this.Tables.Add(key, table);
         }
 
-        /// <summary>テーブルの追加</summary>
+        /// <summary>Add table</summary>
+        /// <param name="key">Table name</param>
+        /// <param name="startAddress">Start Position</param>
+        /// <param name="endAddress">End Position</param>
         public virtual void AddTable(String key, Address startAddress, Address endAddress)
         {
             this.AddTable(key, startAddress.ReferenceString, endAddress.ReferenceString);
         }
 
-        /// <summary>テーブルの追加</summary>
+        /// <summary>Add table</summary>
+        /// <param name="key">Table name</param>
+        /// <param name="startAddress">Start Position(String)</param>
+        /// <param name="endAddress">End Position(String)</param>
         public virtual void AddTable(String key, String startAddress, String endAddress)
         {
             this.Tables.Add(key, GetTable(startAddress, endAddress));

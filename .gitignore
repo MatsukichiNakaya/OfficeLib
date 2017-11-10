@@ -292,3 +292,7 @@ __pycache__/
 /exe/LibTester.vshost.exe
 /exe/LibTester.exe.config
 /exe/LibTester.exe
+/exe/OfficeLib.dll
+/exe/OfficeLib.xml
+*.xlsx
+/exe/WorkBook.xlsx

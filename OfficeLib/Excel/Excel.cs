@@ -613,7 +613,7 @@ namespace OfficeLib.XLS
                                                             UInt32 endRow, UInt32 endCol)
         {
             // Adjust the size of the variable according to the range of the cell to be written.
-            Object[,] result = new Object[(endRow - startRow) + 1, (endCol - startCol) + 1];
+            var result = new Object[(endRow - startRow) + 1, (endCol - startCol) + 1];
 
             Int32 row = result.GetLength(0);
             Int32 col = result.GetLength(1);
