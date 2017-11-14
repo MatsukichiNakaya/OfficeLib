@@ -22,6 +22,8 @@ namespace OfficeLib
         protected const String METHOD_QUIT = "Quit";
         /// <summary>Command of Add</summary>
         protected const String METHOD_ADD = "Add";
+        /// <summary>Command of Move</summary>
+        protected const String METHOD_MOVE = "Move";
 
         /// <summary>Command of Copy</summary>
         protected const String COMMAND_COPY = "Duplicate";
@@ -117,13 +119,13 @@ namespace OfficeLib
         /// Resource release
         /// </summary>
         /// <param name="target">Target object</param>
-        protected void ReleaseObject(Object target)
+        public static void ReleaseObject(Object target)
         {
             try
             {
                 if (target == null) { return; }
                 // Free the object's resources.
-                do { } while (Marshal.ReleaseComObject(target) > 0);
+                do { } while (0 < Marshal.ReleaseComObject(target));
             }
             finally { target = null; }
         }
@@ -132,7 +134,7 @@ namespace OfficeLib
         /// Resources release
         /// </summary>
         /// <param name="targets">List of target object</param>
-        protected void ReleaseObjects(params Object[] targets)
+        public static void ReleaseObjects(params Object[] targets)
         {
             foreach (var target in targets)
             {

@@ -59,7 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Defines.cs" />
+    <Compile Include="Excel\Cell.cs" />
     <Compile Include="Excel\ExcelSheetAttribute.cs" />
+    <Compile Include="Excel\Properties\Color.cs" />
+    <Compile Include="Excel\Properties\Thickness.cs" />
     <Compile Include="Outlook\EMail.cs" />
     <Compile Include="Outlook\MailAddress.cs" />
     <Compile Include="Outlook\Outlook.cs" />

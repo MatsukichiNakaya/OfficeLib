@@ -41,6 +41,76 @@
         <member name="F:OfficeLib.MsoTriState.msoCTrue">
             <summary>Not supported</summary>
         </member>
+        <member name="T:OfficeLib.Excel.Cell`1">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Cell`1.Value">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Cell`1.RuledLine">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Cell`1.BackgroundColor">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Cell`1.ForegroundColor">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Cell`1.Fomula">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Cell`1.FontSize">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.Excel.Cell`1.#ctor">
+            <summary></summary>
+        </member>
+        <member name="T:OfficeLib.Excel.Color">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Color.R">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Color.G">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Color.B">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.Excel.Color.#ctor">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.Excel.Color.#ctor(System.UInt32,System.UInt32,System.UInt32)">
+            <summary></summary>
+        </member>
+        <member name="T:OfficeLib.Excel.Thickness">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Thickness.Left">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Thickness.Top">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Thickness.Right">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Thickness.Bottom">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.Excel.Thickness.Values">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.Excel.Thickness.#ctor">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.Excel.Thickness.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary></summary>
+            <param name="left"></param>
+            <param name="top"></param>
+            <param name="right"></param>
+            <param name="bottom"></param>
+        </member>
         <member name="T:OfficeLib.XLS.ExcelSheetAttribute">
             <summary>Excel sheet attribute</summary>
         </member>
@@ -325,32 +395,35 @@
             </summary>
             <param name="startAdress">Start adress</param>
             <param name="endAdress">End adress</param>
-            <param name="referenceType">Cell value reference type</param>
+            <param name="referenceFormat">Cell value reference type</param>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.String)">
+        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.String,OfficeLib.XLS.Excel.XlGetValueFormat)">
             <summary> 
             Set value to sheet
             </summary>
             <param name="values">Setting values</param>
             <param name="startCell">Start Address</param>
+            <param name="referenceFormat">Cell value reference format</param>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.UInt32,System.UInt32)">
+        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.UInt32,System.UInt32,OfficeLib.XLS.Excel.XlGetValueFormat)">
             <summary> 
             Set value to sheet
             </summary>
             <param name="values">Setting values</param>
             <param name="startRow">Start row</param>
             <param name="startCol">Start column</param>
+            <param name="referenceFormat">Cell value reference format</param>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.String,System.String)">
+        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.String,System.String,OfficeLib.XLS.Excel.XlGetValueFormat)">
             <summary>
             Set value to sheet
             </summary>
             <param name="values">Setting values</param>
             <param name="startAddressString">Start Address</param>
             <param name="endAddressString">End Address</param>
+            <param name="referenceFormat">Cell value reference format</param>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.UInt32,System.UInt32,System.UInt32,System.UInt32,OfficeLib.XLS.Excel.XlGetValueFormat)">
             <summary>
             Set value to sheet
             </summary>
@@ -359,6 +432,14 @@
             <param name="startCol">Start column</param>
             <param name="endRow">End row</param>
             <param name="endCol">End column</param>
+            <param name="referenceFormat">Cell value reference format</param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.GetSetFormat(OfficeLib.XLS.Excel.XlGetValueFormat)">
+            <summary>
+            
+            </summary>
+            <param name="referenceFormat"></param>
+            <returns></returns>
         </member>
         <member name="M:OfficeLib.XLS.Excel.Save">
             <summary>
@@ -1156,6 +1237,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:OfficeLib.EML.Outlook.GetFolder(OfficeLib.EML.Outlook.OlDefaultFolders)">
+            <summary>
+            
+            </summary>
+            <param name="folderType"></param>
+            <returns></returns>
+        </member>
         <member name="M:OfficeLib.EML.Outlook.GetMails(System.Object)">
             <summary>
             Todo : Mail 
@@ -1226,195 +1314,198 @@
             <param name="value">value</param>
         </member>
         <member name="T:OfficeLib.ConvertExtention">
-            <summary>値の型変換に関する拡張関数クラス</summary>
+            <summary>Extended function class for type conversion</summary>
         </member>
         <member name="M:OfficeLib.ConvertExtention.To``1(System.Object)">
             <summary>
-            値の変換
+            Type Conversion
             </summary>
-            <typeparam name="TOutput">変換後の型</typeparam>
-            <param name="value">変換もとの値</param>
+            <typeparam name="TOutput">Type after conversion</typeparam>
+            <param name="value">Value of conversion source</param>
         </member>
         <member name="M:OfficeLib.ConvertExtention.To(System.Object,System.Type)">
             <summary>
-            型を指定しての変換
+            Type Conversion
             </summary>
-            <param name="value">変換もとの値</param>
-            <param name="type">変換後の型</param>
-            <remarks>戻り値のキャストが必要</remarks>
+            <param name="value">Value of conversion source</param>
+            <param name="type">Type after conversion</param>
+            <remarks>Cast of return value required</remarks>
         </member>
         <member name="M:OfficeLib.ConvertExtention.TryTo``1(System.Object)">
             <summary>
-            値の変換 内部で例外処理を行う
+            Type Conversion (Perform exception handling)
             </summary>
-            <typeparam name="TOutput">変換後の型</typeparam>
-            <param name="value">変換もとの値</param>
+            <typeparam name="TOutput">Type after conversion</typeparam>
+            <param name="value">Value of conversion source</param>
         </member>
         <member name="M:OfficeLib.ConvertExtention.TryTo(System.Object,System.Type)">
             <summary>
-            型を指定しての変換 内部で例外処理を行う
+            Type Conversion (Perform exception handling)
             </summary>
-            <param name="value">変換もとの値</param>
-            <param name="type">変換後の型</param>
-            <remarks>戻り値のキャストが必要</remarks>
+            <param name="value">Value of conversion source</param>
+            <param name="type">Type after conversion</param>
+            <remarks>Cast of return value required</remarks>
         </member>
         <member name="M:OfficeLib.ConvertExtention.ConvertAll``2(System.Collections.Generic.IEnumerable{``0})">
-            <summary> 値の変換(一次配列) </summary>
-            <typeparam name="TInput">変換もとの型</typeparam>
-            <typeparam name="TOutput">変換後の型</typeparam>
-            <param name="values">変換もとの値</param>
+            <summary>Type Conversion of Arrays</summary>
+            <typeparam name="TInput">Type of conversion source</typeparam>
+            <typeparam name="TOutput">Type after conversion</typeparam>
+            <param name="values">Value of conversion source</param>
         </member>
         <member name="M:OfficeLib.ConvertExtention.ConvertAll``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
-            <summary> 値の変換(二次配列) </summary>
-            <typeparam name="TInput">変換もとの型</typeparam>
-            <typeparam name="TOutput">変換後の型</typeparam>
-            <param name="values">変換もとの値</param>
+            <summary>Type Conversion of Jag Arrays</summary>
+            <typeparam name="TInput">Type of conversion source</typeparam>
+            <typeparam name="TOutput">Type after conversion</typeparam>
+            <param name="values">Value of conversion source</param>
         </member>
         <member name="M:OfficeLib.ConvertExtention.ToObject``1(``0[])">
             <summary>
-            配列をObject型へ変換する
+            Convert an array to an object type
             </summary>
-            <typeparam name="T">変換もとの型</typeparam>
-            <param name="src">変換を行う配列</param>
-            <returns>Object型に変換された配列</returns>
+            <typeparam name="T">Type of conversion source</typeparam>
+            <param name="src">Value of conversion source</param>
         </member>
         <member name="M:OfficeLib.ConvertExtention.ToArray``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             Enumerable to array
             </summary>
         </member>
+        <member name="T:OfficeLib.JagExtention">
+            <summary>Extended function class of Jag array</summary>
+        </member>
         <member name="M:OfficeLib.JagExtention.OuterJoin``1(``0[][],``0[][])">
-            <summary> 配列の横結合(全てを含む) </summary>
+            <summary>Outer Join(Include all)</summary>
             <typeparam name="T"></typeparam>
-            <param name="srcTable">右側のテーブル</param>
-            <param name="joinTable">左側のテーブル</param>
+            <param name="srcTable">Table on the right</param>
+            <param name="joinTable">Table on the left</param>
             <remarks>
-            SQLのOuterJoinとは少し仕様が異なるが
-            すべての内容を含むように、配列の要素数が
-            多いほうを基準にして横方向で結合する。
-            短い配列の存在しない要素はデフォルト値で作成される。
+            Combine with reference to the more array elements.
+            Elements without short arrays are created with default values.
             </remarks>
         </member>
         <member name="M:OfficeLib.JagExtention.InnerJoin``1(``0[][],``0[][])">
-            <summary> 配列の横結合(共通行のみ) </summary>
+            <summary>Outer Join(Common row only)</summary>
             <typeparam name="T"></typeparam>
-            <param name="srcTable">右側のテーブル</param>
-            <param name="joinTable">左側のテーブル</param>
+            <param name="srcTable">Table on the right</param>
+            <param name="joinTable">Table on the left</param>
             <remarks>
-            SQLのInnerJoinとはかなり仕様が異なるが
-            配列の要素数が少ないほうを基準として
-            横方向で結合する。
-            長いほうの余行は切り捨てられる。
+            Combine with the smaller number of elements of the array as the reference.
+            The longer line is truncated.
             </remarks>
         </member>
         <member name="M:OfficeLib.JagExtention.Join``1(``0[][],``0[][],System.Int32)">
-            <summary> 指定された行数で横結合 </summary>
+            <summary>Outer join with the specified number of rows</summary>
             <typeparam name="T"></typeparam>
-            <param name="srcTable">右側のテーブル</param>
-            <param name="joinTable">左側のテーブル</param>
-            <param name="rows">指定行</param>
+            <param name="srcTable">Table on the right</param>
+            <param name="joinTable">Table on the left</param>
+            <param name="rows">specific number of rows</param>
             <remarks>
-            二つのテーブルに対して指定された行数を持って結合する。
-            指定行を超えた場合は、デフォルト値で作成し
-            あまった行は切り捨てられる。
+            Combine  two tables with the specified number of rows.
+            If it exceeds specified line, it creates with default value.
+            Trimmed rows are truncated.
             </remarks>
         </member>
         <member name="M:OfficeLib.JagExtention.Union``1(``0[][],``0[][][])">
-            <summary> 配列の縦結合 </summary>
+            <summary>Union</summary>
             <typeparam name="T"></typeparam>
-            <param name="srcTable">上側のテーブル</param>
-            <param name="unionTable">下側のテーブル</param>
+            <param name="srcTable">Table on the top</param>
+            <param name="unionTable">Table on the bottom</param>
             <remarks>
-            SQLのUnionとは仕様が異なる。
-            ベースのテーブルに対して下側にテーブルを結合する。
-            各列はそのまま結合される。
+            Combine the table to the underside
+            Each column is Combined as it is.
             </remarks>
         </member>
         <member name="M:OfficeLib.JagExtention.VDividingArray``1(``0[][],System.Int32)">
-            <summary> 配列を縦に分割 </summary>
+            <summary>Split array vertically</summary>
             <typeparam name="T"></typeparam>
-            <param name="src">配列の配列</param>
-            <param name="dividCount">分割数</param>
+            <param name="src">Table</param>
+            <param name="dividCount">Division number</param>
         </member>
         <member name="M:OfficeLib.JagExtention.HDividingArray``1(``0[][],System.Int32)">
-            <summary> 横方向の分割 </summary>
+            <summary>Split array horizontally</summary>
             <typeparam name="T"></typeparam>
-            <param name="src">配列の配列</param>
-            <param name="divid">分割数</param>
+            <param name="src">Table</param>
+            <param name="divid">Division number</param>
         </member>
         <member name="M:OfficeLib.JagExtention.ColumnRemoveStart``1(``0[][],System.Int32)">
-            <summary> 最初の列から指定列数削除 </summary>
+            <summary>Remove the specified number of columns from the first column</summary>
             <typeparam name="T"></typeparam>
-            <param name="src">配列の配列</param>
-            <param name="trimCount">削除する列数</param>
+            <param name="src">Table</param>
+            <param name="trimCount">Number of columns to delete</param>
         </member>
         <member name="M:OfficeLib.JagExtention.ColumnRemoveEnd``1(``0[][],System.Int32)">
-            <summary> 最後の列から指定列数削除 </summary>
+            <summary>Remove the specified number of columns from the last column</summary>
             <typeparam name="T"></typeparam>
-            <param name="src">配列の配列</param>
-            <param name="trimCount">削除する列数</param>
+            <param name="src">Table</param>
+            <param name="trimCount">Number of columns to delete</param>
         </member>
         <member name="M:OfficeLib.JagExtention.ToRectArray``1(``0[][])">
-            <summary> 矩形配列への変換 </summary>
+            <summary>
+            Convert to rectangular array
+            </summary>
             <typeparam name="T"></typeparam>
-            <param name="src">配列の配列</param>
+            <param name="src">Jag Array</param>
         </member>
         <member name="M:OfficeLib.JagExtention.ToRectLikeJagArray``1(``0[][])">
-            <summary>矩形配列のようにジャグ配列の横長さをそろえる</summary>
+            <summary>
+            Align horizontal width of jag array like rectangular array
+            </summary>
+            <param name="src">Jag Array</param>
         </member>
         <member name="M:OfficeLib.JagExtention.ToJagArray``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
-            <summary>一次元の配列を二次元の配列に変換する</summary>
-            <param name="src">配列</param>
-            <param name="divCount">各次元の要素数</param>
+            <summary>
+            Convert a one-dimensional array to a two-dimensional array
+            </summary>
+            <param name="src">Array</param>
+            <param name="divCount">Element count(Row count)</param>
             <remarks>
-            一次元の要素数を割り切れる数を指定すること
-            割ったとき小数点以下は切捨
-            最低限divCountで指定した配列数は返ってくる。
+            Specify a divisible number of one-dimensional elements.
+            Truncated decimal places are truncated.
             </remarks>
         </member>
         <member name="M:OfficeLib.JagExtention.ToJagArray``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
             <summary>
-            列挙型の列挙を二次元配列に変換する
+            Convert an enumeration enumeration to a two-dimensional array
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="src"></param>
-            <returns></returns>
+            <param name="src">Enumeration enumeration</param>
+            <returns>Jag Array</returns>
         </member>
         <member name="M:OfficeLib.JagExtention.ToSingleArray``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
             <summary>
-            二次元配列を一次元配列に変換
+            Convert two-dimensional array to one-dimensional array
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="src">配列の配列</param>
+            <param name="src">Enumeration enumeration</param>
         </member>
         <member name="M:OfficeLib.JagExtention.TakeVertical``1(``0[][],System.Int32)">
             <summary>
-            配列内から縦に値を抜き出す
+            Extract values vertically from the table
             </summary>
         </member>
         <member name="M:OfficeLib.JagExtention.RangeTake``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}},System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            配列の配列から指定範囲の値を取得する
+            Acquire the specified range value from the table
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="src">配列</param>
-            <param name="top">開始行</param>
-            <param name="bottom">終了行</param>
-            <param name="left">開始列</param>
-            <param name="right">終了列</param>
+            <param name="src">Table</param>
+            <param name="top">Start row</param>
+            <param name="bottom">End row</param>
+            <param name="left">Start column</param>
+            <param name="right">End column</param>
         </member>
         <member name="M:OfficeLib.JagExtention.ColumnsMax``1(``0[][])">
-            <summary>配列中の最大長を取得</summary>
-            <param name="src">配列の配列</param>
+            <summary>Get maximum length in Table</summary>
+            <param name="src">Table</param>
         </member>
         <member name="M:OfficeLib.JagExtention.SkipTake``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)">
             <summary>
-            配列内の指定位置から指定範囲の要素を取り出す
+            Extract specified range element from specified position in array
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="src">配列</param>
-            <param name="skip">開始位置</param>
-            <param name="length">取得長さ</param>
+            <param name="src">Array</param>
+            <param name="skip">Length to skip</param>
+            <param name="length">Length to take</param>
         </member>
         <member name="T:OfficeLib.InvokeExtention">
             <summary>Reflection InvokeMember extention class</summary>

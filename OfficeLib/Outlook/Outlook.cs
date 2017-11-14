@@ -71,6 +71,21 @@ namespace OfficeLib.EML
             olFolderRssFeeds = 25,
         }
 
+        /// <summary>Indicates the recipient type for the Item.</summary>
+        public enum OlMailRecipientType
+        {
+            /// <summary>Originator (sender) of the Item.</summary>
+            olOriginator = 0,
+            /// <summary>The recipient is specified in the To property of the Item.</summary>
+            olTo,
+            /// <summary>The recipient is specified in the CC property of the Item.</summary>
+            olCC,
+            /// <summary>The recipient is specified in the BCC property of the Item.</summary>
+            olBCC,
+        }
+    
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -104,124 +119,74 @@ namespace OfficeLib.EML
         }
 
         /// <summary>
-        /// 
+        /// Get Folder object
         /// </summary>
+        /// <param name="folderType"></param>
         /// <returns></returns>
-        public Int32 GetItemCount()
+        public Object GetFolder(OlDefaultFolders folderType)
         {
-            return 0;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public String[] GetInboxFolders()
-        {
-            String[] result = null;
             Object ns = null;
-            Object inbox = null;
-            Object folders = null;
+            Object folder = null;
+
             try
             {
                 ns = this.Application.Method(METHOD_GET_NAMESPACE, new Object[] { ARG_MAPI });
-                // Get Folders Property
-                inbox = ns.Method(METHOD_GET_DEFAULT_FOLDER, new Object[] { OlDefaultFolders.olFolderInbox });
-                folders = inbox.GetProperty(PROP_FOLDERS);
-                Int32 folderCount = folders.GetProperty(PROP_COUNT).To<Int32>();
+                folder = ns.Method(METHOD_GET_DEFAULT_FOLDER, new Object[] { folderType });
+            }
+            catch { ReleaseObject(folder); }
+            finally { ReleaseObject(ns); }
 
-                result = new String[folderCount];
-                for (Int32 i = 0; i < result.Length; i++)
-                {   // Get Name property
-                    result[i] = inbox.GetProperty(PROP_FOLDERS, new Object[] { i + 1 })
-                                     .GetProperty(PROP_NAME).ToString();
-                }
+            return folder;
+        }
+
+        /// <summary>
+        /// Get child folder object
+        /// </summary>
+        /// <param name="folderType"></param>
+        /// <param name="childFolderName"></param>
+        /// <returns></returns>
+        public Object GetChildFolder(Object folder, String childFolderName)
+        {
+            Object specFolder = null;
+            try
+            {
+                specFolder = folder.GetProperty(PROP_FOLDERS, new Object[] { childFolderName });
+            }
+            catch { ReleaseObject(specFolder); }
+
+            return specFolder;
+        }
+
+        /// <summary>
+        /// Retrieve mail from specified folder.
+        /// </summary>
+        /// <param name="folder">Folder object</param>
+        /// <returns></returns>
+        public EMail[] GetMails(Object folder)
+        {
+            EMail[] result = null;
+            Object items = null;
+            try
+            {
+                items = folder.GetProperty(PROP_ITEMS);
+                // Get number of items and initialize array.
+                result = new EMail[items.GetProperty(PROP_COUNT).To<Int32>()];
+
+                System.Threading.Tasks.Parallel.For(0, result.Length, (no) =>
+                {
+                    Object item = items.GetProperty(PROP_ITEM, new Object[] { no + 1 });
+                    result[no] = new EMail(item);
+                    ReleaseObject(item);
+                });
             }
             finally
-            {
-                // Free the Objects
-                ReleaseObjects(ns, inbox, folders);
+            {   // Todo : Is releasable [folder]?
+                ReleaseObjects(folder, items);
             }
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public EMail[] GetInboxMails()
-        {
-            Object ns = null;
-            Object inbox = null;
-
-            try
-            {   // Get Namespace Object
-                ns = this.Application.Method(METHOD_GET_NAMESPACE, new Object[] { ARG_MAPI });
-                // Get Folders Property
-                inbox = ns.Method(METHOD_GET_DEFAULT_FOLDER, new Object[] { OlDefaultFolders.olFolderInbox });
-
-
-                return GetMails(inbox);
-            }
-            finally
-            {   // Free the Objects
-                ReleaseObjects(ns, inbox);
-            }
-        }
-
-        /// <summary>
-        /// Todo : Mail 
-        /// </summary>
-        /// <param name="folder"></param>
-        /// <returns></returns>
-        private EMail[] GetMails(Object folder)
-        {
-            Object folders = null;
-            Object innerFolder = null;
-            Int32 innerCount = 0;
-            var result = new System.Collections.Generic.List<EMail>();
-
-            try
-            {
-                folders = folder.GetProperty(PROP_FOLDERS);
-                Int32 folderCount = folders.GetProperty(PROP_COUNT).To<Int32>();
-                Object items = null;
-                Int32 itemCount = 0;
-                
-                for (var i = 0; i < folderCount; i++)
-                {
-                    innerFolder = folder.GetProperty(PROP_FOLDERS, new Object[] { i + 1 });
-                    // vba は 配列が 1 オリジン
-                    items = innerFolder.GetProperty(PROP_ITEMS);
-                    itemCount = items.GetProperty(PROP_COUNT).To<Int32>();
-                    var itemList = new Object[itemCount];
-                    for (var no = 0; no < itemCount; no++)
-                    {
-                        itemList[no] = items.Method(PROP_ITEM, new Object[] { no + 1 });
-                    }
-
-                    // Todo : EMail クラスに変換する
-                    // result.Add(); 
-
-                    ReleaseObjects(itemList);
-
-                    // 下の階層があるか
-                    innerCount = innerFolder.GetProperty(PROP_FOLDERS)
-                                            .GetProperty(PROP_COUNT).To<Int32>();
-                    if (0 < innerCount)
-                    {
-                        result.AddRange(GetMails(innerFolder));
-                    }
-                    ReleaseObject(innerFolder);
-                }
-            }
-            finally
-            {
-                ReleaseObjects(folders);
-            }
-            return result.ToArray();
-        }
-
+        #region Unread Count Method
         /// <summary>
         /// Get the number of unread counts in inbox
         /// </summary>
@@ -282,9 +247,8 @@ namespace OfficeLib.EML
         }
 
         /// <summary>
-        /// 
+        /// Get the number of unread counts in specified folder
         /// </summary>
-        /// <returns></returns>
         private Int32 UnreadCount(Object folder)
         {
             Object folders = null;
@@ -300,10 +264,10 @@ namespace OfficeLib.EML
                 for (var i = 0; i < folderCount; i++)
                 {
                     innerFolder = folder.GetProperty(PROP_FOLDERS, new Object[] { i + 1 });
-                    // vba は 配列が 1 オリジン
+                    // vba is 1 origin
                     result += innerFolder.GetProperty(PROP_UNREAD_ITEM_COUNT).To<Int32>();
 
-                    // 下の階層があるか
+                    // Is there a lower hierarchy
                     innerCount = innerFolder.GetProperty(PROP_FOLDERS).GetProperty(PROP_COUNT).To<Int32>();
                     if (0 < innerCount)
                     {
@@ -317,6 +281,52 @@ namespace OfficeLib.EML
                 ReleaseObjects(folders);
             }
             return result;
+        }
+        #endregion
+
+        /// <summary>
+        /// Add folder from specified folder.
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <param name="folderName"></param>
+        /// <param name="folderType"></param>
+        public void AddFolder(Object folder, String folderName, OlDefaultFolders folderType)
+        {
+            folder.GetProperty(PROP_FOLDERS).Method(METHOD_ADD, new Object[] { folderName, folderType });
+        }
+
+        /// <summary>
+        /// Auto Filtering
+        /// </summary>
+        /// <param name="srcFolder">Src folder object</param>
+        /// <param name="destFolder">Dest folder object</param>
+        /// <param name="filter">Filter script</param>
+        public void AutoFiltering(Object srcFolder, Object destFolder,
+                                  Func<Object, Boolean> filter)
+        {
+            Object items = null;
+            try
+            {
+                items = srcFolder.GetProperty(PROP_ITEMS);
+                Int32 mailCount = items.GetProperty(PROP_COUNT).To<Int32>();
+
+                for (var no = 0; no < mailCount; no++)
+                {
+                    Object item = items.GetProperty(PROP_ITEM, new Object[] { no + 1 });
+                    if (filter(item))
+                    {
+                        item.Method(METHOD_MOVE, new Object[] { destFolder });
+                        // Return step.
+                        no -= 1;
+                        // param reset and restart.
+                        ReleaseObject(items);
+                        items = srcFolder.GetProperty(PROP_ITEMS);
+                        mailCount = items.GetProperty(PROP_COUNT).To<Int32>();
+                    }
+                    ReleaseObject(item);
+                }
+            }
+            finally { ReleaseObject(items); }
         }
     }
 }

@@ -273,7 +273,9 @@ namespace OfficeLib.XLS
         /// <param name="startAddress">Satart Position</param>
         protected virtual void SetTable<T>(Excel excel, T[][] value, Address startAddress)
         {
-            excel.SetCellValue(Excel.ConvertSetValue(value), startAddress.ReferenceString);
+            excel.SetCellValue(Excel.ConvertSetValue(value),
+                               startAddress.ReferenceString,
+                               Excel.XlGetValueFormat.xlValue2);
         }
 
         /// <summary>
@@ -289,7 +291,8 @@ namespace OfficeLib.XLS
         {
             excel.SetCellValue(Excel.ConvertSetValue(value),
                                startAddress.Row, startAddress.Column, 
-                               endAddress.Row, startAddress.Column);
+                               endAddress.Row, startAddress.Column,
+                               Excel.XlGetValueFormat.xlValue2);
         }
         #endregion
 

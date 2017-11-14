@@ -440,14 +440,14 @@ namespace OfficeLib.XLS
         /// </summary>
         /// <param name="startAdress">Start adress</param>
         /// <param name="endAdress">End adress</param>
-        /// <param name="referenceType">Cell value reference type</param>
+        /// <param name="referenceFormat">Cell value reference type</param>
         public String[,] GetCellValue(String startAdress, String endAdress,
-                                      XlGetValueFormat referenceType)
+                                      XlGetValueFormat referenceFormat)
         {
             var start = startAdress.ToAddress();
             var end = endAdress.ToAddress();
             return GetCellValue(start.Row, start.Column,
-                                end.Row, end.Column, referenceType);
+                                end.Row, end.Column, referenceFormat);
         }
         #endregion
 
@@ -457,10 +457,12 @@ namespace OfficeLib.XLS
         /// </summary>
         /// <param name="values">Setting values</param>
         /// <param name="startCell">Start Address</param>
-        public Boolean SetCellValue(Object[,] values, String startCell)
+        /// <param name="referenceFormat">Cell value reference format</param>
+        public Boolean SetCellValue(Object[,] values, String startCell,
+                                    XlGetValueFormat referenceFormat)
         {
             var startAddress = startCell.ToAddress();
-            return SetCellValue(values, startAddress.Row, startAddress.Column);
+            return SetCellValue(values, startAddress.Row, startAddress.Column, referenceFormat);
         }
 
         /// <summary> 
@@ -469,12 +471,14 @@ namespace OfficeLib.XLS
         /// <param name="values">Setting values</param>
         /// <param name="startRow">Start row</param>
         /// <param name="startCol">Start column</param>
-        public Boolean SetCellValue(Object[,] values, UInt32 startRow, UInt32 startCol)
+        /// <param name="referenceFormat">Cell value reference format</param>
+        public Boolean SetCellValue(Object[,] values, UInt32 startRow, UInt32 startCol,
+                                    XlGetValueFormat referenceFormat)
         {
             UInt32 endRow = startRow + (UInt32)values.GetLength(0) - 1;
             UInt32 endCol = startCol + (UInt32)values.GetLength(1) - 1;
 
-            return SetCellValue(values, startRow, startCol, endRow, endCol);
+            return SetCellValue(values, startRow, startCol, endRow, endCol, referenceFormat);
         }
 
         /// <summary>
@@ -483,13 +487,14 @@ namespace OfficeLib.XLS
         /// <param name="values">Setting values</param>
         /// <param name="startAddressString">Start Address</param>
         /// <param name="endAddressString">End Address</param>
+        /// <param name="referenceFormat">Cell value reference format</param>
         public Boolean SetCellValue(Object[,] values, String startAddressString,
-                                                      String endAddressString)
+                                    String endAddressString, XlGetValueFormat referenceFormat)
         {
             var startAddress = startAddressString.ToAddress();
             var endAddress = endAddressString.ToAddress();
             return SetCellValue(values, startAddress.Row, startAddress.Column,
-                                        endAddress.Row, endAddress.Column);
+                                        endAddress.Row, endAddress.Column, referenceFormat);
         }
 
         /// <summary>
@@ -500,8 +505,9 @@ namespace OfficeLib.XLS
         /// <param name="startCol">Start column</param>
         /// <param name="endRow">End row</param>
         /// <param name="endCol">End column</param>
+        /// <param name="referenceFormat">Cell value reference format</param>
         public Boolean SetCellValue(Object[,] values, UInt32 startRow, UInt32 startCol,
-                                                      UInt32 endRow, UInt32 endCol)
+                                    UInt32 endRow, UInt32 endCol, XlGetValueFormat referenceFormat)
         {
             Object range = null;
             try
@@ -509,7 +515,7 @@ namespace OfficeLib.XLS
                 range = GetRange(startRow, startCol, endRow, endCol);
                 Object setValue = ReplaceNullValue(values, startRow, startCol,
                                                            endRow, endCol);
-                range.SetProperty(PROP_VALUE2, new Object[] { setValue });
+                range.SetProperty(GetSetFormat(referenceFormat), new Object[] { setValue });
             }
             catch (Exception) { throw; }
             finally
@@ -517,6 +523,27 @@ namespace OfficeLib.XLS
                 ReleaseObject(range);
             }
             return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="referenceFormat"></param>
+        /// <returns></returns>
+        private String GetSetFormat(XlGetValueFormat referenceFormat)
+        {
+            switch (referenceFormat)
+            {
+                case XlGetValueFormat.xlValue:
+                    return PROP_VALUE;
+                case XlGetValueFormat.xlValue2:
+                    return PROP_VALUE2;
+                case XlGetValueFormat.xlText:
+                    return PROP_TEXT;
+                case XlGetValueFormat.xlFormula:
+                    return PROP_FOMULA;
+            }
+            return PROP_VALUE2;
         }
         #endregion
         #endregion

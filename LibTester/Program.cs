@@ -1,4 +1,7 @@
-﻿using OfficeLib;        // Dll ベース部分
+﻿#define OUTLOOK
+//#define EXCEL
+
+using OfficeLib;        // Dll ベース部分
 using OfficeLib.EML;    // Outlook
 using OfficeLib.PPT;    // PowerPoint
 using OfficeLib.XLS;    // Excel
@@ -7,7 +10,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
-
+using System.Text.RegularExpressions;
 using static OfficeLib.EnumSheetPermission;
 
 namespace LibTester
@@ -19,6 +22,7 @@ namespace LibTester
     {
         static void Main(String[] args)
         {
+#if EXCEL
             var wb = new WorkBook("WorkBook.xlsx");
             wb.AddSheet(new Sheet1());
 
@@ -40,8 +44,7 @@ namespace LibTester
 
 
             Console.ReadLine();
-
-
+#endif
 
 #if OUTLOOK
             // Outlookテストコード
@@ -50,37 +53,29 @@ namespace LibTester
                 var ol = new Outlook();
                 ol.Connect();
 
-                Int32 unreads = 0;// ol.GetUnreadCount("システム開発");
-                unreads = ol.GetUnreadCount(FolderSearchOption.AllFolders);
-                Console.WriteLine(unreads);
+                // 送信済みメール一覧
+                //EMail[] mails = ol.GetMails(ol.GetFolder(Outlook.OlDefaultFolders.olFolderSentMail));
 
-                // ディレクトリの一覧取得
-                //var folders = ol.GetInboxFolders();
-                //foreach (var f in folders)
-                //{
-                //    Console.WriteLine(f);
-                //}
+                // 未読メール件数（全件取得）
+                //Int32 count = ol.GetUnreadCount(FolderSearchOption.AllFolders);
+                //Console.WriteLine(count);
+                //Console.ReadLine();
+
+                //// フォルダの追加
+                //Object folder = ol.GetFolder(Outlook.OlDefaultFolders.olFolderInbox);
+                //ol.AddFolder(folder, "重要", Outlook.OlDefaultFolders.olFolderInbox);
+                //OfficeCore.ReleaseObject(folder);
+
+                // 振り分け処理マクロ作成
+                Object srcfolder = ol.GetFolder(Outlook.OlDefaultFolders.olFolderInbox);
+                Object destfolder = ol.GetChildFolder(srcfolder, "GMail");
+
+                ol.AutoFiltering(srcfolder, destfolder, (mail) =>
+                {   // 送信元の情報が指定のパターンの場合にマッチしているか？
+                    return Regex.IsMatch(new EMail(mail).From.Address, @"@gmail\.com");
+                });
             }
-            Console.ReadLine();
 #endif
-        }
-
-        [ExcelSheet(ReadWrite)]
-        class Sheet1 : WorkSheet
-        {
-            public const String SHEET_NAME = "Sheet1";
-
-            public Sheet1() : base(SHEET_NAME, "E5") { }
-
-            public override void Read(Excel excel)
-            {
-                base.Read(excel);
-            }
-
-            public override void Write(Excel excel)
-            {
-                base.Write(excel);
-            }
         }
     }
 }
