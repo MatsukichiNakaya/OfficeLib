@@ -305,6 +305,13 @@ namespace OfficeLib.XLS
             => new Field<TOutput>(this.Data.ConvertAll<T, TOutput>());
 
         /// <summary>
+        /// Convert table contents to specified type
+        /// </summary>
+        /// <param name="field"></param>
+        public static T[][] Convert(Object[][] field)
+            => field.ConvertAll<Object, T>(); 
+
+        /// <summary>
         /// Get the cell Value
         /// </summary>
         private T GetCellValue(Address range)

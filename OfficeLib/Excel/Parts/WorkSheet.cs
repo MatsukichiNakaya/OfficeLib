@@ -144,7 +144,7 @@ namespace OfficeLib.XLS
                                         excel.GetCellValue(1, 1,
                                                            (UInt32)this.MaxRow,
                                                            (UInt32)this.MaxColumn,
-                                                           Excel.XlGetValueFormat.xlValue));
+                                                           XlGetValueFormat.xlValue));
             // Initialize tables
             this.Tables = new Dictionary<String, Field<Object>>();
         }
@@ -166,7 +166,7 @@ namespace OfficeLib.XLS
             => new Field<Object>(
                 excel.GetCellValue(startAddress.ReferenceString, 
                                    endAddress.ReferenceString,
-                                   Excel.XlGetValueFormat.xlValue), startAddress);
+                                   XlGetValueFormat.xlValue), startAddress);
 
         /// <summary>
         /// Get table from its own field
@@ -275,7 +275,7 @@ namespace OfficeLib.XLS
         {
             excel.SetCellValue(Excel.ConvertSetValue(value),
                                startAddress.ReferenceString,
-                               Excel.XlGetValueFormat.xlValue2);
+                               XlGetValueFormat.xlValue2);
         }
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace OfficeLib.XLS
             excel.SetCellValue(Excel.ConvertSetValue(value),
                                startAddress.Row, startAddress.Column, 
                                endAddress.Row, startAddress.Column,
-                               Excel.XlGetValueFormat.xlValue2);
+                               XlGetValueFormat.xlValue2);
         }
         #endregion
 

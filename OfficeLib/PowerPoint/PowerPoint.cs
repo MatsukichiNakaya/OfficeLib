@@ -2,6 +2,7 @@
 // Work in progress
 // 
 using System;
+using static OfficeLib.Commands;
 
 namespace OfficeLib.PPT
 {

@@ -1,5 +1,5 @@
-﻿#define OUTLOOK
-//#define EXCEL
+﻿//#define OUTLOOK
+#define EXCEL
 
 using OfficeLib;        // Dll ベース部分
 using OfficeLib.EML;    // Outlook
@@ -23,26 +23,25 @@ namespace LibTester
         static void Main(String[] args)
         {
 #if EXCEL
-            var wb = new WorkBook("WorkBook.xlsx");
-            wb.AddSheet(new Sheet1());
-
-            wb.ReadPreset();
-
-            var sh = wb[Sheet1.SHEET_NAME];
-
-            var table = new String[4][];
-            for (var r = 0; r < table.Length; r++)
+            using (var workBook = WorkBook.GetInstance(@".\WorkBook.xlsx"))
             {
-                table[r] = new String[4];
-                for (var c = 0; c < table[r].Length; c++)
-                {
-                    table[r][c] = (r + c).ToString();
-                }
+                if(workBook == null) { return; }
+
+                workBook.SelectSheet("sheet1");
+
+                //// セル一つだけ
+                //workBook.SetBackgroundColor(target: new Address("B4"),
+                //                            color:  new Color(0, 0, 255));
+                //// 複数セル一括
+                //workBook.SetBackgroundColor(start: new Address("D3"),
+                //                            end:   new Address("E5"),
+                //                            color: new Color(0, 255, 0));
+
+                //workBook.SetBorder(new Range("D3:E5"), new Thickness(new Border()));
+
+                workBook.CopySheet("sheet1", "sheet4");
+                workBook.Save();
             }
-
-            sh[new Address("B2"), new Address("D4")] = table;
-
-
             Console.ReadLine();
 #endif
 
@@ -68,11 +67,11 @@ namespace LibTester
 
                 // 振り分け処理マクロ作成
                 Object srcfolder = ol.GetFolder(Outlook.OlDefaultFolders.olFolderInbox);
-                Object destfolder = ol.GetChildFolder(srcfolder, "GMail");
+                Object destfolder = ol.GetChildFolder(srcfolder, "三洋");
 
                 ol.AutoFiltering(srcfolder, destfolder, (mail) =>
                 {   // 送信元の情報が指定のパターンの場合にマッチしているか？
-                    return Regex.IsMatch(new EMail(mail).From.Address, @"@gmail\.com");
+                    return Regex.IsMatch(new EMail(mail).From.Address, @"@jp\.panasonic\.com");
                 });
             }
 #endif

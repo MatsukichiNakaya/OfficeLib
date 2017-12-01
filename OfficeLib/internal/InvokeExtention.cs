@@ -77,13 +77,13 @@ namespace OfficeLib
         #endregion
 
         #region --- SetProperty ---
-        /// <summary>
-        /// Invoke Setproperty extention
-        /// </summary>
-        public static Object SetProperty(this Object src, String command)
-        {
-            return SetProperty(src, command, null, src, null);
-        }
+        ///// <summary>
+        ///// Invoke Setproperty extention
+        ///// </summary>
+        //public static Object SetProperty(this Object src, String command)
+        //{
+        //    return SetProperty(src, command, null, src, null);
+        //}
 
         /// <summary>
         /// Invoke Setproperty extention

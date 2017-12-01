@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using static OfficeLib.Commands;
+using static OfficeLib.XLS.ExcelCommands;
 
 namespace OfficeLib.XLS
 {
@@ -17,38 +19,6 @@ namespace OfficeLib.XLS
         #region --- Constant ---
         /// <summary>Application object ID</summary>
         protected const String PROG_ID = "Excel.Application";
-        /// <summary>WorkBooks object ID</summary>
-        protected const String OBJECT_WORKBOOKS = "Workbooks";
-        /// <summary>Sheets object ID</summary>
-        protected const String OBJECT_SHEET = "Sheets";
-        /// <summary>Cells</summary>
-        protected const String OBJECT_CELL = "Cells";
-        /// <summary>Range</summary>
-        protected const String OBJECT_RANGE = "Range";
-
-        /// <summary>Value</summary>
-        protected const String PROP_VALUE = "Value";
-        /// <summary>Value2</summary>
-        /// <remarks>
-        /// The only difference between this property 
-        /// and the Value property is that the Value2 property
-        /// doesnÅft use the Currency and Date data types.
-        /// You can return values formatted with
-        /// these data types as floating-point numbers
-        /// by using the Double data type.
-        /// </remarks>
-        protected const String PROP_VALUE2 = "Value2";
-        /// <summary>Text</summary>
-        protected const String PROP_TEXT = "Text";
-        /// <summary>Fomula</summary>
-        protected const String PROP_FOMULA = "Formula";
-
-        /// <summary>Row</summary>
-        protected const String PROP_ROW = "Row";
-        /// <summary>Column</summary>
-        protected const String PROP_COL = "Column";
-        /// <summary>SheetsInNewWorkbook</summary>
-        protected const String PROP_SHEET_IN_NEW_WORKBOOK = "SheetsInNewWorkbook";
 
         /// <summary>argument count of "Open" method</summary>
         protected static readonly Int32 ARGS_OPEN = 15;
@@ -57,44 +27,6 @@ namespace OfficeLib.XLS
         public static readonly Int32 ROW = 0;
         /// <summary>Columun</summary>
         public static readonly Int32 COL = 1;
-
-        /// <summary>XlCorruptLoad Enumeration</summary>
-        /// <remarks>Specifies the processing for a file when it is opened.</remarks>
-        public enum XlCorruptLoad : Int32
-        {
-            /// <summary>Workbook is opened normally.</summary>
-            xlNormalLoad = 0,
-            /// <summary>Workbook is opened in repair mode.</summary>
-            xlRepairFile = 1,
-            /// <summary>Workbook is opened in extract data mode.</summary>
-            xlExtractData = 2,
-        }
-
-        /// <summary>XlPlatform Enumeration</summary>
-        /// <remarks>Specifies the platform on which a text file originated.</remarks>
-        public enum XlPlatform : Int32
-        {
-            /// <summary>Macintosh</summary>
-            xlMacintosh = 1,
-            /// <summary>MS-DOS</summary>
-            xlMSDOS = 3,
-            /// <summary>Microsoft Windows</summary>
-            xlWindows = 2,
-        }
-
-        /// <summary>XlGetValueType Enumeration</summary>
-        /// <remarks>Specifies the format for retrieving values from a cell.</remarks>
-        public enum XlGetValueFormat : Int32
-        {
-            /// <summary>Value</summary>
-            xlValue = 0,
-            /// <summary>Floating-point numbers</summary>
-            xlValue2 = 1,
-            /// <summary>Text</summary>
-            xlText = 2,
-            /// <summary>Fomula</summary>
-            xlFormula = 3,
-        }
     
         #endregion
 
@@ -348,6 +280,45 @@ namespace OfficeLib.XLS
         {
             // Todo: Remove sheet method
             throw new Exception("work in progress");
+        }
+
+        /// <summary>
+        /// Copy the sheet
+        /// </summary>
+        /// <param name="sourceSheetName"></param>
+        /// <param name="destSheetName"></param>
+        /// <returns></returns>
+        public Boolean CopySheet(String sourceSheetName, String destSheetName)
+        {
+            Object sheets = null;
+            Object target = null;
+            Object firstSheet = null;
+            Object destSheet = null;
+
+            Boolean result = false;
+            try
+            {
+                sheets = this.Book?.GetProperty(OBJECT_SHEET);
+                if(sheets  == null) { return false; }
+
+                target = sheets.GetProperty(PROP_ITEM, new Object[] { sourceSheetName });
+                firstSheet = sheets.GetProperty(PROP_ITEM, new Object[] { 1 });
+                if (target == null || firstSheet == null) { return false; }
+
+                // Copy sheets to the beginning.
+                target.Method(METHOD_COPY, new Object[] { firstSheet, Type.Missing });
+
+                // Change name.
+                destSheet = sheets.GetProperty(PROP_ITEM, new Object[] { 1 });
+                destSheet.SetProperty(PROP_NAME, new Object[] { destSheetName });
+
+                result = true;
+            }
+            finally
+            {
+                ReleaseObjects(target, firstSheet, destSheet, sheets);
+            }
+            return result;
         }
         #endregion
 

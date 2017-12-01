@@ -16,10 +16,15 @@ namespace OfficeLib
         public static TOutput To<TOutput>(this Object value)
         {   
             if(value == null) { return default(TOutput); }
-            var converter = TypeDescriptor.GetConverter(typeof(TOutput));
-            return converter != null
-                    ? (TOutput)converter.ConvertTo(value, typeof(TOutput))
-                    : default(TOutput);
+            try
+            {
+                TypeConverter converter = TypeDescriptor.GetConverter(typeof(TOutput));
+
+                return converter != null
+                            ? (TOutput)converter.ConvertTo(value, typeof(TOutput))
+                            : default(TOutput);
+            }
+            catch (Exception) { return default(TOutput); }
         }
 
         /// <summary>
@@ -30,15 +35,19 @@ namespace OfficeLib
         /// <remarks>Cast of return value required</remarks>
         public static Object To(this Object value, Type type)
         {
-            if (value == null)
+            Object result = type.IsValueType ? Activator.CreateInstance(type) : null;
+            if (value == null) { return result; }
+            try
             {
-                return type.IsValueType ? Activator.CreateInstance(type) : null;
+                var converter = TypeDescriptor.GetConverter(type);
+                return converter != null
+                        ? converter.ConvertTo(value, type) : result;
             }
-            var converter = TypeDescriptor.GetConverter(type);
-            return converter != null 
-                    ? converter.ConvertTo(value, type) 
-                    : (type.IsValueType ? Activator.CreateInstance(type) : null);
+            catch (Exception) { return result; }
         }
+
+#if false
+        // 
 
         /// <summary>
         /// Type Conversion (Perform exception handling)
@@ -77,6 +86,7 @@ namespace OfficeLib
             }
             catch (Exception) { return result; }
         }
+#endif
 
         /// <summary>Type Conversion of Arrays</summary>
         /// <typeparam name="TInput">Type of conversion source</typeparam>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OfficeLib.Excel
+namespace OfficeLib.XLS
 {
     /// <summary></summary>
     public class Cell<T>

@@ -39,6 +39,7 @@ namespace OfficeLib.EML
         /// </summary>
         /// <param name="address">EMail Address</param>
         /// <param name="name">Display Name</param>
+        /// <param name="olType"></param>
         public MailAddress(String address, String name, Outlook.OlMailRecipientType olType)
         {
             this.Address = address;

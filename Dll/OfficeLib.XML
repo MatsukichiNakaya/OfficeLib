@@ -4,6 +4,89 @@
         <name>OfficeLib</name>
     </assembly>
     <members>
+        <member name="T:OfficeLib.Commands">
+            <summary>
+            Commonly used command
+            </summary>
+        </member>
+        <member name="F:OfficeLib.Commands.OBJECT_SHAPES">
+            <summary>Command of Shapes</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.METHOD_ADD">
+            <summary>Command of Add</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.METHOD_CLOSE">
+            <summary>Command of Close</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.METHOD_MOVE">
+            <summary>Command of Move</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.METHOD_OPEN">
+            <summary>Command of Open</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.METHOD_QUIT">
+            <summary>Command of Quit</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.METHOD_SAVE">
+            <summary>Command of Save</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.METHOD_SAVE_AS">
+            <summary>Command of Save as</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.METHOD_COPY">
+            <summary>Command of Copy</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.COMMAND_CUT">
+            <summary>Command of Cut</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.COMMAND_COPY">
+            <summary>Command of Copy</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.COMMAND_PASTE">
+            <summary>Command of Paste</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_BORDERS">
+            <summary>Borders</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_COLOR">
+            <summary>Color</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_COUNT">
+            <summary>count</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_DISP_ALERT">
+            <summary>Display alert</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_ITEM">
+            <summary>Item</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_ITEMS">
+            <summary>Items</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_LEFT">
+            <summary>Left</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_LINE_STYLE">
+            <summary>LineStyle</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_NAME">
+            <summary>Name</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_PATH">
+            <summary>Path</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_SAVED">
+            <summary>Saved</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_TOP">
+            <summary>Top</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_VERSION">
+            <summary>Version</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_WEIGHT">
+            <summary>Weight</summary>
+        </member>
         <member name="T:OfficeLib.FolderSearchOption">
             <summary>
             Specifies whether to search the current directory,
@@ -41,75 +124,763 @@
         <member name="F:OfficeLib.MsoTriState.msoCTrue">
             <summary>Not supported</summary>
         </member>
-        <member name="T:OfficeLib.Excel.Cell`1">
+        <member name="T:OfficeLib.XLS.Border">
+            <summary>Border class</summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Border.Index">
+            <summary>Border index</summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Border.Weight">
+            <summary>Border weight</summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Border.LineStyle">
+            <summary>Border line style</summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Border.Color">
+            <summary>Border color</summary>
+        </member>
+        <member name="M:OfficeLib.XLS.Border.#ctor">
             <summary></summary>
         </member>
-        <member name="P:OfficeLib.Excel.Cell`1.Value">
+        <member name="M:OfficeLib.XLS.Border.#ctor(OfficeLib.XLS.XlBordersIndex)">
             <summary></summary>
         </member>
-        <member name="P:OfficeLib.Excel.Cell`1.RuledLine">
+        <member name="M:OfficeLib.XLS.Border.Clone(OfficeLib.XLS.XlBordersIndex,OfficeLib.XLS.Border)">
+            <summary></summary>
+            <param name="index"></param>
+            <param name="border"></param>
+        </member>
+        <member name="T:OfficeLib.XLS.Cell`1">
             <summary></summary>
         </member>
-        <member name="P:OfficeLib.Excel.Cell`1.BackgroundColor">
+        <member name="P:OfficeLib.XLS.Cell`1.Value">
             <summary></summary>
         </member>
-        <member name="P:OfficeLib.Excel.Cell`1.ForegroundColor">
+        <member name="P:OfficeLib.XLS.Cell`1.RuledLine">
             <summary></summary>
         </member>
-        <member name="P:OfficeLib.Excel.Cell`1.Fomula">
+        <member name="P:OfficeLib.XLS.Cell`1.BackgroundColor">
             <summary></summary>
         </member>
-        <member name="P:OfficeLib.Excel.Cell`1.FontSize">
+        <member name="P:OfficeLib.XLS.Cell`1.ForegroundColor">
             <summary></summary>
         </member>
-        <member name="M:OfficeLib.Excel.Cell`1.#ctor">
+        <member name="P:OfficeLib.XLS.Cell`1.Fomula">
             <summary></summary>
         </member>
-        <member name="T:OfficeLib.Excel.Color">
+        <member name="P:OfficeLib.XLS.Cell`1.FontSize">
             <summary></summary>
         </member>
-        <member name="P:OfficeLib.Excel.Color.R">
+        <member name="M:OfficeLib.XLS.Cell`1.#ctor">
             <summary></summary>
         </member>
-        <member name="P:OfficeLib.Excel.Color.G">
-            <summary></summary>
+        <member name="T:OfficeLib.XLS.ExcelEditExtention">
+            <summary>
+            
+            </summary>
         </member>
-        <member name="P:OfficeLib.Excel.Color.B">
-            <summary></summary>
+        <member name="M:OfficeLib.XLS.ExcelEditExtention.SetBackgroundColor(OfficeLib.XLS.Excel,OfficeLib.XLS.Address,OfficeLib.XLS.Color)">
+            <summary>
+            Set colors for cell
+            </summary>
+            <param name="excel"></param>
+            <param name="target"></param>
+            <param name="color"></param>
+            <remarks>
+            [2003] and [2007 ～] Check operation
+            </remarks>
         </member>
-        <member name="M:OfficeLib.Excel.Color.#ctor">
-            <summary></summary>
+        <member name="M:OfficeLib.XLS.ExcelEditExtention.SetBackgroundColor(OfficeLib.XLS.Excel,OfficeLib.XLS.Address,OfficeLib.XLS.Address,OfficeLib.XLS.Color)">
+            <summary>
+            Set colors for cell
+            </summary>
+            <param name="excel"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="color"></param>
         </member>
-        <member name="M:OfficeLib.Excel.Color.#ctor(System.UInt32,System.UInt32,System.UInt32)">
-            <summary></summary>
+        <member name="M:OfficeLib.XLS.ExcelEditExtention.SetBorder(OfficeLib.XLS.Excel,OfficeLib.XLS.Range,OfficeLib.XLS.Thickness)">
+            <summary>
+            Set Border
+            </summary>
+            <param name="excel"></param>
+            <param name="target"></param>
+            <param name="thickness"></param>
         </member>
-        <member name="T:OfficeLib.Excel.Thickness">
-            <summary></summary>
+        <member name="M:OfficeLib.XLS.ExcelEditExtention.SetBorder(OfficeLib.XLS.Excel,OfficeLib.XLS.Address,OfficeLib.XLS.XlBorderWeight,OfficeLib.XLS.XlLineStyle)">
+            <summary>
+            
+            </summary>
+            <param name="excel"></param>
+            <param name="target"></param>
+            <param name="xlWeight"></param>
+            <param name="xlStyle"></param>
         </member>
-        <member name="P:OfficeLib.Excel.Thickness.Left">
-            <summary></summary>
+        <member name="T:OfficeLib.XLS.ExcelCommands">
+            <summary>
+            Commands used in Excel
+            </summary>
         </member>
-        <member name="P:OfficeLib.Excel.Thickness.Top">
-            <summary></summary>
+        <member name="F:OfficeLib.XLS.ExcelCommands.OBJECT_CELL">
+            <summary>Cells</summary>
         </member>
-        <member name="P:OfficeLib.Excel.Thickness.Right">
-            <summary></summary>
+        <member name="F:OfficeLib.XLS.ExcelCommands.OBJECT_RANGE">
+            <summary>Range</summary>
         </member>
-        <member name="P:OfficeLib.Excel.Thickness.Bottom">
-            <summary></summary>
+        <member name="F:OfficeLib.XLS.ExcelCommands.OBJECT_SHEET">
+            <summary>Sheets object ID</summary>
         </member>
-        <member name="P:OfficeLib.Excel.Thickness.Values">
-            <summary></summary>
+        <member name="F:OfficeLib.XLS.ExcelCommands.OBJECT_WORKBOOKS">
+            <summary>WorkBooks object ID</summary>
         </member>
-        <member name="M:OfficeLib.Excel.Thickness.#ctor">
-            <summary></summary>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_COL">
+            <summary>Column</summary>
         </member>
-        <member name="M:OfficeLib.Excel.Thickness.#ctor(System.Double,System.Double,System.Double,System.Double)">
-            <summary></summary>
-            <param name="left"></param>
-            <param name="top"></param>
-            <param name="right"></param>
-            <param name="bottom"></param>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_FOMULA">
+            <summary>Fomula</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_INTERIOR">
+            <summary>Interior</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_ROW">
+            <summary>Row</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_SHEET_IN_NEW_WORKBOOK">
+            <summary>SheetsInNewWorkbook</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_TEXT">
+            <summary>Text</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_VALUE">
+            <summary>Value</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_VALUE2">
+            <summary>Value2</summary>
+            <remarks>
+            The only difference between this property 
+            and the Value property is that the Value2 property
+            doesn’t use the Currency and Date data types.
+            You can return values formatted with
+            these data types as floating-point numbers
+            by using the Double data type.
+            </remarks>
+        </member>
+        <member name="T:OfficeLib.XLS.Constants">
+            <summary>Constants Enumeration</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xl3DBar">
+            <summary>3D Bar</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xl3DEffects1">
+            <summary>3D Effects1</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xl3DEffects2">
+            <summary>3D Effects2</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xl3DSurface">
+            <summary>3D Surface</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlAbove">
+            <summary>Above</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlAccounting1">
+            <summary>Accounting1</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlAccounting2">
+            <summary>Accounting2</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlAccounting4">
+            <summary>Accounting4</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlAdd">
+            <summary>Add</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlAll">
+            <summary>All</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlAccounting3">
+            <summary>Accounting3</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlAllExceptBorders">
+            <summary>All Except Borders</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlAutomatic">
+            <summary>Automatic</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlBar">
+            <summary>Automatic</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlBelow">
+            <summary>Below</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlBidi">
+            <summary>Bidi</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlBidiCalendar">
+            <summary>BidiCalendar</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlBoth">
+            <summary>Both</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlBottom">
+            <summary>Bottom</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlCascade">
+            <summary>Cascade</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlCenter">
+            <summary>Center</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlCenterAcrossSelection">
+            <summary>Center Across Selection</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlChart4">
+            <summary>Chart 4</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlChartSeries">
+            <summary>Chart Series</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlChartShort">
+            <summary>Chart Short</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlChartTitles">
+            <summary>Chart Titles</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlChecker">
+            <summary>Checker</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlCircle">
+            <summary>Circle</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlClassic1">
+            <summary>Classic1</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlClassic2">
+            <summary>Classic2</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlClassic3">
+            <summary>Classic3</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlClosed">
+            <summary>Closed</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlColor1">
+            <summary>Color1</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlColor2">
+            <summary>Color2</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlColor3">
+            <summary>Color3</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlColumn">
+            <summary>Column</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlCombination">
+            <summary>Combination</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlComplete">
+            <summary>Complete</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlConstants">
+            <summary>Constants</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlContents">
+            <summary>Contents</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlContext">
+            <summary>Context</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlCorner">
+            <summary>Corner</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlCrissCross">
+            <summary>CrissCross</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlCross">
+            <summary>Cross</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlCustom">
+            <summary>Custom</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDebugCodePane">
+            <summary>Debug Code Pane</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDefaultAutoFormat">
+            <summary>Default Auto Format</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDesktop">
+            <summary>Desktop</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDiamond">
+            <summary>Diamond</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDirect">
+            <summary>Direct</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDistributed">
+            <summary>Distributed</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDivide">
+            <summary>Divide</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDoubleAccounting">
+            <summary>Double Accounting</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDoubleClosed">
+            <summary>Double Closed</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDoubleOpen">
+            <summary>Double Open</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDoubleQuote">
+            <summary>Double Quote</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlDrawingObject">
+            <summary>Drawing Object</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlEntireChart">
+            <summary>Entire Chart</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlExcelMenus">
+            <summary>Excel Menus</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlExtended">
+            <summary>Extended</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlFill">
+            <summary>Fill</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlFirst">
+            <summary>First</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlFixedValue">
+            <summary>Fixed Value</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlFloating">
+            <summary>Floating</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlFormats">
+            <summary>Formats</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlFormula">
+            <summary>Formula</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlFullScript">
+            <summary>Full Script</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlGeneral">
+            <summary>General</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlGray16">
+            <summary>Gray16</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlGray25">
+            <summary>Gray25</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlGray50">
+            <summary>Gray50</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlGray75">
+            <summary>Gray75</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlGray8">
+            <summary>Gray8</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlGregorian">
+            <summary>Gregorian</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlGrid">
+            <summary>Grid</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlGridline">
+            <summary>Gridline</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlHigh">
+            <summary>High</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlHindiNumerals">
+            <summary>Hindi Numerals</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlIcons">
+            <summary>Icons</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlImmediatePane">
+            <summary>Immediate Pane</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlInside">
+            <summary>Inside</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlInteger">
+            <summary>Integer</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlJustify">
+            <summary>Justify</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLast">
+            <summary>Last</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLastCell">
+            <summary>Last Cell</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLatin">
+            <summary>Latin</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLeft">
+            <summary>Left</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLeftToRight">
+            <summary>Left To Right</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLightDown">
+            <summary>Light Down</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLightHorizontal">
+            <summary>Light Horizontal</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLightUp">
+            <summary>Light Up</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLightVertical">
+            <summary>Light Vertical</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlList1">
+            <summary>List1</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlList2">
+            <summary>List2</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlList3">
+            <summary>List3</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLocalFormat1">
+            <summary>Local Format1</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLocalFormat2">
+            <summary>Local Format2</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLogicalCursor">
+            <summary>Logical Cursor</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLong">
+            <summary>Long</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLotusHelp">
+            <summary>Lotus Help</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLow">
+            <summary>Low</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlLTR">
+            <summary>LTR</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlMacrosheetCell">
+            <summary>MacrosheetCell</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlManual">
+            <summary>Manual</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlMaximum">
+            <summary>Maximum</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlMinimum">
+            <summary>Minimum</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlMinusValues">
+            <summary>Minus Values</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlMixed">
+            <summary>Mixed</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlMixedAuthorizedScript">
+            <summary>Mixed Authorized Script</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlMixedScript">
+            <summary>Mixed Script</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlModule">
+            <summary>Module</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlMultiply">
+            <summary>Multiply</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlNarrow">
+            <summary>Narrow</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlNextToAxis">
+            <summary>Next To Axis</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlNoDocuments">
+            <summary>No Documents</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlNone">
+            <summary>None</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlNotes">
+            <summary>Notes</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlOff">
+            <summary>Off</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlOn">
+            <summary>On</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlOpaque">
+            <summary>Opaque</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlOpen">
+            <summary>Open</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlOutside">
+            <summary>Outside</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlPartial">
+            <summary>Partial</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlPartialScript">
+            <summary>Partial Script</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlPercent">
+            <summary>Percent</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlPlus">
+            <summary>Plus</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlPlusValues">
+            <summary>Plus Values</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlReference">
+            <summary>Reference</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlRight">
+            <summary>Right</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlRTL">
+            <summary>RTL</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlScale">
+            <summary>Scale</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSemiautomatic">
+            <summary>Semiautomatic</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSemiGray75">
+            <summary>SemiGray75</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlShort">
+            <summary>Short</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlShowLabel">
+            <summary>Show Label</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlShowLabelAndPercent">
+            <summary>Show Label and Percent</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlShowPercent">
+            <summary>Show Percent</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlShowValue">
+            <summary>Show Value</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSimple">
+            <summary>Simple</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSingle">
+            <summary>Single</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSingleAccounting">
+            <summary>Single Accounting</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSingleQuote">
+            <summary>Single Quote</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSolid">
+            <summary>Solid</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSquare">
+            <summary>Square</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlStar">
+            <summary>Star</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlStError">
+            <summary>St Error</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlStrict">
+            <summary>Strict</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSubtract">
+            <summary>Subtract</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlSystem">
+            <summary>System</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlTextBox">
+            <summary>Text Box</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlTiled">
+            <summary>Tiled</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlTitleBar">
+            <summary>Title Bar</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlToolbar">
+            <summary>Toolbar</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlToolbarButton">
+            <summary>Toolbar Button</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlTop">
+            <summary>Top</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlTopToBottom">
+            <summary>Top To Bottom</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlTransparent">
+            <summary>Transparent</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlTriangle">
+            <summary>Triangle</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlVeryHidden">
+            <summary>Very Hidden</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlVisible">
+            <summary>Visible</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlVisualCursor">
+            <summary>Visual Cursor</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlWatchPane">
+            <summary>Watch Pane</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlWide">
+            <summary>Wide</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlWorkbookTab">
+            <summary>Workbook Tab</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlWorksheet4">
+            <summary>Worksheet4</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlWorksheetCell">
+            <summary>Worksheet Cell</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.Constants.xlWorksheetShort">
+            <summary>Worksheet Short</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlBordersIndex">
+            <summary>XlBordersIndex Enumeration</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBordersIndex.xlDiagonalDown">
+            <summary>Border running from the upper left-hand corner to the lower right of each cell in the range.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBordersIndex.xlDiagonalUp">
+            <summary>Border running from the lower left-hand corner to the upper right of each cell in the range.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBordersIndex.xlEdgeBottom">
+            <summary>Border at the bottom of the range.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBordersIndex.xlEdgeLeft">
+            <summary>Border at the left-hand edge of the range.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBordersIndex.xlEdgeRight">
+            <summary>Border at the right-hand edge of the range.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBordersIndex.xlEdgeTop">
+            <summary>Border at the top of the range.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBordersIndex.xlInsideHorizontal">
+            <summary>Horizontal borders for all cells in the range except borders on the outside of the range.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBordersIndex.xlInsideVertical">
+            <summary>Vertical borders for all the cells in the range except borders on the outside of the range.</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlBorderWeight">
+            <summary>XlBorderWeight Enumeration </summary>
+            <remarks>Specifies the weight of the border around a range.</remarks>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBorderWeight.xlHairline">
+            <summary>Hairline (thinnest border).</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBorderWeight.xlMedium">
+            <summary>Medium.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBorderWeight.xlThick">
+            <summary>Thick (widest border).</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlBorderWeight.xlThin">
+            <summary>Thin.</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlCorruptLoad">
+            <summary>XlCorruptLoad Enumeration</summary>
+            <remarks>Specifies the processing for a file when it is opened.</remarks>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCorruptLoad.xlNormalLoad">
+            <summary>Workbook is opened normally.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCorruptLoad.xlRepairFile">
+            <summary>Workbook is opened in repair mode.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCorruptLoad.xlExtractData">
+            <summary>Workbook is opened in extract data mode.</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlGetValueFormat">
+            <summary>XlGetValueType Enumeration</summary>
+            <remarks>Specifies the format for retrieving values from a cell.</remarks>
+        </member>
+        <member name="F:OfficeLib.XLS.XlGetValueFormat.xlValue">
+            <summary>Value</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlGetValueFormat.xlValue2">
+            <summary>Floating-point numbers</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlGetValueFormat.xlText">
+            <summary>Text</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlGetValueFormat.xlFormula">
+            <summary>Fomula</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlLineStyle">
+            <summary>XlLineStyle Enumeration</summary>
+            <remarks>Specifies the line style for the border.</remarks>
+        </member>
+        <member name="F:OfficeLib.XLS.XlLineStyle.xlContinuous">
+            <summary>Continuous line.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlLineStyle.xlDash">
+            <summary>Dashed line.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlLineStyle.xlDashDot">
+            <summary>Alternating dashes and dots.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlLineStyle.xlDashDotDot">
+            <summary>Dash followed by two dots.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlLineStyle.xlDot">
+            <summary>Dotted line.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlLineStyle.xlDouble">
+            <summary>Double line.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlLineStyle.xlLineStyleNone">
+            <summary>No line.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlLineStyle.xlSlantDashDot">
+            <summary>Slanted dashes.</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlPlatform">
+            <summary>XlPlatform Enumeration</summary>
+            <remarks>Specifies the platform on which a text file originated.</remarks>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPlatform.xlMacintosh">
+            <summary>Macintosh</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPlatform.xlMSDOS">
+            <summary>MS-DOS</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPlatform.xlWindows">
+            <summary>Microsoft Windows</summary>
         </member>
         <member name="T:OfficeLib.XLS.ExcelSheetAttribute">
             <summary>Excel sheet attribute</summary>
@@ -129,6 +900,106 @@
         <member name="M:OfficeLib.XLS.ExcelSheetAttribute.#ctor(OfficeLib.EnumSheetPermission)">
             <summary>Constructor</summary>
         </member>
+        <member name="T:OfficeLib.XLS.Color">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Color.R">
+            <summary>Red</summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Color.G">
+            <summary>Green</summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Color.B">
+            <summary>Blue</summary>
+        </member>
+        <member name="M:OfficeLib.XLS.Color.#ctor">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.XLS.Color.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.XLS.Color.AdjustLimit(System.Int32)">
+            <summary>
+            Adjust to 0 - 255
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.Color.RGB(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get color index
+            </summary>
+            <param name="r">Red</param>
+            <param name="g">Green</param>
+            <param name="b">Blue</param>
+        </member>
+        <member name="M:OfficeLib.XLS.Color.RGB">
+            <summary>
+            Get color index
+            </summary>
+        </member>
+        <member name="T:OfficeLib.XLS.Range">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Range.Start">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Range.End">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.XLS.Range.#ctor(System.String)">
+            <summary>Constructor</summary>
+            <param name="rangeString"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.Range.#ctor(OfficeLib.XLS.Address)">
+            <summary>Constructor</summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.Range.#ctor(OfficeLib.XLS.Address,OfficeLib.XLS.Address)">
+            <summary>Constructor</summary>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.Range.ToString">
+            <summary>
+            Range to String
+            </summary>
+        </member>
+        <member name="T:OfficeLib.XLS.Thickness">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Thickness.Left">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Thickness.Top">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Thickness.Right">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Thickness.Bottom">
+            <summary></summary>
+        </member>
+        <member name="P:OfficeLib.XLS.Thickness.Values">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.XLS.Thickness.#ctor">
+            <summary></summary>
+        </member>
+        <member name="M:OfficeLib.XLS.Thickness.#ctor(OfficeLib.XLS.Border,OfficeLib.XLS.Border,OfficeLib.XLS.Border,OfficeLib.XLS.Border)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="top"></param>
+            <param name="right"></param>
+            <param name="bottom"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.Thickness.#ctor(OfficeLib.XLS.Border)">
+            <summary>
+            
+            </summary>
+            <param name="all"></param>
+        </member>
         <member name="T:OfficeLib.XLS.ExcelExtention">
             <summary>Excel extention method class</summary>
         </member>
@@ -137,7 +1008,7 @@
             Convert character string to cell address
             </summary>
             <param name="value">character string</param>
-            <returns>Range class object</returns>
+            <returns>Address class object</returns>
         </member>
         <member name="M:OfficeLib.XLS.ExcelExtention.ToExcelColumnString(System.Int32)">
             <summary>
@@ -151,6 +1022,13 @@
             </summary>
             <param name="value">column side strings</param>
             <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.ExcelExtention.ToRange(System.String)">
+            <summary>
+            Convert character string to range
+            </summary>
+            <param name="value">character string</param>
+            <returns>Range class object</returns>
         </member>
         <member name="T:OfficeLib.XLS.Excel">
             <summary>
@@ -166,47 +1044,6 @@
         <member name="F:OfficeLib.XLS.Excel.PROG_ID">
             <summary>Application object ID</summary>
         </member>
-        <member name="F:OfficeLib.XLS.Excel.OBJECT_WORKBOOKS">
-            <summary>WorkBooks object ID</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.OBJECT_SHEET">
-            <summary>Sheets object ID</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.OBJECT_CELL">
-            <summary>Cells</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.OBJECT_RANGE">
-            <summary>Range</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.PROP_VALUE">
-            <summary>Value</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.PROP_VALUE2">
-            <summary>Value2</summary>
-            <remarks>
-            The only difference between this property 
-            and the Value property is that the Value2 property
-            doesn’t use the Currency and Date data types.
-            You can return values formatted with
-            these data types as floating-point numbers
-            by using the Double data type.
-            </remarks>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.PROP_TEXT">
-            <summary>Text</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.PROP_FOMULA">
-            <summary>Fomula</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.PROP_ROW">
-            <summary>Row</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.PROP_COL">
-            <summary>Column</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.PROP_SHEET_IN_NEW_WORKBOOK">
-            <summary>SheetsInNewWorkbook</summary>
-        </member>
         <member name="F:OfficeLib.XLS.Excel.ARGS_OPEN">
             <summary>argument count of "Open" method</summary>
         </member>
@@ -215,48 +1052,6 @@
         </member>
         <member name="F:OfficeLib.XLS.Excel.COL">
             <summary>Columun</summary>
-        </member>
-        <member name="T:OfficeLib.XLS.Excel.XlCorruptLoad">
-            <summary>XlCorruptLoad Enumeration</summary>
-            <remarks>Specifies the processing for a file when it is opened.</remarks>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlCorruptLoad.xlNormalLoad">
-            <summary>Workbook is opened normally.</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlCorruptLoad.xlRepairFile">
-            <summary>Workbook is opened in repair mode.</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlCorruptLoad.xlExtractData">
-            <summary>Workbook is opened in extract data mode.</summary>
-        </member>
-        <member name="T:OfficeLib.XLS.Excel.XlPlatform">
-            <summary>XlPlatform Enumeration</summary>
-            <remarks>Specifies the platform on which a text file originated.</remarks>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlPlatform.xlMacintosh">
-            <summary>Macintosh</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlPlatform.xlMSDOS">
-            <summary>MS-DOS</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlPlatform.xlWindows">
-            <summary>Microsoft Windows</summary>
-        </member>
-        <member name="T:OfficeLib.XLS.Excel.XlGetValueFormat">
-            <summary>XlGetValueType Enumeration</summary>
-            <remarks>Specifies the format for retrieving values from a cell.</remarks>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlGetValueFormat.xlValue">
-            <summary>Value</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlGetValueFormat.xlValue2">
-            <summary>Floating-point numbers</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlGetValueFormat.xlText">
-            <summary>Text</summary>
-        </member>
-        <member name="F:OfficeLib.XLS.Excel.XlGetValueFormat.xlFormula">
-            <summary>Fomula</summary>
         </member>
         <member name="P:OfficeLib.XLS.Excel.Book">
             <summary>Book object</summary>
@@ -362,7 +1157,15 @@
             <param name="sheetName"></param>
             <returns></returns>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.GetCellValue(System.UInt32,System.UInt32,System.UInt32,System.UInt32,OfficeLib.XLS.Excel.XlGetValueFormat)">
+        <member name="M:OfficeLib.XLS.Excel.CopySheet(System.String,System.String)">
+            <summary>
+            Copy the sheet
+            </summary>
+            <param name="sourceSheetName"></param>
+            <param name="destSheetName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.GetCellValue(System.UInt32,System.UInt32,System.UInt32,System.UInt32,OfficeLib.XLS.XlGetValueFormat)">
             <summary>
             Get value from sheet
             </summary>
@@ -381,7 +1184,7 @@
             Fomula = DATE(2017,3,27)
             </remarks>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.GetValue(System.Object,OfficeLib.XLS.Excel.XlGetValueFormat)">
+        <member name="M:OfficeLib.XLS.Excel.GetValue(System.Object,OfficeLib.XLS.XlGetValueFormat)">
             <summary>
             Get the value by reference format specification
             </summary>
@@ -389,7 +1192,7 @@
             <param name="referenceFormat">Cell value reference format</param>
             <returns></returns>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.GetCellValue(System.String,System.String,OfficeLib.XLS.Excel.XlGetValueFormat)">
+        <member name="M:OfficeLib.XLS.Excel.GetCellValue(System.String,System.String,OfficeLib.XLS.XlGetValueFormat)">
             <summary>
             Get value from sheet
             </summary>
@@ -397,7 +1200,7 @@
             <param name="endAdress">End adress</param>
             <param name="referenceFormat">Cell value reference type</param>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.String,OfficeLib.XLS.Excel.XlGetValueFormat)">
+        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.String,OfficeLib.XLS.XlGetValueFormat)">
             <summary> 
             Set value to sheet
             </summary>
@@ -405,7 +1208,7 @@
             <param name="startCell">Start Address</param>
             <param name="referenceFormat">Cell value reference format</param>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.UInt32,System.UInt32,OfficeLib.XLS.Excel.XlGetValueFormat)">
+        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.UInt32,System.UInt32,OfficeLib.XLS.XlGetValueFormat)">
             <summary> 
             Set value to sheet
             </summary>
@@ -414,7 +1217,7 @@
             <param name="startCol">Start column</param>
             <param name="referenceFormat">Cell value reference format</param>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.String,System.String,OfficeLib.XLS.Excel.XlGetValueFormat)">
+        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.String,System.String,OfficeLib.XLS.XlGetValueFormat)">
             <summary>
             Set value to sheet
             </summary>
@@ -423,7 +1226,7 @@
             <param name="endAddressString">End Address</param>
             <param name="referenceFormat">Cell value reference format</param>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.UInt32,System.UInt32,System.UInt32,System.UInt32,OfficeLib.XLS.Excel.XlGetValueFormat)">
+        <member name="M:OfficeLib.XLS.Excel.SetCellValue(System.Object[0:,0:],System.UInt32,System.UInt32,System.UInt32,System.UInt32,OfficeLib.XLS.XlGetValueFormat)">
             <summary>
             Set value to sheet
             </summary>
@@ -434,7 +1237,7 @@
             <param name="endCol">End column</param>
             <param name="referenceFormat">Cell value reference format</param>
         </member>
-        <member name="M:OfficeLib.XLS.Excel.GetSetFormat(OfficeLib.XLS.Excel.XlGetValueFormat)">
+        <member name="M:OfficeLib.XLS.Excel.GetSetFormat(OfficeLib.XLS.XlGetValueFormat)">
             <summary>
             
             </summary>
@@ -633,6 +1436,12 @@
             </summary>
             <typeparam name="TOutput"></typeparam>
         </member>
+        <member name="M:OfficeLib.XLS.Field`1.Convert(System.Object[][])">
+            <summary>
+            Convert table contents to specified type
+            </summary>
+            <param name="field"></param>
+        </member>
         <member name="M:OfficeLib.XLS.Field`1.GetCellValue(OfficeLib.XLS.Address)">
             <summary>
             Get the cell Value
@@ -779,6 +1588,18 @@
         </member>
         <member name="P:OfficeLib.XLS.WorkBook.Item(System.String)">
             <summary>Retrieve sheet object from sheet name</summary>
+        </member>
+        <member name="M:OfficeLib.XLS.WorkBook.GetInstance(System.String)">
+            <summary>
+            Get Excel instance
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.WorkBook.GetInstance">
+            <summary>
+            Get Excel instance
+            </summary>
         </member>
         <member name="M:OfficeLib.XLS.WorkBook.Read">
             <summary>
@@ -1025,84 +1846,139 @@
             E-Mail Class
             </summary>
         </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_SUBJECT">
+            <summary>Subject</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_ADDRESS">
+            <summary>EMail Address</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_NAME">
+            <summary>EMail Name</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_TYPE">
+            <summary>Recipient Type</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_COUNT">
+            <summary>Count</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_ITEMS">
+            <summary>Items</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_ITEM">
+            <summary>Item</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_SENDER">
+            <summary>From</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_RECIPIENTS">
+            <summary>Recipients</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_BODY">
+            <summary>Body</summary>
+        </member>
+        <member name="F:OfficeLib.EML.EMail.PROP_ATTACHEMENTS">
+            <summary>Attachement</summary>
+        </member>
         <member name="P:OfficeLib.EML.EMail.Subject">
             <summary>
-            
+            Subject
             </summary>
         </member>
         <member name="P:OfficeLib.EML.EMail.From">
             <summary>
-            
+            From
             </summary>
         </member>
         <member name="P:OfficeLib.EML.EMail.To">
             <summary>
-            
+            To
             </summary>
         </member>
         <member name="P:OfficeLib.EML.EMail.CC">
             <summary>
-            
+            CC
             </summary>
         </member>
         <member name="P:OfficeLib.EML.EMail.BCC">
             <summary>
-            
+            BCC
             </summary>
         </member>
         <member name="P:OfficeLib.EML.EMail.SendDate">
             <summary>
-            
+            Send Date
             </summary>
         </member>
         <member name="P:OfficeLib.EML.EMail.Body">
             <summary>
-            
+            Body
             </summary>
         </member>
         <member name="P:OfficeLib.EML.EMail.HasAttachements">
             <summary>
-            
+            Has Attachements
             </summary>
         </member>
         <member name="M:OfficeLib.EML.EMail.#ctor">
             <summary>
-            
+            Constructor
             </summary>
         </member>
         <member name="M:OfficeLib.EML.EMail.#ctor(System.Object)">
             <summary>
-            
+            Constructor
             </summary>
-            <param name="mailItem"></param>
+            <param name="mailItem">Mail object</param>
+        </member>
+        <member name="M:OfficeLib.EML.EMail.GetMailAdds(System.Object)">
+            <summary>
+            Get Mail Address from mail object
+            </summary>
+            <param name="mailAdds">Mail object</param>
+        </member>
+        <member name="M:OfficeLib.EML.EMail.ToString">
+            <summary>
+            To String
+            </summary>
         </member>
         <member name="T:OfficeLib.EML.MailAddress">
             <summary>
-            
+            E-Mail Address Class
             </summary>
         </member>
         <member name="P:OfficeLib.EML.MailAddress.DisplayName">
             <summary>
-            
+            Display Name
             </summary>
         </member>
         <member name="P:OfficeLib.EML.MailAddress.Address">
             <summary>
-            
+            Email Address
+            </summary>
+        </member>
+        <member name="P:OfficeLib.EML.MailAddress.Type">
+            <summary>
+            Email Recipient Type
             </summary>
         </member>
         <member name="M:OfficeLib.EML.MailAddress.#ctor(System.String)">
             <summary>
-            
+            Constructor
             </summary>
-            <param name="address"></param>
+            <param name="address">EMail Address</param>
         </member>
-        <member name="M:OfficeLib.EML.MailAddress.#ctor(System.String,System.String)">
+        <member name="M:OfficeLib.EML.MailAddress.#ctor(System.String,System.String,OfficeLib.EML.Outlook.OlMailRecipientType)">
             <summary>
-            
+            Constructor
             </summary>
-            <param name="address"></param>
-            <param name="name"></param>
+            <param name="address">EMail Address</param>
+            <param name="name">Display Name</param>
+            <param name="olType"></param>
+        </member>
+        <member name="M:OfficeLib.EML.MailAddress.ToString">
+            <summary>
+            To String
+            </summary>
         </member>
         <member name="T:OfficeLib.EML.Outlook">
             <summary>
@@ -1196,6 +2072,21 @@
         <member name="F:OfficeLib.EML.Outlook.OlDefaultFolders.olFolderRssFeeds">
             <summary>The RSS Feeds folder</summary>
         </member>
+        <member name="T:OfficeLib.EML.Outlook.OlMailRecipientType">
+            <summary>Indicates the recipient type for the Item.</summary>
+        </member>
+        <member name="F:OfficeLib.EML.Outlook.OlMailRecipientType.olOriginator">
+            <summary>Originator (sender) of the Item.</summary>
+        </member>
+        <member name="F:OfficeLib.EML.Outlook.OlMailRecipientType.olTo">
+            <summary>The recipient is specified in the To property of the Item.</summary>
+        </member>
+        <member name="F:OfficeLib.EML.Outlook.OlMailRecipientType.olCC">
+            <summary>The recipient is specified in the CC property of the Item.</summary>
+        </member>
+        <member name="F:OfficeLib.EML.Outlook.OlMailRecipientType.olBCC">
+            <summary>The recipient is specified in the BCC property of the Item.</summary>
+        </member>
         <member name="M:OfficeLib.EML.Outlook.#ctor">
             <summary>
             
@@ -1219,36 +2110,26 @@
             Close Outlook
             </summary>
         </member>
-        <member name="M:OfficeLib.EML.Outlook.GetItemCount">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OfficeLib.EML.Outlook.GetInboxFolders">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OfficeLib.EML.Outlook.GetInboxMails">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:OfficeLib.EML.Outlook.GetFolder(OfficeLib.EML.Outlook.OlDefaultFolders)">
             <summary>
-            
+            Get Folder object
             </summary>
             <param name="folderType"></param>
             <returns></returns>
         </member>
-        <member name="M:OfficeLib.EML.Outlook.GetMails(System.Object)">
+        <member name="M:OfficeLib.EML.Outlook.GetChildFolder(System.Object,System.String)">
             <summary>
-            Todo : Mail 
+            Get child folder object
             </summary>
             <param name="folder"></param>
+            <param name="childFolderName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.EML.Outlook.GetMails(System.Object)">
+            <summary>
+            Retrieve mail from specified folder.
+            </summary>
+            <param name="folder">Folder object</param>
             <returns></returns>
         </member>
         <member name="M:OfficeLib.EML.Outlook.GetUnreadCount(OfficeLib.FolderSearchOption)">
@@ -1266,9 +2147,24 @@
         </member>
         <member name="M:OfficeLib.EML.Outlook.UnreadCount(System.Object)">
             <summary>
-            
+            Get the number of unread counts in specified folder
             </summary>
-            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.EML.Outlook.AddFolder(System.Object,System.String,OfficeLib.EML.Outlook.OlDefaultFolders)">
+            <summary>
+            Add folder from specified folder.
+            </summary>
+            <param name="folder"></param>
+            <param name="folderName"></param>
+            <param name="folderType"></param>
+        </member>
+        <member name="M:OfficeLib.EML.Outlook.AutoFiltering(System.Object,System.Object,System.Func{System.Object,System.Boolean})">
+            <summary>
+            Auto Filtering
+            </summary>
+            <param name="srcFolder">Src folder object</param>
+            <param name="destFolder">Dest folder object</param>
+            <param name="filter">Filter script</param>
         </member>
         <member name="T:OfficeLib.EnumSheetPermission">
             <summary>Sheet access permission definition</summary>
@@ -1326,21 +2222,6 @@
         <member name="M:OfficeLib.ConvertExtention.To(System.Object,System.Type)">
             <summary>
             Type Conversion
-            </summary>
-            <param name="value">Value of conversion source</param>
-            <param name="type">Type after conversion</param>
-            <remarks>Cast of return value required</remarks>
-        </member>
-        <member name="M:OfficeLib.ConvertExtention.TryTo``1(System.Object)">
-            <summary>
-            Type Conversion (Perform exception handling)
-            </summary>
-            <typeparam name="TOutput">Type after conversion</typeparam>
-            <param name="value">Value of conversion source</param>
-        </member>
-        <member name="M:OfficeLib.ConvertExtention.TryTo(System.Object,System.Type)">
-            <summary>
-            Type Conversion (Perform exception handling)
             </summary>
             <param name="value">Value of conversion source</param>
             <param name="type">Type after conversion</param>
@@ -1550,11 +2431,6 @@
             Invoke Getproperty extention
             </summary>
         </member>
-        <member name="M:OfficeLib.InvokeExtention.SetProperty(System.Object,System.String)">
-            <summary>
-            Invoke Setproperty extention
-            </summary>
-        </member>
         <member name="M:OfficeLib.InvokeExtention.SetProperty(System.Object,System.String,System.Object[])">
             <summary>
             Invoke Setproperty extention
@@ -1573,66 +2449,6 @@
         <member name="T:OfficeLib.OfficeCore">
             <summary>Microsoft Office application class</summary>
             <remarks>Excel, Word, PowerPoint</remarks>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.OBJECT_SHAPES">
-            <summary>Command of Shapes</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.METHOD_OPEN">
-            <summary>Command of Open</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.METHOD_SAVE">
-            <summary>Command of Save</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.METHOD_SAVE_AS">
-            <summary>Command of Save as</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.METHOD_CLOSE">
-            <summary>Command of Close</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.METHOD_QUIT">
-            <summary>Command of Quit</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.METHOD_ADD">
-            <summary>Command of Add</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.COMMAND_COPY">
-            <summary>Command of Copy</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.COMMAND_CUT">
-            <summary>Command of Cut</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.COMMAND_PASTE">
-            <summary>Command of Paste</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_VERSION">
-            <summary>Version</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_COUNT">
-            <summary>count</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_ITEM">
-            <summary>Item</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_ITEMS">
-            <summary>Items</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_NAME">
-            <summary>Name</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_LEFT">
-            <summary>Left</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_TOP">
-            <summary>Top</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_PATH">
-            <summary>Path</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_SAVED">
-            <summary>Saved</summary>
-        </member>
-        <member name="F:OfficeLib.OfficeCore.PROP_DISP_ALERT">
-            <summary>Display alert</summary>
         </member>
         <member name="P:OfficeLib.OfficeCore.ApplicationID">
             <summary>Application ID</summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using static OfficeLib.Commands;
 
 namespace OfficeLib
 {
@@ -7,52 +8,6 @@ namespace OfficeLib
     /// <remarks>Excel, Word, PowerPoint</remarks>
     public abstract class OfficeCore : IDisposable
     {
-        /// <summary>Command of Shapes</summary>
-        protected const String OBJECT_SHAPES = "Shapes";
-
-        /// <summary>Command of Open</summary>
-        protected const String METHOD_OPEN = "Open";
-        /// <summary>Command of Save</summary>
-        protected const String METHOD_SAVE = "Save";
-        /// <summary>Command of Save as</summary>
-        protected const String METHOD_SAVE_AS = "SaveAs";
-        /// <summary>Command of Close</summary>
-        protected const String METHOD_CLOSE = "Close";
-        /// <summary>Command of Quit</summary>
-        protected const String METHOD_QUIT = "Quit";
-        /// <summary>Command of Add</summary>
-        protected const String METHOD_ADD = "Add";
-        /// <summary>Command of Move</summary>
-        protected const String METHOD_MOVE = "Move";
-
-        /// <summary>Command of Copy</summary>
-        protected const String COMMAND_COPY = "Duplicate";
-        /// <summary>Command of Cut</summary>
-        protected const String COMMAND_CUT = "Cut";
-        /// <summary>Command of Paste</summary>
-        protected const String COMMAND_PASTE = "Paste";
-
-        /// <summary>Version</summary>
-        protected const String PROP_VERSION = "Version";
-        /// <summary>count</summary>
-        protected const String PROP_COUNT = "Count";
-        /// <summary>Item</summary>
-        protected const String PROP_ITEM = "Item";
-        /// <summary>Items</summary>
-        protected const String PROP_ITEMS = "Items";
-        /// <summary>Name</summary>
-        protected const String PROP_NAME = "Name";
-        /// <summary>Left</summary>
-        protected const String PROP_LEFT = "Left";
-        /// <summary>Top</summary>
-        protected const String PROP_TOP = "Top";
-        /// <summary>Path</summary>
-        protected const String PROP_PATH = "Path";
-        /// <summary>Saved</summary>
-        protected const String PROP_SAVED = "Saved";
-        /// <summary>Display alert</summary>
-        protected const String PROP_DISP_ALERT = "DisplayAlerts";
-
         /// <summary>Application ID</summary>
         public String ApplicationID { get; }
 

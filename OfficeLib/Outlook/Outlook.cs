@@ -1,4 +1,5 @@
 ﻿using System;
+using static OfficeLib.Commands;
 
 namespace OfficeLib.EML
 {
@@ -142,7 +143,7 @@ namespace OfficeLib.EML
         /// <summary>
         /// Get child folder object
         /// </summary>
-        /// <param name="folderType"></param>
+        /// <param name="folder"></param>
         /// <param name="childFolderName"></param>
         /// <returns></returns>
         public Object GetChildFolder(Object folder, String childFolderName)

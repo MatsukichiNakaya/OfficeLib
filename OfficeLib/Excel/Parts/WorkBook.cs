@@ -55,6 +55,32 @@ namespace OfficeLib.XLS
         }
         #endregion
 
+        #region --- GetInstance ---
+        /// <summary>
+        /// Get Excel instance
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static Excel GetInstance(String path)
+        {
+            if (!File.Exists(path))
+            { throw new FileNotFoundException("File not found.", path); }
+
+            var result = new Excel();
+            Boolean isSuccess = result.Open(System.IO.Path.GetFullPath(path));
+            if (!isSuccess)
+            {
+                result.Dispose();
+            }
+            return isSuccess ? result : null;
+        }
+
+        /// <summary>
+        /// Get Excel instance
+        /// </summary>
+        public Excel GetInstance() => GetInstance(this.Path);
+        #endregion
+
         #region --- Read ---
         /// <summary>
         /// Read all the sheets in the book

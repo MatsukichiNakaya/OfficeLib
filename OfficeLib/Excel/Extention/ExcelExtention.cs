@@ -9,7 +9,7 @@ namespace OfficeLib.XLS
         /// Convert character string to cell address
         /// </summary>
         /// <param name="value">character string</param>
-        /// <returns>Range class object</returns>
+        /// <returns>Address class object</returns>
         public static Address ToAddress(this String value)
         {
             return new Address(value);
@@ -32,6 +32,16 @@ namespace OfficeLib.XLS
         public static UInt32 ToColumnNumber(this String value)
         {
             return Address.ToColumnNumber(value);
+        }
+
+        /// <summary>
+        /// Convert character string to range
+        /// </summary>
+        /// <param name="value">character string</param>
+        /// <returns>Range class object</returns>
+        public static Range ToRange(this String value)
+        {
+            return new Range(value);
         }
     }
 }
