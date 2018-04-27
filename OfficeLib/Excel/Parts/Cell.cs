@@ -3,7 +3,7 @@
 namespace OfficeLib.XLS
 {
     /// <summary></summary>
-    public class Cell<T>
+    internal class Cell<T>
     {
         /// <summary></summary>
         public T Value { get; set; }
@@ -17,6 +17,8 @@ namespace OfficeLib.XLS
         public String Fomula { get; set; }
         /// <summary></summary>
         public UInt32 FontSize { get; set; }
+        /// <summary></summary>
+        public XlGetValueFormat FormatType { get; set; }
 
 #if false
         // Todo :
@@ -28,7 +30,10 @@ namespace OfficeLib.XLS
         /// <summary></summary>
         public Cell()
         {
+            this.Value = default(T);
             this.RuledLine = new Thickness();
+            this.Fomula = String.Empty;
+            this.FormatType = XlGetValueFormat.xlValue2; 
         }
     }
 }

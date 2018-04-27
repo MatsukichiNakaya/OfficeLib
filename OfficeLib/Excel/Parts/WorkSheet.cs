@@ -150,6 +150,27 @@ namespace OfficeLib.XLS
         }
 
         /// <summary>
+        /// Read the sheet
+        /// </summary>
+        /// <param name="excel">Excel instance</param>
+        /// <param name="format">Get value format type</param>
+        public virtual void Read(Excel excel, XlGetValueFormat format)
+        {
+            if (!excel.SelectSheet(this.Name))
+            {
+                throw new Exception(String.Format("{0} is Nothing. Can not Read.", this, this.Name));
+            }
+            // Start "A1" from there Get the maximum amount of data
+            this.EntireField = new Field<Object>(
+                                        excel.GetCellValue(1, 1,
+                                                           (UInt32)this.MaxRow,
+                                                           (UInt32)this.MaxColumn,
+                                                           format));
+            // Initialize tables
+            this.Tables = new Dictionary<String, Field<Object>>();
+        }
+
+        /// <summary>
         /// Get table from its own field
         /// </summary>
         /// <param name="excel">Excel instance</param>
@@ -161,10 +182,10 @@ namespace OfficeLib.XLS
         /// Since it is acquired directly from Excel, 
         /// it can be obtained freely if it is within the allowable range of Excel
         /// </remarks>
-        public virtual Field<Object> GetTable(Excel excel, 
+        public virtual Field<Object> GetTable(Excel excel,
                                               Address startAddress, Address endAddress)
             => new Field<Object>(
-                excel.GetCellValue(startAddress.ReferenceString, 
+                excel.GetCellValue(startAddress.ReferenceString,
                                    endAddress.ReferenceString,
                                    XlGetValueFormat.xlValue), startAddress);
 
@@ -276,6 +297,20 @@ namespace OfficeLib.XLS
             excel.SetCellValue(Excel.ConvertSetValue(value),
                                startAddress.ReferenceString,
                                XlGetValueFormat.xlValue2);
+        }
+
+        /// <summary>
+        /// Set value to sheet
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="excel"></param>
+        /// <param name="value"></param>
+        /// <param name="address"></param>
+        /// <param name="format"></param>
+        protected virtual void SetValue<T>(Excel excel, T value, Address address, XlGetValueFormat format)
+        {
+            var values = new Object[1, 1] { { value } };
+            excel.SetCellValue(values, address.ReferenceString, format);
         }
 
         /// <summary>

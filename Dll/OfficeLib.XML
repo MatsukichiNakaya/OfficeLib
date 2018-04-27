@@ -171,6 +171,9 @@
         <member name="P:OfficeLib.XLS.Cell`1.FontSize">
             <summary></summary>
         </member>
+        <member name="P:OfficeLib.XLS.Cell`1.FormatType">
+            <summary></summary>
+        </member>
         <member name="M:OfficeLib.XLS.Cell`1.#ctor">
             <summary></summary>
         </member>
@@ -1133,10 +1136,17 @@
         </member>
         <member name="M:OfficeLib.XLS.Excel.SelectSheet(System.String)">
             <summary>
-            Select the Sheet
+            Select the Sheet(Sheet name)
             </summary>
             <param name="sheetName">Sheet name</param>
             <returns>Success(true), Failure(false)</returns>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.SelectSheet(System.Int32)">
+            <summary>
+            Select the Sheet(Sheet index)
+            </summary>
+            <param name="sheetIndex"></param>
+            <returns></returns>
         </member>
         <member name="M:OfficeLib.XLS.Excel.GetWorkBookSheetNames">
             <summary>
@@ -1164,6 +1174,23 @@
             <param name="sourceSheetName"></param>
             <param name="destSheetName"></param>
             <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.MoveSheet(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sourceSheetName"></param>
+            <param name="beforeSheetName"></param>
+            <param name="afterSheetName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.SetSheetProperty(System.String,System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="sheetName"></param>
+            <param name="propertyName"></param>
+            <param name="values"></param>
         </member>
         <member name="M:OfficeLib.XLS.Excel.GetCellValue(System.UInt32,System.UInt32,System.UInt32,System.UInt32,OfficeLib.XLS.XlGetValueFormat)">
             <summary>
@@ -1606,16 +1633,42 @@
             Read all the sheets in the book
             </summary>
         </member>
+        <member name="M:OfficeLib.XLS.WorkBook.Read(OfficeLib.XLS.XlGetValueFormat)">
+            <summary>
+            Read all the sheets in the book
+            </summary>
+            <param name="format"></param>
+        </member>
         <member name="M:OfficeLib.XLS.WorkBook.Read(System.String)">
             <summary>
             Read sheet specification
             </summary>
             <param name="sheetName">Sheet name</param>
         </member>
+        <member name="M:OfficeLib.XLS.WorkBook.Read(System.String,OfficeLib.XLS.XlGetValueFormat)">
+            <summary>
+            Read sheet specification
+            </summary>
+            <param name="sheetName">Sheet name</param>
+            <param name="format"></param>
+        </member>
         <member name="M:OfficeLib.XLS.WorkBook.ReadPreset">
             <summary>
             Read preset sheets
             </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.WorkBook.ReadPreset(OfficeLib.XLS.XlGetValueFormat)">
+            <summary>
+            Read preset sheets
+            </summary>
+            <param name="format"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.WorkBook.ReadBase(OfficeLib.XLS.XlGetValueFormat,System.String[])">
+            <summary>
+            Read Sheets base function
+            </summary>
+            <param name="format"></param>
+            <param name="sheetNames"></param>
         </member>
         <member name="M:OfficeLib.XLS.WorkBook.CanRead(OfficeLib.XLS.Excel,OfficeLib.XLS.WorkSheet)">
             <summary>
@@ -1654,6 +1707,7 @@
             Add multiple sheets
             </summary>
             <param name="sheets">Sheet array</param>
+            <returns>Error Count</returns>
         </member>
         <member name="M:OfficeLib.XLS.WorkBook.GetKeys">
             <summary>
@@ -1742,6 +1796,13 @@
             Field size Default(1000 x 1000)
             </remarks>
         </member>
+        <member name="M:OfficeLib.XLS.WorkSheet.Read(OfficeLib.XLS.Excel,OfficeLib.XLS.XlGetValueFormat)">
+            <summary>
+            Read the sheet
+            </summary>
+            <param name="excel">Excel instance</param>
+            <param name="format">Get value format type</param>
+        </member>
         <member name="M:OfficeLib.XLS.WorkSheet.GetTable(OfficeLib.XLS.Excel,OfficeLib.XLS.Address,OfficeLib.XLS.Address)">
             <summary>
             Get table from its own field
@@ -1813,6 +1874,16 @@
             <param name="excel">Excel instance</param>
             <param name="value">Setting value</param>
             <param name="startAddress">Satart Position</param>
+        </member>
+        <member name="M:OfficeLib.XLS.WorkSheet.SetValue``1(OfficeLib.XLS.Excel,``0,OfficeLib.XLS.Address,OfficeLib.XLS.XlGetValueFormat)">
+            <summary>
+            Set value to sheet
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="excel"></param>
+            <param name="value"></param>
+            <param name="address"></param>
+            <param name="format"></param>
         </member>
         <member name="M:OfficeLib.XLS.WorkSheet.SetTable``1(OfficeLib.XLS.Excel,``0[][],OfficeLib.XLS.Address,OfficeLib.XLS.Address)">
             <summary>

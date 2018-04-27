@@ -78,7 +78,7 @@ namespace OfficeLib.XLS
         /// <summary>
         /// Get Excel instance
         /// </summary>
-        public Excel GetInstance() => GetInstance(this.Path);
+        public Excel GetInstance() { return GetInstance(this.Path); }
         #endregion
 
         #region --- Read ---
@@ -87,34 +87,17 @@ namespace OfficeLib.XLS
         /// </summary>
         public virtual void Read()
         {
-            if (!File.Exists(this.Path))
-            { throw new FileNotFoundException("File not found.", this.Path); }
-            // Setting the Wrokebook name
-            this.Name = System.IO.Path.GetFileNameWithoutExtension(this.Path);
+            // fixed type "Value2"
+            ReadBase(XlGetValueFormat.xlValue2, null);
+        }
 
-            // Create the Excel instance
-            using (var excel = new Excel())
-            {
-                if (!excel.Open(System.IO.Path.GetFullPath(this.Path)))
-                {
-                    throw new ArgumentException();
-                }
-                foreach (var name in excel.SheetNames)
-                {
-                    if (!this.WorkSheets.ContainsKey(name))
-                    {   // Add unconfigured sheet
-                        this.WorkSheets.Add(name, new WorkSheet(name));
-                    }
-                }
-                // Read data on each sheet
-                foreach (var sheet in this.WorkSheets)
-                {
-                    if (CanRead(excel, sheet.Value))
-                    {
-                        this[sheet.Key].Read(excel);
-                    }
-                }
-            }
+        /// <summary>
+        /// Read all the sheets in the book
+        /// </summary>
+        /// <param name="format"></param>
+        public virtual void Read(XlGetValueFormat format)
+        {
+            ReadBase(format, null);
         }
 
         /// <summary>
@@ -123,29 +106,42 @@ namespace OfficeLib.XLS
         /// <param name="sheetName">Sheet name</param>
         public virtual void Read(String sheetName)
         {
-            if (!File.Exists(this.Path))
-            { throw new FileNotFoundException("File not found.", this.Path); }
-            
-            // Setting the Wrokebook name
-            this.Name = System.IO.Path.GetFileNameWithoutExtension(this.Path);
+            ReadBase(XlGetValueFormat.xlValue2, sheetName);
+        }
 
-            using (var excel = new Excel())
-            {
-                if(!excel.Open(System.IO.Path.GetFullPath(this.Path)))
-                {
-                    throw new ArgumentException();
-                }
-                if (CanRead(excel, this[sheetName]))
-                {
-                    this[sheetName].Read(excel);
-                }
-            }
+        /// <summary>
+        /// Read sheet specification
+        /// </summary>
+        /// <param name="sheetName">Sheet name</param>
+        /// <param name="format"></param>
+        public virtual void Read(String sheetName, XlGetValueFormat format)
+        {
+            ReadBase(format, sheetName);
         }
 
         /// <summary>
         /// Read preset sheets
         /// </summary>
         public virtual void ReadPreset()
+        {
+            ReadBase(XlGetValueFormat.xlValue2, this.SheetNames);
+        }
+
+        /// <summary>
+        /// Read preset sheets
+        /// </summary>
+        /// <param name="format"></param>
+        public virtual void ReadPreset(XlGetValueFormat format)
+        {
+            ReadBase(format, this.SheetNames);
+        }
+
+        /// <summary>
+        /// Read Sheets base function
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="sheetNames"></param>
+        protected virtual void ReadBase(XlGetValueFormat format, params String[] sheetNames)
         {
             if (!File.Exists(this.Path))
             { throw new FileNotFoundException("File not found.", this.Path); }
@@ -159,12 +155,19 @@ namespace OfficeLib.XLS
                 {
                     throw new ArgumentException();
                 }
+                foreach (var name in sheetNames ?? excel.SheetNames)
+                {
+                    if (!this.WorkSheets.ContainsKey(name))
+                    {   // Add unconfigured sheet
+                        AddSheet(new WorkSheet(name));
+                    }
+                }
                 // Read data on each sheet
                 foreach (var sheet in this.WorkSheets)
                 {
                     if (CanRead(excel, sheet.Value))
                     {
-                        this[sheet.Key].Read(excel);
+                        this[sheet.Key].Read(excel, format);
                     }
                 }
             }
@@ -270,21 +273,33 @@ namespace OfficeLib.XLS
         /// Add sheet
         /// </summary>
         /// <param name="sheet">Sheet instance</param>
-        public void AddSheet<T>(T sheet) where T : WorkSheet
+        public Boolean AddSheet<T>(T sheet) where T : WorkSheet
         {
+            if (this._sheetNames.Contains(sheet.Name))
+            {
+                return false;
+            }
             this.WorkSheets.Add(sheet.Name, sheet);
+            this._sheetNames.Add(sheet.Name);
+            return true;
         }
 
         /// <summary>
         /// Add multiple sheets
         /// </summary>
         /// <param name="sheets">Sheet array</param>
-        public void AddRangeSheet<T>(T[] sheets) where T : WorkSheet
+        /// <returns>Error Count</returns>
+        public Int32 AddRangeSheet<T>(T[] sheets) where T : WorkSheet
         {
+            var result = 0;
             foreach (T sheet in sheets)
             {
-                this.AddSheet(sheet);
+                if (!this.AddSheet(sheet))
+                {   // Add error count up
+                    result++;
+                }
             }
+            return result;
         }
         #endregion
 

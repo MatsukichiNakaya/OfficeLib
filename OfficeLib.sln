@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Windows Desktop
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeLib", "OfficeLib\OfficeLib.csproj", "{D8EDEF74-C86A-4CB7-800C-4B021A4E3127}"
 EndProject
@@ -30,9 +30,11 @@ Global
 		{F8CCAAC4-F8DF-43DA-91CF-61F25EE3256E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8CCAAC4-F8DF-43DA-91CF-61F25EE3256E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8CCAAC4-F8DF-43DA-91CF-61F25EE3256E}.Release|x64.ActiveCfg = Release|x64
-		{F8CCAAC4-F8DF-43DA-91CF-61F25EE3256E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FED7AF02-81AE-429E-8194-661E01DCD7F0}
 	EndGlobalSection
 EndGlobal

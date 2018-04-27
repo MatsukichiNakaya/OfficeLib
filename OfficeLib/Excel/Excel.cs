@@ -96,7 +96,6 @@ namespace OfficeLib.XLS
         /// 13, AddToMru,                    true,       Boolean
         /// 14, Local,                       true,       Boolean
         /// 15, CorruptLoad,                 true,       XlCorruptLoad(enum)
-        /// 
         /// See MSDN for further details.
         /// </remarks>
         /// <returns></returns>
@@ -216,7 +215,7 @@ namespace OfficeLib.XLS
 
         #region --- Sheet ---
         /// <summary>
-        /// Select the Sheet
+        /// Select the Sheet(Sheet name)
         /// </summary>
         /// <param name="sheetName">Sheet name</param>
         /// <returns>Success(true), Failure(false)</returns>
@@ -234,17 +233,35 @@ namespace OfficeLib.XLS
         }
 
         /// <summary>
+        /// Select the Sheet(Sheet index)
+        /// </summary>
+        /// <param name="sheetIndex"></param>
+        /// <returns></returns>
+        public Boolean SelectSheet(Int32 sheetIndex)
+        {
+            try
+            {
+                this.Sheet = this.Book.GetProperty(OBJECT_SHEET, new Object[] { sheetIndex });
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return this.Sheet != null;
+        }
+
+        /// <summary>
         /// Get a list of sheet names
         /// </summary>
         /// <returns>Sheet names</returns>
         public String[] GetWorkBookSheetNames()
         {
             String[] result = null;
-            Object sheets = null;
+            Object sheets = null;           
             try
             {   // Get number of sheets
                 sheets = this.Book?.GetProperty(OBJECT_SHEET);
-                Object countObject = sheets?.GetProperty(PROP_COUNT); 
+                Object countObject = sheets?.GetProperty(PROP_COUNT);
                 var count = Convert.ToInt32(countObject ?? 0);
                 Object sheet = null;
                 result = new String[count];
@@ -319,6 +336,68 @@ namespace OfficeLib.XLS
                 ReleaseObjects(target, firstSheet, destSheet, sheets);
             }
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceSheetName"></param>
+        /// <param name="beforeSheetName"></param>
+        /// <param name="afterSheetName"></param>
+        /// <returns></returns>
+        public Boolean MoveSheet(String sourceSheetName, String beforeSheetName = null, String afterSheetName = null)
+        {
+            Object sheets = null;
+            Object target = null;
+            Object followSheet = null;
+            Boolean result = false;
+
+            try
+            {
+                sheets = this.Book.GetProperty(OBJECT_SHEET);
+                if (sheets == null) { return false; }
+
+                target = sheets.GetProperty(PROP_ITEM, new Object[] { sourceSheetName });
+                if (target == null) { return false; }
+
+                if (String.IsNullOrWhiteSpace(beforeSheetName))
+                {
+                    if (String.IsNullOrWhiteSpace(afterSheetName)) { return false; }
+                    followSheet = sheets.GetProperty(PROP_ITEM, new Object[] { afterSheetName });
+                    target.Method(METHOD_MOVE, new Object[] { Type.Missing, followSheet });
+                }
+                else
+                {
+                    followSheet = sheets.GetProperty(PROP_ITEM, new Object[] { beforeSheetName });
+                    target.Method(METHOD_MOVE, new Object[] { followSheet, Type.Missing });
+                }
+                result = true;
+            }
+            finally
+            {
+                ReleaseObjects(target, followSheet, sheets);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="values"></param>
+        public void SetSheetProperty(String sheetName, String propertyName, Object[] values)
+        {
+            Object sheet = null;
+            try
+            {
+                sheet = this.Book.GetProperty(OBJECT_SHEET, new Object[] { sheetName });
+                sheet.SetProperty(propertyName, values);
+            }
+            finally
+            {
+                ReleaseObject(sheet);
+            }
         }
         #endregion
 
@@ -632,7 +711,7 @@ namespace OfficeLib.XLS
         /// <summary>
         /// ToString
         /// </summary>
-        public override String ToString() 
+        public override String ToString()
             => String.Format("Book:{0}", System.IO.Path.GetFileNameWithoutExtension(this.Path));
     }
 }

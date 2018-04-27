@@ -23,25 +23,38 @@ namespace LibTester
         static void Main(String[] args)
         {
 #if EXCEL
-            using (var workBook = WorkBook.GetInstance(@".\WorkBook.xlsx"))
-            {
-                if(workBook == null) { return; }
+            //using (var workBook = WorkBook.GetInstance(@".\WorkBook.xlsx"))
+            //{
+            //    if (workBook == null) { return; }
 
-                workBook.SelectSheet("sheet1");
+            //    workBook.SelectSheet("sheet1");
 
-                //// セル一つだけ
-                //workBook.SetBackgroundColor(target: new Address("B4"),
-                //                            color:  new Color(0, 0, 255));
-                //// 複数セル一括
-                //workBook.SetBackgroundColor(start: new Address("D3"),
-                //                            end:   new Address("E5"),
-                //                            color: new Color(0, 255, 0));
+            //    //// セル一つだけ
+            //    //workBook.SetBackgroundColor(target: new Address("B4"),
+            //    //                            color:  new Color(0, 0, 255));
+            //    //// 複数セル一括
+            //    //workBook.SetBackgroundColor(start: new Address("D3"),
+            //    //                            end:   new Address("E5"),
+            //    //                            color: new Color(0, 255, 0));
 
-                //workBook.SetBorder(new Range("D3:E5"), new Thickness(new Border()));
+            //    //workBook.SetBorder(new Range("D3:E5"), new Thickness(new Border()));
 
-                workBook.CopySheet("sheet1", "sheet4");
-                workBook.Save();
-            }
+            //    //workBook.CopySheet("sheet1", "sheet4");
+            //    //workBook.SetSheetProperty("sheet3", "Visible", new Object[] { OfficeLib.MsoTriState.msoTrue });
+            //    //workBook.MoveSheet("Sheet1", beforeSheetName: "Sheet3");
+            //    //workBook.Save();
+            //}
+
+            var workBook = new WorkBook(@".\WorkBook.xlsx");
+
+            //workBook.AddSheet(new Sheet1());
+
+            //workBook.WriteSheet("Sheet1");
+
+            workBook.Read("Sheet2", XlGetValueFormat.xlFormula);
+
+            Object val = workBook["Sheet2"][new Address("B3")];
+
             Console.ReadLine();
 #endif
 
@@ -75,6 +88,22 @@ namespace LibTester
                 });
             }
 #endif
+        }
+    }
+
+    [ExcelSheet(EnumSheetPermission.ReadWrite)]
+    class Sheet1 : WorkSheet
+    {
+        public Sheet1() : base("Sheet1", "F5") { }
+
+        public override void Write(Excel excel)
+        {
+            excel.SelectSheet(this.Name);
+
+            SetValue(excel,
+                     "=(TIMEVALUE(\"20:00\")-TIMEVALUE(\"18:30\"))*24",
+                     new Address("A1"),
+                     XlGetValueFormat.xlFormula);
         }
     }
 }

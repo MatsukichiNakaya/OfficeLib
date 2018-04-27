@@ -22,8 +22,8 @@ namespace OfficeLib
             if (joinTable == null) { return srcTable; }
             try
             {   // Get longer length by comparing the length of the array.
-                Int32 rows = (srcTable?.Length ?? 0) > (joinTable?.Length ?? 0) ?
-                                srcTable?.Length ?? 0 : joinTable?.Length ?? 0;
+                Int32 rows = srcTable.Length > joinTable.Length ?
+                                srcTable.Length : joinTable.Length;
                 result = Join(srcTable, joinTable, rows);
             }
             catch (Exception) { throw; }
@@ -45,8 +45,8 @@ namespace OfficeLib
             if (joinTable == null) { return srcTable; }
             try
             {   // Get shorter length of array vertical length.
-                Int32 rows = (srcTable?.Length ?? 0) < (joinTable?.Length ?? 0) ?
-                                srcTable?.Length ?? 0 : joinTable?.Length ?? 0;
+                Int32 rows = srcTable.Length < joinTable.Length ?
+                                srcTable.Length : joinTable.Length;
                 result = Join(srcTable, joinTable, rows);
             }
             catch (Exception) { throw; }
@@ -66,22 +66,19 @@ namespace OfficeLib
         private static T[][] Join<T>(T[][] srcTable, T[][] joinTable, Int32 rows)
         {
             T[][] result = null;
-            try
+            Int32 colSrc = srcTable.ColumnsMax();
+            Int32 colJoin = joinTable.ColumnsMax();
+            result = new T[rows][];
+            for (var row = 0; row < result.Length; row++)
             {
-                Int32 colSrc = srcTable.ColumnsMax();
-                Int32 colJoin = joinTable.ColumnsMax();
-                result = new T[rows][];
-                for (var row = 0; row < result.Length; row++)
+                result[row] = new T[colSrc + colJoin];
+
+                if (row < srcTable.Length)
                 {
-                    result[row] = new T[colSrc + colJoin];
-                    if (row < srcTable.Length)
-                    {
-                        srcTable[row]?.CopyTo(result[row], 0);
-                    }
-                    if (row < joinTable.Length) { joinTable[row]?.CopyTo(result[row], colSrc); }
+                    srcTable[row].CopyTo(result[row], 0);
                 }
+                if (row < joinTable.Length) { joinTable[row].CopyTo(result[row], colSrc); }
             }
-            catch (Exception) { throw; }
             return result;
         }
 
@@ -364,7 +361,7 @@ namespace OfficeLib
         /// <summary>Get maximum length in Table</summary>
         /// <param name="src">Table</param>
         public static Int32 ColumnsMax<T>(this T[][] src)
-            =>  System.Linq.Enumerable.Max(src, row => row.Length);
+            => System.Linq.Enumerable.Max(src, row => row.Length);
 
         /// <summary>
         /// Extract specified range element from specified position in array
