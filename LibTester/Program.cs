@@ -23,6 +23,7 @@ namespace LibTester
         static void Main(String[] args)
         {
 #if EXCEL
+            /*
             //using (var workBook = WorkBook.GetInstance(@".\WorkBook.xlsx"))
             //{
             //    if (workBook == null) { return; }
@@ -44,7 +45,8 @@ namespace LibTester
             //    //workBook.MoveSheet("Sheet1", beforeSheetName: "Sheet3");
             //    //workBook.Save();
             //}
-
+            */
+            /*
             var workBook = new WorkBook(@".\WorkBook.xlsx");
 
             //workBook.AddSheet(new Sheet1());
@@ -54,6 +56,30 @@ namespace LibTester
             workBook.Read("Sheet2", XlGetValueFormat.xlFormula);
 
             Object val = workBook["Sheet2"][new Address("B3")];
+            */
+            using (var book = WorkBook.GetInstance(@".\WorkBook.xlsx"))
+            {
+               
+                book.RemoveSheet("Sheet3");
+
+                //var val = book.GetCellValue("A4", "A4", XlGetValueFormat.xlValue);
+                //Console.WriteLine(val);
+                //var set = new String[1, 1];
+                //set[0, 0] = "3";
+                //book.SetCellValue(set, "A1", XlGetValueFormat.xlValue);
+                //var val2 = book.GetCellValue("A4", "A4", XlGetValueFormat.xlFormula);
+                //Console.WriteLine(val2);
+                //var ret = book.GetLastCell();
+
+                //using (var sheet = book.GetSheet("Sheet2"))
+                //{
+                //    Excel.Macro(sheet.ComObject, "Move", null);
+                //}
+
+                book.SetCellValue(null, "C5", XlGetValueFormat.xlFormula);
+
+                book.Save();
+            }
 
             Console.ReadLine();
 #endif

@@ -36,6 +36,9 @@
         <member name="F:OfficeLib.Commands.METHOD_COPY">
             <summary>Command of Copy</summary>
         </member>
+        <member name="F:OfficeLib.Commands.METHOD_DELETE">
+            <summary>Command of Delete</summary>
+        </member>
         <member name="F:OfficeLib.Commands.COMMAND_CUT">
             <summary>Command of Cut</summary>
         </member>
@@ -267,6 +270,9 @@
             these data types as floating-point numbers
             by using the Double data type.
             </remarks>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_SPECIAL_CALLS">
+            <summary>SpecialCells</summary>
         </member>
         <member name="T:OfficeLib.XLS.Constants">
             <summary>Constants Enumeration</summary>
@@ -885,6 +891,165 @@
         <member name="F:OfficeLib.XLS.XlPlatform.xlWindows">
             <summary>Microsoft Windows</summary>
         </member>
+        <member name="T:OfficeLib.XLS.XlSpecialCellsValue">
+            <summary>XlSpecialCellsValue Enumeration</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlSpecialCellsValue.xlErrors">
+            <summary>Cells with errors.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlSpecialCellsValue.xlLogical">
+            <summary>Cells with logical values.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlSpecialCellsValue.xlNumbers">
+            <summary>Cells with numeric values.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlSpecialCellsValue.xlTextValues">
+            <summary>Cells with text.</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlCellType">
+            <summary>XlCellType Enumeration</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeAllFormatConditions">
+            <summary>表示形式が設定されているセル</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeAllValidation">
+            <summary>条件の設定が含まれているセル</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeBlanks">
+            <summary>空の文字列</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeComments">
+            <summary>コメントが含まれているセル</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeConstants">
+            <summary>定数が含まれているセル</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeFormulas">
+            <summary>数式が含まれているセル</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeLastCell">
+            <summary>使われたセル範囲内の最後のセル</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeSameFormatConditions">
+            <summary>同じ表示形式が設定されているセル</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeSameValidation">
+            <summary>同じ条件の設定が含まれているセル</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellType.xlCellTypeVisible">
+            <summary>すべての可視セル</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlFormatConditionType">
+            <summary>XlFormatConditionType Enumeration</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlAboveAverageCondition">
+            <summary>Above average condition</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlBlanksCondition">
+            <summary>Blanks condition</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlCellValue">
+            <summary>Cell value</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlColorScale">
+            <summary>Color scale</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlDatabar">
+            <summary>Databar</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlErrorsCondition">
+            <summary>Errors condition</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlExpression">
+            <summary>Expression</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.XlIconSet">
+            <summary>Icon set</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlNoBlanksCondition">
+            <summary>No blanks condition</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlNoErrorsCondition">
+            <summary>No errors condition</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlTextString">
+            <summary>Text string</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlTimePeriod">
+            <summary>Time period</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlTop10">
+            <summary>Top 10 values</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionType.xlUniqueValues">
+            <summary>Unique values</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlFormatConditionOperator">
+            <summary>XlFormatConditionOperator Enumeration</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionOperator.xlBetween">
+            <summary>Between. Can be used only if two formulas are provided.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionOperator.xlEqual">
+            <summary>Equal.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionOperator.xlGreater">
+            <summary>Greater than.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionOperator.xlGreaterEqual">
+            <summary>Greater than or equal to.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionOperator.xlLess">
+            <summary>Less than.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionOperator.xlLessEqual">
+            <summary>Less than or equal to.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionOperator.xlNotBetween">
+            <summary>Not between. Can be used only if two formulas are provided.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlFormatConditionOperator.xlNotEqual">
+            <summary>Not equal.</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlThemeColor">
+            <summary>XlThemeColor Enumeration</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorAccent1">
+            <summary>Accent1</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorAccent2">
+            <summary>Accent2</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorAccent3">
+            <summary>Accent3</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorAccent4">
+            <summary>Accent4</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorAccent5">
+            <summary>Accent5</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorAccent6">
+            <summary>Accent6</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorDark1">
+            <summary>Dark1</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorDark2">
+            <summary>Dark2</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorFollowedHyperlink">
+            <summary>Followed hyperlink</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorHyperlink">
+            <summary>Hyperlink</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorLight1">
+            <summary>Light1</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorLight2">
+            <summary>Light2</summary>
+        </member>
         <member name="T:OfficeLib.XLS.ExcelSheetAttribute">
             <summary>Excel sheet attribute</summary>
         </member>
@@ -967,23 +1132,46 @@
             Range to String
             </summary>
         </member>
+        <member name="T:OfficeLib.XLS.SheetObject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.SheetObject.#ctor(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="sheet"></param>
+        </member>
+        <member name="P:OfficeLib.XLS.SheetObject.ComObject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.SheetObject.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:OfficeLib.XLS.Thickness">
-            <summary></summary>
+            <summary>
+            Border Thickness 
+            </summary>
         </member>
         <member name="P:OfficeLib.XLS.Thickness.Left">
-            <summary></summary>
+            <summary>Left</summary>
         </member>
         <member name="P:OfficeLib.XLS.Thickness.Top">
-            <summary></summary>
+            <summary>Top</summary>
         </member>
         <member name="P:OfficeLib.XLS.Thickness.Right">
-            <summary></summary>
+            <summary>Right</summary>
         </member>
         <member name="P:OfficeLib.XLS.Thickness.Bottom">
-            <summary></summary>
+            <summary>Bottom</summary>
         </member>
         <member name="P:OfficeLib.XLS.Thickness.Values">
-            <summary></summary>
+            <summary>4 points param array</summary>
         </member>
         <member name="M:OfficeLib.XLS.Thickness.#ctor">
             <summary></summary>
@@ -1062,8 +1250,8 @@
         <member name="P:OfficeLib.XLS.Excel.Sheet">
             <summary>Sheet object</summary>
         </member>
-        <member name="P:OfficeLib.XLS.Excel.CurrentSheetName">
-            <summary>Current sheet name</summary>
+        <member name="P:OfficeLib.XLS.Excel.ActiveSheetName">
+            <summary>Active sheet name</summary>
         </member>
         <member name="F:OfficeLib.XLS.Excel._sheetNames">
             <summary>Sheet names (internal variable)</summary>
@@ -1106,7 +1294,6 @@
             13, AddToMru,                    true,       Boolean
             14, Local,                       true,       Boolean
             15, CorruptLoad,                 true,       XlCorruptLoad(enum)
-            
             See MSDN for further details.
             </remarks>
             <returns></returns>
@@ -1177,7 +1364,7 @@
         </member>
         <member name="M:OfficeLib.XLS.Excel.MoveSheet(System.String,System.String,System.String)">
             <summary>
-            
+            Move the sheet
             </summary>
             <param name="sourceSheetName"></param>
             <param name="beforeSheetName"></param>
@@ -1191,6 +1378,22 @@
             <param name="sheetName"></param>
             <param name="propertyName"></param>
             <param name="values"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.GetSheetProperty(System.String,System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="sheetName"></param>
+            <param name="propertyName"></param>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.GetSheet(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sheetName"></param>
+            <returns></returns>
         </member>
         <member name="M:OfficeLib.XLS.Excel.GetCellValue(System.UInt32,System.UInt32,System.UInt32,System.UInt32,OfficeLib.XLS.XlGetValueFormat)">
             <summary>
@@ -1269,6 +1472,12 @@
             
             </summary>
             <param name="referenceFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.GetLastCell">
+            <summary>
+            
+            </summary>
             <returns></returns>
         </member>
         <member name="M:OfficeLib.XLS.Excel.Save">

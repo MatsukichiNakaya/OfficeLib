@@ -15,16 +15,16 @@ namespace OfficeLib
         /// <param name="value">Value of conversion source</param>
         public static TOutput To<TOutput>(this Object value)
         {   
-            if(value == null) { return default(TOutput); }
+            if(value == null) { return default; }
             try
             {
                 TypeConverter converter = TypeDescriptor.GetConverter(typeof(TOutput));
 
                 return converter != null
                             ? (TOutput)converter.ConvertTo(value, typeof(TOutput))
-                            : default(TOutput);
+                            : default;
             }
-            catch (Exception) { return default(TOutput); }
+            catch (Exception) { return default; }
         }
 
         /// <summary>

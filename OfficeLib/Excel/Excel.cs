@@ -32,13 +32,13 @@ namespace OfficeLib.XLS
 
         #region --- Properties ---
         /// <summary>Book object</summary>
-        public Object Book { get; private set; }
+        internal Object Book { get; private set; }
 
         /// <summary>Sheet object</summary>
-        public Object Sheet { get; private set; }
+        internal Object Sheet { get; private set; }
 
-        /// <summary>Current sheet name</summary>
-        public String CurrentSheetName
+        /// <summary>Active sheet name</summary>
+        public String ActiveSheetName
         {
             get { return this.Sheet.GetProperty(PROP_NAME) as String; }
         }
@@ -241,7 +241,7 @@ namespace OfficeLib.XLS
         {
             try
             {
-                this.Sheet = this.Book.GetProperty(OBJECT_SHEET, new Object[] { sheetIndex });
+                this.Sheet = this.Book.GetProperty(OBJECT_SHEET, new Object[] { this.SheetNames[sheetIndex] });
             }
             catch (Exception)
             {
@@ -295,8 +295,18 @@ namespace OfficeLib.XLS
         /// <returns></returns>
         public Boolean RemoveSheet(String sheetName)
         {
-            // Todo: Remove sheet method
-            throw new Exception("work in progress");
+            // Sheet not found.
+            if (!SelectSheet(sheetName)) { return false; }
+
+            this.Sheet.Method(METHOD_DELETE);
+
+            // Set Ather sheet
+            if (!SelectSheet(0))
+            {
+                // Workbook Item is none.
+                ReleaseObject(this.Sheet);
+            }
+            return true;
         }
 
         /// <summary>
@@ -322,7 +332,7 @@ namespace OfficeLib.XLS
                 firstSheet = sheets.GetProperty(PROP_ITEM, new Object[] { 1 });
                 if (target == null || firstSheet == null) { return false; }
 
-                // Copy sheets to the beginning.
+                // Copy sheets to the first position.
                 target.Method(METHOD_COPY, new Object[] { firstSheet, Type.Missing });
 
                 // Change name.
@@ -339,7 +349,7 @@ namespace OfficeLib.XLS
         }
 
         /// <summary>
-        /// 
+        /// Move the sheet
         /// </summary>
         /// <param name="sourceSheetName"></param>
         /// <param name="beforeSheetName"></param>
@@ -386,7 +396,7 @@ namespace OfficeLib.XLS
         /// <param name="sheetName"></param>
         /// <param name="propertyName"></param>
         /// <param name="values"></param>
-        public void SetSheetProperty(String sheetName, String propertyName, Object[] values)
+        public void SetSheetProperty(String sheetName, String propertyName, params Object[] values)
         {
             Object sheet = null;
             try
@@ -398,6 +408,40 @@ namespace OfficeLib.XLS
             {
                 ReleaseObject(sheet);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public Object GetSheetProperty(String sheetName, String propertyName, params Object[] values)
+        {
+            Object sheet = null;
+            Object result = null;
+            try
+            {
+                sheet = this.Book.GetProperty(OBJECT_SHEET, new Object[] { sheetName });
+                result = sheet.GetProperty(propertyName, values);
+            }
+            finally
+            {
+                ReleaseObject(sheet);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <returns></returns>
+        public SheetObject GetSheet(String sheetName)
+        {
+            return new SheetObject(
+                this.Book.GetProperty(OBJECT_SHEET, new Object[] { sheetName }));
         }
         #endregion
 
@@ -596,6 +640,31 @@ namespace OfficeLib.XLS
             return PROP_VALUE2;
         }
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public String GetLastCell()
+        {
+            Object cells = null;
+            Object range = null;
+            String result = String.Empty;
+            try
+            {
+                cells = this.Sheet?.GetProperty(OBJECT_CELL);
+                range = cells?.GetProperty(PROP_SPECIAL_CALLS, new Object[] { XlCellType.xlCellTypeLastCell });
+                Int32 row = range?.GetProperty(PROP_ROW).To<Int32>() ?? 1;
+                Int32 col = range?.GetProperty(PROP_COL).To<Int32>() ?? 1;
+                
+                result = $"{Address.ToExcelColumnString((UInt32)col)}{row}";
+            }
+            finally
+            {
+                ReleaseObjects(cells, range);
+            }
+            return result;
+        }
         #endregion
 
         #region --- Save ---
@@ -664,7 +733,7 @@ namespace OfficeLib.XLS
         /// <param name="startCol">Start column</param>
         /// <param name="endRow">End row</param>
         /// <param name="endCol">End colmun</param>
-        public Object GetRange(UInt32 startRow, UInt32 startCol, UInt32 endRow, UInt32 endCol)
+        internal Object GetRange(UInt32 startRow, UInt32 startCol, UInt32 endRow, UInt32 endCol)
         {
             try
             {   // Get cell address
@@ -706,6 +775,43 @@ namespace OfficeLib.XLS
             }
             return result;
         }
+#if false
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="command"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static Object Macro(Object target, String command, params Object[] args)
+        {
+            return target.Method(command, args);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public Object BookMacro(String command, params Object[] args)
+        {
+            return this.Book.Method(command, args);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <param name="command"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public Object SheetMacro(String sheetName, String command, params Object[] args)
+        {
+            SelectSheet(sheetName);
+            return this.Sheet.Method(command, args);
+        }
+#endif
         #endregion
 
         /// <summary>

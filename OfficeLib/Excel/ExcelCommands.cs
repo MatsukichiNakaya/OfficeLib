@@ -41,5 +41,8 @@ namespace OfficeLib.XLS
         /// by using the Double data type.
         /// </remarks>
         public const String PROP_VALUE2 = "Value2";
+
+        /// <summary>SpecialCells</summary>
+        public const String PROP_SPECIAL_CALLS = "SpecialCells";
     }
 }

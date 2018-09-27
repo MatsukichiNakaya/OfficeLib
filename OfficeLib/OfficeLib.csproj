@@ -71,6 +71,7 @@
     <Compile Include="Excel\Parts\ExcelSheetAttribute.cs" />
     <Compile Include="Excel\Parts\Color.cs" />
     <Compile Include="Excel\Parts\Range.cs" />
+    <Compile Include="Excel\Parts\SheetObject.cs" />
     <Compile Include="Excel\Parts\Thickness.cs" />
     <Compile Include="Outlook\Parts\EMail.cs" />
     <Compile Include="Outlook\Parts\MailAddress.cs" />

@@ -184,10 +184,8 @@ namespace OfficeLib.XLS
             // Does the workbook have a seat?
             Boolean hasSheet = excel.SheetNames.Contains(sheet.Name);
             Boolean hasAttribute = false;
-            var attr = sheet.GetType().GetCustomAttribute(
-                                        typeof(ExcelSheetAttribute))
-                                        as ExcelSheetAttribute;
-            if (attr != null)
+            if (sheet.GetType().GetCustomAttribute(
+                                        typeof(ExcelSheetAttribute)) is ExcelSheetAttribute attr)
             {   // Does the sheet have read permission?
                 hasAttribute = ((UInt32)attr.Permission)
                                 .ContainsBitFlag((Int32)EnumSheetPermission.Read);
@@ -255,10 +253,8 @@ namespace OfficeLib.XLS
             // Does the workbook have a seat?
             Boolean hasSheet = excel.SheetNames.Contains(sheet.Name);
             Boolean hasAttribute = false;
-            var attr = sheet.GetType().GetCustomAttribute(
-                                        typeof(ExcelSheetAttribute))
-                                        as ExcelSheetAttribute;
-            if (attr != null)
+            if (sheet.GetType().GetCustomAttribute(
+                                        typeof(ExcelSheetAttribute)) is ExcelSheetAttribute attr)
             {   // Does the sheet have write permission?
                 hasAttribute = ((UInt32)attr.Permission)
                                 .ContainsBitFlag((Int32)EnumSheetPermission.Write);

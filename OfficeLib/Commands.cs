@@ -26,6 +26,8 @@ namespace OfficeLib
         public const String METHOD_SAVE_AS = "SaveAs";
         /// <summary>Command of Copy</summary>
         public const String METHOD_COPY = "Copy";
+        /// <summary>Command of Delete</summary>
+        public const String METHOD_DELETE = "Delete";
 
         /// <summary>Command of Cut</summary>
         public const String COMMAND_CUT = "Cut";

@@ -14,12 +14,15 @@ namespace OfficeLib.PPT
         /// <summary>Presentations object ID</summary>
         protected static readonly String OBJECT_PRESENTATIONS = "Presentations";
 
+        /// <summary>Property Slides</summary>
+        protected static readonly String PROP_SLIDES = "Slides";
 
         #region --- Properties ---
         /// <summary>Presentation object</summary>
         public Object Presentation { get; private set; }
 
-
+        /// <summary>Slide object</summary>
+        public Object Slide { get; private set; }
 
         #endregion
 

@@ -2,19 +2,21 @@
 
 namespace OfficeLib.XLS
 {
-    /// <summary></summary>
+    /// <summary>
+    /// Border Thickness 
+    /// </summary>
     public class Thickness
     {
-        /// <summary></summary>
+        /// <summary>Left</summary>
         public Border Left { get; set; }
-        /// <summary></summary>
+        /// <summary>Top</summary>
         public Border Top { get; set; }
-        /// <summary></summary>
+        /// <summary>Right</summary>
         public Border Right { get; set; }
-        /// <summary></summary>
+        /// <summary>Bottom</summary>
         public Border Bottom { get; set; }
 
-        /// <summary></summary>
+        /// <summary>4 points param array</summary>
         public Border[] Values {
             get {
                 return new Border[4] {

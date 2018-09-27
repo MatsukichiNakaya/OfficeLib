@@ -435,4 +435,125 @@ namespace OfficeLib.XLS
         /// <summary>Microsoft Windows</summary>
         xlWindows = 2,
     }
+
+    /// <summary>XlSpecialCellsValue Enumeration</summary>
+    public enum XlSpecialCellsValue : Int32
+    {
+        /// <summary>Cells with errors.</summary>
+        xlErrors = 16,
+        /// <summary>Cells with logical values.</summary>
+        xlLogical = 4,
+        /// <summary>Cells with numeric values.</summary>
+        xlNumbers = 1,
+        /// <summary>Cells with text.</summary>
+        xlTextValues = 2,
+    }
+
+    /// <summary>XlCellType Enumeration</summary>
+    public enum XlCellType : Int32
+    {
+        /// <summary>表示形式が設定されているセル</summary>
+        xlCellTypeAllFormatConditions =	-4172,
+        /// <summary>条件の設定が含まれているセル</summary>
+        xlCellTypeAllValidation = -4174,
+        /// <summary>空の文字列</summary>
+        xlCellTypeBlanks = 4,
+        /// <summary>コメントが含まれているセル</summary>
+        xlCellTypeComments = -4144,
+        /// <summary>定数が含まれているセル</summary>
+        xlCellTypeConstants = 2,
+        /// <summary>数式が含まれているセル</summary>
+        xlCellTypeFormulas = -4123,
+        /// <summary>使われたセル範囲内の最後のセル</summary>
+        xlCellTypeLastCell = 11,
+        /// <summary>同じ表示形式が設定されているセル</summary>
+        xlCellTypeSameFormatConditions = -4173,
+        /// <summary>同じ条件の設定が含まれているセル</summary>
+        xlCellTypeSameValidation = -4175,
+        /// <summary>すべての可視セル</summary>
+        xlCellTypeVisible = 12,
+    }
+
+    /// <summary>XlFormatConditionType Enumeration</summary>
+    public enum XlFormatConditionType : Int32
+    {
+        /// <summary>Above average condition</summary>
+        xlAboveAverageCondition = 12,
+        /// <summary>Blanks condition</summary>
+        xlBlanksCondition = 10,
+        /// <summary>Cell value</summary>
+        xlCellValue = 1,
+        /// <summary>Color scale</summary>
+        xlColorScale = 3,
+        /// <summary>Databar</summary>
+        xlDatabar = 4,
+        /// <summary>Errors condition</summary>
+        xlErrorsCondition = 16,
+        /// <summary>Expression</summary>
+        xlExpression = 2,
+        /// <summary>Icon set</summary>
+        XlIconSet = 6,
+        /// <summary>No blanks condition</summary>
+        xlNoBlanksCondition = 13,
+        /// <summary>No errors condition</summary>
+        xlNoErrorsCondition = 17,
+        /// <summary>Text string</summary>
+        xlTextString = 9,
+        /// <summary>Time period</summary>
+        xlTimePeriod = 11,
+        /// <summary>Top 10 values</summary>
+        xlTop10 = 5,
+        /// <summary>Unique values</summary>
+        xlUniqueValues = 8,
+    }
+
+    /// <summary>XlFormatConditionOperator Enumeration</summary>
+    public enum XlFormatConditionOperator : Int32
+    {
+        /// <summary>Between. Can be used only if two formulas are provided.</summary>
+        xlBetween = 1,
+        /// <summary>Equal.</summary>
+        xlEqual = 3,
+        /// <summary>Greater than.</summary>
+        xlGreater = 5,
+        /// <summary>Greater than or equal to.</summary>
+        xlGreaterEqual = 7,
+        /// <summary>Less than.</summary>
+        xlLess = 6,
+        /// <summary>Less than or equal to.</summary>
+        xlLessEqual = 8,
+        /// <summary>Not between. Can be used only if two formulas are provided.</summary>
+        xlNotBetween = 2,
+        /// <summary>Not equal.</summary>
+        xlNotEqual = 4,
+    }
+
+    /// <summary>XlThemeColor Enumeration</summary>
+    public enum XlThemeColor : Int32
+    {
+        /// <summary>Accent1</summary>
+        xlThemeColorAccent1 = 5,
+        /// <summary>Accent2</summary>
+        xlThemeColorAccent2 = 6,
+        /// <summary>Accent3</summary>
+        xlThemeColorAccent3 = 7,
+        /// <summary>Accent4</summary>
+        xlThemeColorAccent4 = 8,
+        /// <summary>Accent5</summary>
+        xlThemeColorAccent5 = 9,
+        /// <summary>Accent6</summary>
+        xlThemeColorAccent6 = 10,
+        /// <summary>Dark1</summary>
+        xlThemeColorDark1 = 1,
+        /// <summary>Dark2</summary>
+        xlThemeColorDark2 = 3,
+        /// <summary>Followed hyperlink</summary>
+        xlThemeColorFollowedHyperlink = 12,
+        /// <summary>Hyperlink</summary>
+        xlThemeColorHyperlink = 11,
+        /// <summary>Light1</summary>
+        xlThemeColorLight1 = 2,
+        /// <summary>Light2</summary>
+        xlThemeColorLight2 = 4,	
+    }
 }
