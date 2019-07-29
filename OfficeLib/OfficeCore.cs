@@ -23,6 +23,9 @@ namespace OfficeLib
         /// <summary>Work area</summary>
         protected Object WorkArea { get; set; }
 
+        /// <summary>Copy and Paste Buffer</summary>
+        protected Object ClipBoard { get; set; }
+
         /// <summary>Version of Application</summary>
         public String Version
         {

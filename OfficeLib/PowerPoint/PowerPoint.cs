@@ -17,6 +17,9 @@ namespace OfficeLib.PPT
         /// <summary>Property Slides</summary>
         protected static readonly String PROP_SLIDES = "Slides";
 
+        /// <summary>Property NotesPage</summary>
+        protected static readonly String PROP_NOTESPAGE = "NotesPage";
+
         #region --- Properties ---
         /// <summary>Presentation object</summary>
         public Object Presentation { get; private set; }
@@ -77,6 +80,23 @@ namespace OfficeLib.PPT
             catch (Exception) { throw; }
             return true;
         }
+        #endregion
+
+        #region --- Slides ---
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="slideNo"></param>
+        public void SelectSlide(Int32 slideNo)
+        {
+            var slide = this.Presentation.GetProperty(PROP_SLIDES, new Object[] { slideNo });
+            String name = slide.GetProperty(PROP_NOTESPAGE).ToString();
+
+
+            ReleaseObject(slide);
+            Console.WriteLine(name);
+        }
+
         #endregion
 
         #region --- Save ---

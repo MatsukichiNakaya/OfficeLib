@@ -556,4 +556,33 @@ namespace OfficeLib.XLS
         /// <summary>Light2</summary>
         xlThemeColorLight2 = 4,	
     }
+
+    /// <summary>Specifies the part of the range to be pasted.</summary>
+    public enum XlPasteType
+    {
+        /// <summary>Everything will be pasted.</summary>
+        xlPasteAll = -4104,
+        /// <summary>Everything except borders will be pasted.</summary>
+        xlPasteAllExceptBorders = 7,
+        /// <summary>Everything will be pasted and conditional formats will be merged.</summary>
+        xlPasteAllMergingConditionalFormats = 14,
+        /// <summary>Everything will be pasted using the source theme.</summary>
+        xlPasteAllUsingSourceTheme = 13,
+        /// <summary>Copied column width is pasted.</summary>
+        xlPasteColumnWidths = 8,
+        /// <summary>Comments are pasted.</summary>
+        xlPasteComments = -4144,
+        /// <summary>Copied source format is pasted.</summary>
+        xlPasteFormats = -4122,
+        /// <summary>Formulas are pasted.</summary>
+        xlPasteFormulas = -4123,
+        /// <summary>Formulas and Number formats are pasted.</summary>
+        xlPasteFormulasAndNumberFormats = 11,
+        /// <summary>Validations are pasted.</summary>
+        xlPasteValidation = 6,
+        /// <summary>Values are pasted.</summary>
+        xlPasteValues = -4163,
+        /// <summary>Values and Number formats are pasted.</summary>
+        xlPasteValuesAndNumberFormats = 12,
+    }
 }

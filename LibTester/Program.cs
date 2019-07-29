@@ -1,5 +1,6 @@
 ﻿//#define OUTLOOK
 #define EXCEL
+//#define POWERPOINT
 
 using OfficeLib;        // Dll ベース部分
 using OfficeLib.EML;    // Outlook
@@ -22,6 +23,7 @@ namespace LibTester
     {
         static void Main(String[] args)
         {
+            #region Excel
 #if EXCEL
             /*
             //using (var workBook = WorkBook.GetInstance(@".\WorkBook.xlsx"))
@@ -59,8 +61,8 @@ namespace LibTester
             */
             using (var book = WorkBook.GetInstance(@".\WorkBook.xlsx"))
             {
-               
-                book.RemoveSheet("Sheet3");
+
+                //book.RemoveSheet("Sheet3");
 
                 //var val = book.GetCellValue("A4", "A4", XlGetValueFormat.xlValue);
                 //Console.WriteLine(val);
@@ -76,13 +78,24 @@ namespace LibTester
                 //    Excel.Macro(sheet.ComObject, "Move", null);
                 //}
 
-                book.SetCellValue(null, "C5", XlGetValueFormat.xlFormula);
+                //book.SetCellValue(null, "C5", XlGetValueFormat.xlFormula);
 
-                book.Save();
+
+                book.CellCopy("Sheet2", "A6", "A6");
+
+                using (var book2 = WorkBook.GetInstance(@".\WorkBook2.xlsx")) {
+                    book2.CellPaste("Sheet2", "B6", "B6");
+                    book2.Save();
+                }
+                
+
+                //book.Save();
             }
-
+            Console.WriteLine("Complete");
             Console.ReadLine();
 #endif
+            #endregion
+
 
 #if OUTLOOK
             // Outlookテストコード
@@ -113,6 +126,17 @@ namespace LibTester
                     return Regex.IsMatch(new EMail(mail).From.Address, @"@jp\.panasonic\.com");
                 });
             }
+#endif
+
+#if POWERPOINT
+            using (var pp = new PowerPoint())
+            {
+                pp.Open(@"presentation.pptx");
+
+                pp.SelectSlide(2);
+            }
+
+            Console.WriteLine();
 #endif
         }
     }

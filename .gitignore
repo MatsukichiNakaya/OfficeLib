@@ -296,3 +296,4 @@ __pycache__/
 /exe/OfficeLib.xml
 *.xlsx
 /exe/WorkBook.xlsx
+/exe

@@ -28,6 +28,8 @@ namespace OfficeLib
         public const String METHOD_COPY = "Copy";
         /// <summary>Command of Delete</summary>
         public const String METHOD_DELETE = "Delete";
+        /// <summary>Command of PasteSpecial</summary>
+        public const String METHOD_SPECIAL_PASTE = "PasteSpecial";
 
         /// <summary>Command of Cut</summary>
         public const String COMMAND_CUT = "Cut";
@@ -64,5 +66,7 @@ namespace OfficeLib
         public const String PROP_VERSION = "Version";
         /// <summary>Weight</summary>
         public const String PROP_WEIGHT = "Weight";
+        /// <summary>CutCopyMode</summary>
+        public const String PROP_CUTCOPY_MODE = "CutCopyMode";
     }
 }

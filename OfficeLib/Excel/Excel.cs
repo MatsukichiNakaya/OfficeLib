@@ -139,14 +139,7 @@ namespace OfficeLib.XLS
 
             for (var i = 0; i < result.Length; i++)
             {   // For items for which there is no setting, set [Type.Missing]
-                if (i < args.Length)
-                {
-                    result[i] = args[i] ?? Type.Missing;
-                }
-                else
-                {
-                    result[i] = Type.Missing;
-                }
+                result[i] = i < args.Length ? args[i] ?? Type.Missing : Type.Missing;
             }
             return result;
         }
@@ -158,8 +151,7 @@ namespace OfficeLib.XLS
         /// <returns></returns>
         public Boolean New(String file)
         {
-            try
-            {
+            try {
                 this.Path = System.IO.Path.GetFullPath(file);
                 base.CreateApplication();
 
@@ -194,20 +186,20 @@ namespace OfficeLib.XLS
         /// </remarks>
         public override void Close()
         {
-            try
-            {   // Sheet list clear
+            try {
+                // Sheet list clear
                 this._sheetNames = null;
 
-                if (this.Book != null)
-                {   // Close the Book
+                if (this.Book != null) {
+                    // Close the Book
                     this.Book.Method(METHOD_CLOSE);
                 }
                 // Quit the Application
                 QuitAplication();
             }
             catch (Exception) { throw; }
-            finally
-            {   // free the sheet, book and work area
+            finally {
+                // free the sheet, book and work area
                 ReleaseObjects(this.Sheet, this.Book, this.WorkArea);
             }
         }
@@ -221,12 +213,10 @@ namespace OfficeLib.XLS
         /// <returns>Success(true), Failure(false)</returns>
         public Boolean SelectSheet(String sheetName)
         {
-            try
-            {
+            try {
                 this.Sheet = this.Book.GetProperty(OBJECT_SHEET, new Object[] { sheetName });
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 return false;
             }
             return this.Sheet != null;
@@ -239,12 +229,10 @@ namespace OfficeLib.XLS
         /// <returns></returns>
         public Boolean SelectSheet(Int32 sheetIndex)
         {
-            try
-            {
+            try {
                 this.Sheet = this.Book.GetProperty(OBJECT_SHEET, new Object[] { this.SheetNames[sheetIndex] });
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 return false;
             }
             return this.Sheet != null;
@@ -258,16 +246,16 @@ namespace OfficeLib.XLS
         {
             String[] result = null;
             Object sheets = null;           
-            try
-            {   // Get number of sheets
+            try {
+                // Get number of sheets
                 sheets = this.Book?.GetProperty(OBJECT_SHEET);
                 Object countObject = sheets?.GetProperty(PROP_COUNT);
                 var count = Convert.ToInt32(countObject ?? 0);
                 Object sheet = null;
                 result = new String[count];
 
-                for (var i = 0; i < count; i++)
-                {   // Get a Sheet on the basis of the number
+                for (var i = 0; i < count; i++) {
+                    // Get a Sheet on the basis of the number
                     sheet = sheets.GetProperty(PROP_ITEM, new Object[] { i + 1 });
                     // Get Sheet name
                     result[i] = sheet?.GetProperty(PROP_NAME) as String;
@@ -301,8 +289,7 @@ namespace OfficeLib.XLS
             this.Sheet.Method(METHOD_DELETE);
 
             // Set Ather sheet
-            if (!SelectSheet(0))
-            {
+            if (!SelectSheet(0)) {
                 // Workbook Item is none.
                 ReleaseObject(this.Sheet);
             }
@@ -323,8 +310,7 @@ namespace OfficeLib.XLS
             Object destSheet = null;
 
             Boolean result = false;
-            try
-            {
+            try {
                 sheets = this.Book?.GetProperty(OBJECT_SHEET);
                 if(sheets  == null) { return false; }
 
@@ -341,8 +327,7 @@ namespace OfficeLib.XLS
 
                 result = true;
             }
-            finally
-            {
+            finally {
                 ReleaseObjects(target, firstSheet, destSheet, sheets);
             }
             return result;
@@ -362,29 +347,25 @@ namespace OfficeLib.XLS
             Object followSheet = null;
             Boolean result = false;
 
-            try
-            {
+            try {
                 sheets = this.Book.GetProperty(OBJECT_SHEET);
                 if (sheets == null) { return false; }
 
                 target = sheets.GetProperty(PROP_ITEM, new Object[] { sourceSheetName });
                 if (target == null) { return false; }
 
-                if (String.IsNullOrWhiteSpace(beforeSheetName))
-                {
+                if (String.IsNullOrWhiteSpace(beforeSheetName)) {
                     if (String.IsNullOrWhiteSpace(afterSheetName)) { return false; }
                     followSheet = sheets.GetProperty(PROP_ITEM, new Object[] { afterSheetName });
                     target.Method(METHOD_MOVE, new Object[] { Type.Missing, followSheet });
                 }
-                else
-                {
+                else {
                     followSheet = sheets.GetProperty(PROP_ITEM, new Object[] { beforeSheetName });
                     target.Method(METHOD_MOVE, new Object[] { followSheet, Type.Missing });
                 }
                 result = true;
             }
-            finally
-            {
+            finally {
                 ReleaseObjects(target, followSheet, sheets);
             }
             return result;
@@ -399,13 +380,11 @@ namespace OfficeLib.XLS
         public void SetSheetProperty(String sheetName, String propertyName, params Object[] values)
         {
             Object sheet = null;
-            try
-            {
+            try {
                 sheet = this.Book.GetProperty(OBJECT_SHEET, new Object[] { sheetName });
                 sheet.SetProperty(propertyName, values);
             }
-            finally
-            {
+            finally {
                 ReleaseObject(sheet);
             }
         }
@@ -421,13 +400,11 @@ namespace OfficeLib.XLS
         {
             Object sheet = null;
             Object result = null;
-            try
-            {
+            try {
                 sheet = this.Book.GetProperty(OBJECT_SHEET, new Object[] { sheetName });
                 result = sheet.GetProperty(propertyName, values);
             }
-            finally
-            {
+            finally {
                 ReleaseObject(sheet);
             }
             return result;
@@ -471,36 +448,32 @@ namespace OfficeLib.XLS
             if (this.Sheet == null ){ return null; }
             Object range = null;
             Object values = null;
-            try
-            {   // Reference range acquisition
+            try {
+                // Reference range acquisition
                 range = GetRange(startRow, startCol, endRow, endCol);
                 values = GetValue(range, referenceFormat);
 
                 // The value was an array type
-                if (values is Object[,])    
-                {   
+                if (values is Object[,]) {   
                     var temp = values as Object[,];
                     var result = new String[temp.GetLength(0), temp.GetLength(1)];
 
-                    for (var r = 0; r < result.GetLength(0); r++)
-                    {
-                        for (var c = 0; c < result.GetLength(1); c++)
-                        {   // convert object to string
+                    for (var r = 0; r < result.GetLength(0); r++) {
+                        for (var c = 0; c < result.GetLength(1); c++) {
+                            // convert object to string
                             result[r, c] = temp[r + 1, c + 1]?.ToString() ?? String.Empty;
                         }
                     }
                     return result;
                 }
                 // The value was Object type
-                else if (values is Object)
-                {
+                else if (values is Object) {
                     return new String[,] { { values?.ToString() ?? String.Empty } };
                 }
                 return null;
             }
             catch (Exception) { throw; }
-            finally
-            {
+            finally {
                 values = null;
                 ReleaseObjects(range);
             }
@@ -514,8 +487,7 @@ namespace OfficeLib.XLS
         /// <returns></returns>
         private Object GetValue(Object range, XlGetValueFormat referenceFormat)
         {
-            switch (referenceFormat)
-            {
+            switch (referenceFormat) {
                 case XlGetValueFormat.xlValue:
                     return range.GetProperty(PROP_VALUE);
                 case XlGetValueFormat.xlValue2:
@@ -641,6 +613,7 @@ namespace OfficeLib.XLS
         }
         #endregion
 
+        #region --- Specia Cell ---
         /// <summary>
         /// 
         /// </summary>
@@ -665,6 +638,74 @@ namespace OfficeLib.XLS
             }
             return result;
         }
+        #endregion
+
+        #region --- Copy ---
+        /// <summary>
+        /// Cell Copy
+        /// </summary>
+        /// <param name="sheetName">Sheet name</param>
+        /// <param name="startAdress">Start adress</param>
+        /// <param name="endAdress">End adress</param>
+        public void CellCopy(String sheetName, String startAdress, String endAdress)
+        {
+            /*
+            copy
+            Range("A1").Copy
+            Range("B1").PasteSpecial (xlPasteFormats)
+            Application.CutCopyMode = False
+
+            paste
+            Cells(1, 1).Copy ' A1
+            Cells(2, 1).Copy ' A2
+            Cells(1, 2).PasteSpecial (xlPasteFormats) ' B1
+            Cells(2, 2).PasteSpecial (xlPasteFormats) ' B2
+            Application.CutCopyMode = False
+             */
+
+            this.SelectSheet(sheetName);
+            var start = startAdress.ToAddress();
+            var end = endAdress.ToAddress();
+
+            Object range = null;
+            try {
+                range = GetRange(start.Row, start.Column, end.Row, end.Column);
+                //this.ClipBoard = range.Method(METHOD_COPY);
+                range.Method(METHOD_COPY);
+            }
+            catch (Exception) { throw; }
+            finally {
+                ReleaseObject(range);
+            }
+        }
+        #endregion
+
+        #region --- Paste ---
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <param name="startAdress"></param>
+        /// <param name="endAdress"></param>
+        public void CellPaste(String sheetName, String startAdress, String endAdress)
+        {
+            this.SelectSheet(sheetName);
+            var start = startAdress.ToAddress();
+            var end = endAdress.ToAddress();
+
+            Object range = null;
+            try {
+                range = GetRange(start.Row, start.Column, end.Row, end.Column);
+                range.Method(METHOD_SPECIAL_PASTE, new Object[] { XlPasteType.xlPasteAll });
+
+                Application.SetProperty(PROP_CUTCOPY_MODE, new Object[] { MsoTriState.msoFalse });
+            }
+            catch (Exception) { throw; }
+            finally {
+                ReleaseObject(range);
+            }
+        }
+        #endregion
         #endregion
 
         #region --- Save ---
@@ -717,11 +758,9 @@ namespace OfficeLib.XLS
             Int32 r = 0;
             Int32 c = 0;
             var result = new Object[src.Length, columns];
-            
-            for (; r < src.Length; r++)
-            {
-                for (c = 0; c < columns; c++)
-                {
+
+            for (; r < src.Length; r++) {
+                for (c = 0; c < columns; c++) {
                     result[r, c] = c < src[r].Length ? (Object)src[r][c] : null;
                 }
             }
@@ -735,8 +774,8 @@ namespace OfficeLib.XLS
         /// <param name="endCol">End colmun</param>
         internal Object GetRange(UInt32 startRow, UInt32 startCol, UInt32 endRow, UInt32 endCol)
         {
-            try
-            {   // Get cell address
+            try {
+                // Get cell address
                 Object stCell = this.Sheet.GetProperty(OBJECT_CELL,
                                             new Object[] { startRow, startCol });
                 Object edCell = this.Sheet.GetProperty(OBJECT_CELL,
@@ -766,10 +805,9 @@ namespace OfficeLib.XLS
             Int32 valRow = values.GetLength(0);
             Int32 valCol = values.GetLength(1);
 
-            for (var i = 0; i < row; i++)
-            {
-                for (var j = 0; j < col; j++)
-                {   // Is it not within the range?
+            for (var i = 0; i < row; i++) {
+                for (var j = 0; j < col; j++) {
+                    // Is it not within the range?
                     result[i, j] = (valRow > i && valCol > j) ? values[i, j] ?? "" : "";
                 }
             }

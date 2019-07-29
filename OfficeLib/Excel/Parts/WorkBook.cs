@@ -299,15 +299,29 @@ namespace OfficeLib.XLS
         }
         #endregion
 
+        #region --- Functions --- 
         /// <summary>
         /// Get this worksheet names
         /// </summary>
         private IEnumerable<String> GetKeys()
         {
-            foreach (var key in this.WorkSheets.Keys)
-            {
+            foreach (var key in this.WorkSheets.Keys) {
                 yield return key;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <returns></returns>
+        public Boolean SheetHide(String sheetName)
+        {
+
+
+            return true;
+        }
+
+        #endregion
     }
 }
