@@ -41,8 +41,16 @@ namespace OfficeLib.XLS
         /// by using the Double data type.
         /// </remarks>
         public const String PROP_VALUE2 = "Value2";
-
         /// <summary>SpecialCells</summary>
         public const String PROP_SPECIAL_CALLS = "SpecialCells";
+        /// <summary>Chart</summary>
+        public const String PROP_CHART = "Chart";
+        /// <summary>ChartType</summary>
+        public const String PROP_CHART_TYPE = "ChartType";
+
+        /// <summary>ChartObjects</summary>
+        public const String METHOD_CHART_OBJECTS = "ChartObjects";
+        /// <summary>SeriesCollection</summary>
+        public const String METHOD_SERIES_COLLECTION = "SeriesCollection";
     }
 }

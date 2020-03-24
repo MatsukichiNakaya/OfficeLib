@@ -59,7 +59,8 @@ namespace LibTester
 
             Object val = workBook["Sheet2"][new Address("B3")];
             */
-            using (var book = WorkBook.GetInstance(@".\WorkBook.xlsx"))
+            //*
+            using (var book = WorkBook.GetInstance(@".\WorkBook.xlsx", isAutoSave:true))
             {
 
                 //book.RemoveSheet("Sheet3");
@@ -81,20 +82,34 @@ namespace LibTester
                 //book.SetCellValue(null, "C5", XlGetValueFormat.xlFormula);
 
 
-                book.CellCopy("Sheet2", "A6", "A6");
+                //book.CellCopy("Sheet2", "A6", "A6");
 
-                using (var book2 = WorkBook.GetInstance(@".\WorkBook2.xlsx")) {
-                    book2.CellPaste("Sheet2", "B6", "B6");
-                    book2.Save();
-                }
-                
+                //using (var book2 = WorkBook.GetInstance(@".\WorkBook2.xlsx")) {
+                //    book2.CellPaste("Sheet2", "B6", "B6");
+                //    book2.Save();
+                //}
+                //book.AtherBookCellPaste(@".\WorkBook2.xlsx", "Sheet2", "B6", "B6");
 
-                //book.Save();
-            }
+                book.SelectSheet("Sheet2");
+                // book.AddChart();
+
+                //using (var sheet = book.GetSheet("Sheet2")) {
+
+                //    var count = sheet.Method("ChartObjects").GetProperty("Count").ToInt();
+
+                //    Console.WriteLine(count);
+                //}
+                //
+
+                //book.SetChartType(1, XlChartType.xlLine);
+
+                book.SetChartTypeSeries(1, new XlChartType[] { XlChartType.xlLine, XlChartType.xlColumnClustered });
+            }//*/
+
             Console.WriteLine("Complete");
             Console.ReadLine();
 #endif
-            #endregion
+#endregion
 
 
 #if OUTLOOK

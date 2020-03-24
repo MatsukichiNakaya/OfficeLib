@@ -33,7 +33,7 @@ namespace OfficeLib.XLS
         /// </summary>
         public Field()
         {
-            SetProperties(new T[][] { new T[] { default(T) } }, "A1".ToAddress());
+            SetProperties(new T[][] { new T[] { default } }, "A1".ToAddress());
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace OfficeLib.XLS
         public Field(T[][] value)
         {
             SetProperties(value?.ToRectLikeJagArray()
-                                 ?? new T[][] { new T[] { default(T) } },
+                                 ?? new T[][] { new T[] { default } },
                           "A1".ToAddress());
         }
 
@@ -55,7 +55,7 @@ namespace OfficeLib.XLS
         public Field(T[][] value, Address startAddress)
         {
             SetProperties(value?.ToRectLikeJagArray()
-                                 ?? new T[][] { new T[] { default(T) } },
+                                 ?? new T[][] { new T[] { default } },
                           startAddress);
         }
 
@@ -65,7 +65,7 @@ namespace OfficeLib.XLS
         /// <param name="value">Data handled as a table</param>
         public Field(T[,] value)
         {
-            SetProperties(RectToJag(value) ?? new T[][] { new T[] { default(T) } },
+            SetProperties(RectToJag(value) ?? new T[][] { new T[] { default } },
                           "A1".ToAddress());
         }
 
@@ -76,7 +76,7 @@ namespace OfficeLib.XLS
         /// <param name="startAddress">Start address</param>
         public Field(T[,] value, Address startAddress)
         {
-            SetProperties(RectToJag(value) ?? new T[][] { new T[] { default(T) } },
+            SetProperties(RectToJag(value) ?? new T[][] { new T[] { default } },
                           startAddress);
         }
 
@@ -88,7 +88,7 @@ namespace OfficeLib.XLS
             if(value == null) { return null; }
 
             var result = new T[value.GetLength(0)][];
-            Int32 col = value.GetLength(1);
+            var col = value.GetLength(1);
             for (var r = 0; r < result.Length; r++)
             {
                 result[r] = new T[col];
@@ -138,7 +138,7 @@ namespace OfficeLib.XLS
         {
             get
             {
-                Int32 width = Math.Abs((Int32)(startAddress.Column - endAddress.Column));
+                var width = Math.Abs((Int32)(startAddress.Column - endAddress.Column));
                 return this.Data.RangeTake
                         ((Int32)startAddress.Row - 1, (Int32)endAddress.Row,
                         (Int32)startAddress.Column - 1, width + 1).ToJagArray();
@@ -146,8 +146,8 @@ namespace OfficeLib.XLS
 
             set
             {
-                UInt32 row = (endAddress.Row - startAddress.Row) + 1;
-                UInt32 col = (endAddress.Column - startAddress.Column) + 1;
+                var row = (endAddress.Row - startAddress.Row) + 1;
+                var col = (endAddress.Column - startAddress.Column) + 1;
                 for (var r = 0; r < row; r++)
                 {
                     if (value.Length <= r) { break; }
@@ -205,7 +205,7 @@ namespace OfficeLib.XLS
         /// </summary>
         public static Field<T> operator -(Field<T> baseTable, Int32 minus)
         {
-            Int32 len = baseTable.Data.Length - minus;
+            var len = baseTable.Data.Length - minus;
             len = len < 0 ? 0 : len;
 
             var newTable = new T[len][];
@@ -223,7 +223,7 @@ namespace OfficeLib.XLS
         /// </summary>
         public static Field<T> operator ^(Field<T> baseTable, Int32 minus)
         {
-            Int32 len = baseTable.Data.Length - minus;
+            var len = baseTable.Data.Length - minus;
             len = len < 0 ? 0 : len;
 
             var newTable = new T[len][];
@@ -324,6 +324,24 @@ namespace OfficeLib.XLS
             if (row < 0 || this.Row <= row) { return default(T); }
 
             return this.Data[row][col];
+        }
+
+        /// <summary>
+        /// Data setter (first cell at A1 -> last)
+        /// </summary>
+        /// <param name="data"></param>
+        public void Set(T[][] data)
+        {
+            // minimun length use
+            var row = data.Length < this.Row ? data.Length : this.Row;
+            var argCol = data.Max(r => r.Length);
+            var col = argCol < this.Column ? argCol : this.Column;
+
+            for (var r = 0; r < row; r++) {
+                for (var c = 0; c < col; c++) {
+                    this.Data[r][c] = data[r][c];
+                }
+            }
         }
     }
 }

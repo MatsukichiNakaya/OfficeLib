@@ -5,28 +5,15 @@ namespace OfficeLib.XLS
     /// <summary>
     /// 
     /// </summary>
-    public class SheetObject : IDisposable
+    public class SheetObject : ComObj
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sheet"></param>
-        public SheetObject(Object sheet)
+        public SheetObject(Object sheet) : base(sheet)
         {
-            this.ComObject = sheet;
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Object ComObject { get; private set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Dispose()
-        {
-            OfficeCore.ReleaseObject(this.ComObject);
         }
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="Excel\Parts\Cell.cs" />
     <Compile Include="Excel\Extention\ExcelEditExtention.cs" />
     <Compile Include="Excel\ExcelCommands.cs" />
+    <Compile Include="Excel\Parts\ComObj.cs" />
     <Compile Include="Excel\Parts\ExcelEnum.cs" />
     <Compile Include="Excel\Parts\ExcelSheetAttribute.cs" />
     <Compile Include="Excel\Parts\Color.cs" />
@@ -93,7 +94,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(OutDir)$(TargetFileName) C:\workspase\Reference\cs\new\$(TargetFileName)</PostBuildEvent>
+    <PostBuildEvent>copy $(OutDir)$(TargetFileName) C:\WorkSpace\Reference\cs\new\$(TargetFileName)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

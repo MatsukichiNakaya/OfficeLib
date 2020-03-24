@@ -52,6 +52,9 @@ namespace OfficeLib.XLS
         {   // When not yet acquired : When acquired
             get { return this._sheetNames ?? GetWorkBookSheetNames(); }
         }
+
+        /// <summary>Auto Save</summary>
+        public Boolean IsAutoSave { get; set; } = false;
         #endregion
 
         #region --- Constructor ---
@@ -72,6 +75,18 @@ namespace OfficeLib.XLS
             // Argument creation for Open
             // Items other than File path are set to Type.Missing
             return Open(new Object[] { this.Path });
+        }
+
+        /// <summary>
+        /// Excel file open (optional auto save)
+        /// </summary>
+        /// <param name="file">File path</param>
+        /// <param name="isAutoSave">true : Auto, false : Manual</param>
+        /// <returns></returns>
+        public Boolean Open(String file, Boolean isAutoSave)
+        {
+            this.IsAutoSave = isAutoSave;
+            return Open(file);
         }
 
         /// <summary>
@@ -187,6 +202,11 @@ namespace OfficeLib.XLS
         public override void Close()
         {
             try {
+                // Option auto save
+                if (this.IsAutoSave) {
+                    Save();
+                }
+
                 // Sheet list clear
                 this._sheetNames = null;
 
@@ -372,7 +392,7 @@ namespace OfficeLib.XLS
         }
 
         /// <summary>
-        /// 
+        /// Set sheet properties
         /// </summary>
         /// <param name="sheetName"></param>
         /// <param name="propertyName"></param>
@@ -390,7 +410,7 @@ namespace OfficeLib.XLS
         }
 
         /// <summary>
-        /// 
+        /// Get sheet properties
         /// </summary>
         /// <param name="sheetName"></param>
         /// <param name="propertyName"></param>
@@ -411,7 +431,7 @@ namespace OfficeLib.XLS
         }
 
         /// <summary>
-        /// 
+        /// Get Sheet Object class
         /// </summary>
         /// <param name="sheetName"></param>
         /// <returns></returns>
@@ -592,10 +612,10 @@ namespace OfficeLib.XLS
         }
 
         /// <summary>
-        /// 
+        /// Get cell refarence format string
         /// </summary>
-        /// <param name="referenceFormat"></param>
-        /// <returns></returns>
+        /// <param name="referenceFormat">Value format type</param>
+        /// <returns>Format String</returns>
         private String GetSetFormat(XlGetValueFormat referenceFormat)
         {
             switch (referenceFormat)
@@ -615,9 +635,9 @@ namespace OfficeLib.XLS
 
         #region --- Specia Cell ---
         /// <summary>
-        /// 
+        /// Get the largest cell of the edited range
         /// </summary>
-        /// <returns></returns>
+        /// <returns>largest cell string</returns>
         public String GetLastCell()
         {
             Object cells = null;
@@ -649,20 +669,6 @@ namespace OfficeLib.XLS
         /// <param name="endAdress">End adress</param>
         public void CellCopy(String sheetName, String startAdress, String endAdress)
         {
-            /*
-            copy
-            Range("A1").Copy
-            Range("B1").PasteSpecial (xlPasteFormats)
-            Application.CutCopyMode = False
-
-            paste
-            Cells(1, 1).Copy ' A1
-            Cells(2, 1).Copy ' A2
-            Cells(1, 2).PasteSpecial (xlPasteFormats) ' B1
-            Cells(2, 2).PasteSpecial (xlPasteFormats) ' B2
-            Application.CutCopyMode = False
-             */
-
             this.SelectSheet(sheetName);
             var start = startAdress.ToAddress();
             var end = endAdress.ToAddress();
@@ -670,7 +676,6 @@ namespace OfficeLib.XLS
             Object range = null;
             try {
                 range = GetRange(start.Row, start.Column, end.Row, end.Column);
-                //this.ClipBoard = range.Method(METHOD_COPY);
                 range.Method(METHOD_COPY);
             }
             catch (Exception) { throw; }
@@ -682,11 +687,11 @@ namespace OfficeLib.XLS
 
         #region --- Paste ---
         /// <summary>
-        /// 
+        /// Cell Paste
         /// </summary>
-        /// <param name="sheetName"></param>
-        /// <param name="startAdress"></param>
-        /// <param name="endAdress"></param>
+        /// <param name="sheetName">Sheet Name</param>
+        /// <param name="startAdress">Start adress</param>
+        /// <param name="endAdress">End adress</param>
         public void CellPaste(String sheetName, String startAdress, String endAdress)
         {
             this.SelectSheet(sheetName);
@@ -698,12 +703,71 @@ namespace OfficeLib.XLS
                 range = GetRange(start.Row, start.Column, end.Row, end.Column);
                 range.Method(METHOD_SPECIAL_PASTE, new Object[] { XlPasteType.xlPasteAll });
 
-                Application.SetProperty(PROP_CUTCOPY_MODE, new Object[] { MsoTriState.msoFalse });
+                this.Application.SetProperty(PROP_CUTCOPY_MODE, new Object[] { MsoTriState.msoFalse });
             }
             catch (Exception) { throw; }
             finally {
                 ReleaseObject(range);
             }
+        }
+
+        /// <summary>
+        /// Paste to another book
+        /// </summary>
+        /// <param name="bookName">Book path</param>
+        /// <param name="sheetName">Sheet name</param>
+        /// <param name="startAdress">Start adress</param>
+        /// <param name="endAdress">End adress</param>
+        public Boolean AtherBookCellPaste(String bookName, String sheetName, String startAdress, String endAdress)
+        {
+            return AtherBookCellPaste(bookName, sheetName, startAdress, endAdress, XlPasteType.xlPasteAll);
+        }
+
+        /// <summary>
+        /// Paste to another book
+        /// </summary>
+        /// <param name="bookName">Book path</param>
+        /// <param name="sheetName">Sheet name</param>
+        /// <param name="startAdress">Start adress</param>
+        /// <param name="endAdress">End adress</param>
+        /// <param name="pasteType"></param>
+        public Boolean AtherBookCellPaste(String bookName, String sheetName, String startAdress, String endAdress, XlPasteType pasteType)
+        {
+            // Open the ather Workbook.
+            if (!(this.WorkArea.Method(METHOD_OPEN,
+                            SetOpenArguments(new Object[] {
+                                System.IO.Path.GetFullPath(bookName)
+                            })) is Object atherBook)) {
+                return false;
+            }
+            atherBook.SetProperty(PROP_SAVED, new Object[] { MsoTriState.msoTrue });
+
+            if (!(atherBook.GetProperty(OBJECT_SHEET, new Object[] { sheetName }) is Object sheet)) {
+                ReleaseObjects(atherBook);
+                return false;
+            }
+            var start = startAdress.ToAddress();
+            var end = endAdress.ToAddress();
+            Object range = null;
+            try {
+                range = sheet.GetProperty(OBJECT_RANGE,
+                    new Object[] {
+                            sheet.GetProperty(OBJECT_CELL, new Object[] { start.Row, start.Column }),
+                            sheet.GetProperty(OBJECT_CELL, new Object[] { end.Row, end.Column })
+                    });
+                // Clipboard data paste
+                range?.Method(METHOD_SPECIAL_PASTE, new Object[] { pasteType });
+                this.Application.SetProperty(PROP_CUTCOPY_MODE, new Object[] { MsoTriState.msoFalse });
+
+                // Get this Book path
+                atherBook.Method(METHOD_SAVE);
+                atherBook.Method(METHOD_CLOSE);
+            }
+            catch (Exception) { return false; }
+            finally {
+                ReleaseObjects(range, sheet, atherBook);
+            }
+            return true;
         }
         #endregion
         #endregion
@@ -850,6 +914,128 @@ namespace OfficeLib.XLS
             return this.Sheet.Method(command, args);
         }
 #endif
+        #endregion
+
+        #region --- Object ---
+        ///// <summary>
+        ///// Get ActiveSheet in Chartobjects
+        ///// </summary>
+        ///// <returns>ChartObjects</returns>
+        //public Object[] GetCurrentSheetCharts()
+        //{
+        //    var count = this.Sheet.Method("ChartObjects").GetProperty(PROP_COUNT).To<Int32>();
+        //    var result = new Object[count];
+        //    for (int i = 0; i < result.Length; i++) {
+        //        result[i] = this.Sheet.Method("ChartObjects", new Object[] { i + 1 }).GetProperty("Chart");
+        //    }
+        //    return result;
+        //}
+
+        /// <summary>
+        /// Set ChartSeries Name
+        /// </summary>
+        /// <param name="chartIndex">chart object index</param>
+        /// <param name="names">series names</param>
+        public void SetChartSeriesName(Int32 chartIndex, String[] names)
+        {
+            Object chart = null;
+            try {
+                chart = this.Sheet.Method(METHOD_CHART_OBJECTS, new Object[] { chartIndex }).GetProperty(PROP_CHART);
+
+                for (int i = 0; i < names.Length; i++) {
+                    chart.Method(METHOD_SERIES_COLLECTION, new Object[] { i + 1 })
+                         .SetProperty(PROP_NAME, new Object[] { $"=\"{names[i]}\"" });
+                }
+            }
+            finally {
+                ReleaseObject(chart);
+            }
+        }
+
+        /// <summary>
+        /// Active sheet add chart
+        /// </summary>
+        public void AddChart()
+        {
+            Double.TryParse(this.Version, out var ver);
+
+            if ((Int32)XlVersion.Excel2007 <= ver) {
+                this.Sheet.GetProperty(OBJECT_SHAPES).Method("AddChart");
+            }
+            else {
+                throw new Exception("Functions not supported in this version");
+            }
+        }
+
+        /// <summary>
+        /// Set chart type
+        /// </summary>
+        /// <param name="chartIndex"></param>
+        /// <param name="xlType"></param>
+        public void SetChartType(Int32 chartIndex, XlChartType xlType)
+        {
+            Object chart = null;
+            try {
+                Double.TryParse(this.Version, out var ver);
+                if ((Int32)XlVersion.Excel2007 <= ver) {
+                    // 2007
+                    chart = this.Sheet.Method(METHOD_CHART_OBJECTS, new Object[] { chartIndex }).GetProperty(PROP_CHART);
+                    chart.SetProperty(PROP_CHART_TYPE, new Object[] { xlType });
+                }
+                else {
+                    // 2003 VBA code sample
+                    // ActiveSheet.ChartObjects(1).Activate
+                    // ActiveChart.ChartArea.Select
+                    // ActiveChart.ChartType = xlLine
+                    throw new Exception("Functions not supported in this version");
+                }
+            }
+            finally {
+                ReleaseObject(chart);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="chartIndex"></param>
+        /// <param name="xlTypes"></param>
+        public void SetChartTypeSeries(Int32 chartIndex, XlChartType[] xlTypes)
+        {
+            for (var i = 0; i < xlTypes.Length; i++) {
+                SetChartTypeSeries(chartIndex, i + 1, xlTypes[i]);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="chartIndex"></param>
+        /// <param name="seriesIndex"></param>
+        /// <param name="xlType"></param>
+        public void SetChartTypeSeries(Int32 chartIndex, Int32 seriesIndex, XlChartType xlType)
+        {
+            Object chart = null;
+            try {
+                Double.TryParse(this.Version, out var ver);
+                if ((Int32)XlVersion.Excel2007 <= ver) {
+                    // 2007
+                    chart = this.Sheet.Method(METHOD_CHART_OBJECTS, new Object[] { chartIndex })
+                                      .GetProperty(PROP_CHART).Method(METHOD_SERIES_COLLECTION, new Object[] { seriesIndex });
+                    chart.SetProperty(PROP_CHART_TYPE, new Object[] { xlType });
+                }
+                else {
+                    // 2003 VBA code sample
+                    // ActiveSheet.ChartObjects(1).Activate
+                    // ActiveChart.ChartArea.Select
+                    // ActiveChart.ChartType = xlLine
+                    throw new Exception("Functions not supported in this version");
+                }
+            }
+            finally {
+                ReleaseObject(chart);
+            }
+        }
         #endregion
 
         /// <summary>

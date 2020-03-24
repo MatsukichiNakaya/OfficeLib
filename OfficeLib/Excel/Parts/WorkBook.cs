@@ -63,13 +63,22 @@ namespace OfficeLib.XLS
         /// <returns></returns>
         public static Excel GetInstance(String path)
         {
-            if (!File.Exists(path))
-            { throw new FileNotFoundException("File not found.", path); }
+            return GetInstance(path, false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="isAutoSave"></param>
+        /// <returns></returns>
+        public static Excel GetInstance(String path, Boolean isAutoSave)
+        {
+            if (!File.Exists(path)) { throw new FileNotFoundException("File not found.", path); }
 
             var result = new Excel();
-            Boolean isSuccess = result.Open(System.IO.Path.GetFullPath(path));
-            if (!isSuccess)
-            {
+            var isSuccess = result.Open(System.IO.Path.GetFullPath(path), isAutoSave);
+            if (!isSuccess) {
                 result.Dispose();
             }
             return isSuccess ? result : null;

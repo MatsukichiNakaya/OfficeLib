@@ -59,7 +59,7 @@ namespace OfficeLib.XLS
             this.Column = LimitColumnAdjustment(column);
             this.Row = LimitRowAdjustment(row);
 
-            String a1Col = ToExcelColumnString(this.Column);
+            var a1Col = ToExcelColumnString(this.Column);
             this.ReferenceString = String.Format("{0}{1}", a1Col, this.Row);
         }
         #endregion
@@ -72,13 +72,13 @@ namespace OfficeLib.XLS
         /// <param name="row">Amount of movement in the row direction</param>
         public void Shift(Int32 col, Int32 row)
         {
-            Int32 temp = ((Int32)this.Column + col); 
+            var temp = ((Int32)this.Column + col);
             this.Column = LimitColumnAdjustment(temp < 0 ? 0 : (UInt32)temp);
 
             temp = ((Int32)this.Row + row);
             this.Row = LimitRowAdjustment(temp < 0 ? 0 : (UInt32)temp);
-            
-            String a1Col = ToExcelColumnString(this.Column);
+
+            var a1Col = ToExcelColumnString(this.Column);
             this.ReferenceString = String.Format("{0}{1}", a1Col, this.Row);
         }
 
@@ -100,12 +100,12 @@ namespace OfficeLib.XLS
         /// <param name="row">Amount of movement in the row direction</param>
         public static Address Shift(Address address, Int32 col, Int32 row)
         {
-            Int32 temp = ((Int32)address.Column + col);
-            UInt32 c = LimitColumnAdjustment(temp < 0 ? 0 : (UInt32)temp);
-            String a1Col = ToExcelColumnString(c);
+            var temp = ((Int32)address.Column + col);
+            var c = LimitColumnAdjustment(temp < 0 ? 0 : (UInt32)temp);
+            var a1Col = ToExcelColumnString(c);
 
             temp = ((Int32)address.Row + row);
-            UInt32 r = LimitColumnAdjustment(temp < 0 ? 0 : (UInt32)temp);
+            var r = LimitColumnAdjustment(temp < 0 ? 0 : (UInt32)temp);
 
             return new Address(String.Format("{0}{1}", a1Col, r));
         }
@@ -116,15 +116,15 @@ namespace OfficeLib.XLS
         /// <param name="value">Value to convert</param>
         public static String ToExcelColumnString(UInt32 value)
         {
-            String result = String.Empty;
-            try
-            {   // Continue division until it becomes 0
-                UInt32 tmpIndex = value;
-                for (var i = value; i > 0; i--)
-                {   // Ask for surplus
-                    UInt32 modIndex = tmpIndex % ALPHABET_CNT;
-                    if (modIndex == 0)
-                    {   // Set to Z if 0. Subtract 1 so that digits do not increase
+            var result = String.Empty;
+            try {   
+                // Continue division until it becomes 0
+                var tmpIndex = value;
+                for (var i = value; i > 0; i--) {   
+                    // Ask for surplus
+                    var modIndex = tmpIndex % ALPHABET_CNT;
+                    if (modIndex == 0) {   
+                        // Set to Z if 0. Subtract 1 so that digits do not increase
                         modIndex = ALPHABET_CNT;
                         tmpIndex--;
                     }
@@ -135,8 +135,7 @@ namespace OfficeLib.XLS
                     if (tmpIndex == 0) { break; }
                 }
             }
-            catch (Exception)
-            { throw new Exception("ToExcelColumnString: Conversion failed"); }
+            catch (Exception) { throw new Exception("ToExcelColumnString: Conversion failed"); }
             return result;
         }
 
@@ -159,21 +158,18 @@ namespace OfficeLib.XLS
         {
             UInt32 col = 1;
             UInt32 row = 1;
-            try
-            {   // Split into rows and columns
-                String[] addr = SplitRC(value);   
-                
+            try {   // Split into rows and columns
+                String[] addr = SplitRC(value);
+
                 // Convert column
                 col = ToColumnNumber(addr[Excel.COL]);
 
                 // Convert Row
-                if (!UInt32.TryParse(addr[Excel.ROW], out row))
-                {
+                if (!UInt32.TryParse(addr[Excel.ROW], out row)) {
                     throw new Exception("ToRange: Row conversion failed");
                 }
             }
-            catch (Exception)
-            { throw new Exception("ToRange: Address conversion failed"); }
+            catch (Exception) { throw new Exception("ToRange: Address conversion failed"); }
 
             return new Tuple<UInt32, UInt32>(col, row);
         }
@@ -186,8 +182,7 @@ namespace OfficeLib.XLS
         protected static String[] SplitRC(String cellAddress)
         {
             String[] result = null;
-            try
-            {
+            try {
                 var pattern = new System.Text.RegularExpressions.Regex(@"\d+");
                 String[] temp = pattern.Split(cellAddress);
                 result = new String[2];
@@ -196,8 +191,7 @@ namespace OfficeLib.XLS
                                         cellAddress.Length - temp[0].Length);
                 result[Excel.COL] = temp[0];
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw new Exception(
                     "SplitRC: Split failed. Please check the format of the string");
             }
@@ -212,13 +206,11 @@ namespace OfficeLib.XLS
         /// <returns></returns>
         private static UInt32 ConvertString(UInt32 returnValue, Queue<Char> charQueue)
         {
-            if (charQueue.Count == 0)
-            {
+            if (charQueue.Count == 0) {
                 return returnValue;
             }
-            else
-            {
-                Char charVal = charQueue.Dequeue(); //Take out one from the queue
+            else {
+                var charVal = charQueue.Dequeue(); //Take out one from the queue
                 return ConvertString(CalcDesimal(charVal, charQueue.Count) + returnValue, charQueue);
             }
         }

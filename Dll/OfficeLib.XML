@@ -39,6 +39,9 @@
         <member name="F:OfficeLib.Commands.METHOD_DELETE">
             <summary>Command of Delete</summary>
         </member>
+        <member name="F:OfficeLib.Commands.METHOD_SPECIAL_PASTE">
+            <summary>Command of PasteSpecial</summary>
+        </member>
         <member name="F:OfficeLib.Commands.COMMAND_CUT">
             <summary>Command of Cut</summary>
         </member>
@@ -89,6 +92,9 @@
         </member>
         <member name="F:OfficeLib.Commands.PROP_WEIGHT">
             <summary>Weight</summary>
+        </member>
+        <member name="P:OfficeLib.Commands.PROP_CUTCOPY_MODE">
+            <summary>CutCopyMode</summary>
         </member>
         <member name="T:OfficeLib.FolderSearchOption">
             <summary>
@@ -273,6 +279,65 @@
         </member>
         <member name="F:OfficeLib.XLS.ExcelCommands.PROP_SPECIAL_CALLS">
             <summary>SpecialCells</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_CHART">
+            <summary>Chart</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.PROP_CHART_TYPE">
+            <summary>ChartType</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.METHOD_CHART_OBJECTS">
+            <summary>ChartObjects</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ExcelCommands.METHOD_SERIES_COLLECTION">
+            <summary>SeriesCollection</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.ComObj">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:OfficeLib.XLS.ComObj._com">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.ComObj.#ctor(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="com"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.ComObj.Method(System.String)">
+            <summary>
+            Method
+            </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.ComObj.Method(System.String,System.Object[])">
+            <summary>
+            Method Args
+            </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.ComObj.GetProperty(System.String)">
+            <summary>
+            Getproperty
+            </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.ComObj.GetProperty(System.String,System.Object[])">
+            <summary>
+            Getproperty  Args
+            </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.ComObj.ToInt">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.ComObj.Dispose">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:OfficeLib.XLS.Constants">
             <summary>Constants Enumeration</summary>
@@ -1050,6 +1115,312 @@
         <member name="F:OfficeLib.XLS.XlThemeColor.xlThemeColorLight2">
             <summary>Light2</summary>
         </member>
+        <member name="T:OfficeLib.XLS.XlPasteType">
+            <summary>Specifies the part of the range to be pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteAll">
+            <summary>Everything will be pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteAllExceptBorders">
+            <summary>Everything except borders will be pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteAllMergingConditionalFormats">
+            <summary>Everything will be pasted and conditional formats will be merged.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteAllUsingSourceTheme">
+            <summary>Everything will be pasted using the source theme.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteColumnWidths">
+            <summary>Copied column width is pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteComments">
+            <summary>Comments are pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteFormats">
+            <summary>Copied source format is pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteFormulas">
+            <summary>Formulas are pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteFormulasAndNumberFormats">
+            <summary>Formulas and Number formats are pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteValidation">
+            <summary>Validations are pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteValues">
+            <summary>Values are pasted.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlPasteType.xlPasteValuesAndNumberFormats">
+            <summary>Values and Number formats are pasted.</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlCellReference">
+            <summary>Cell reference type</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellReference.Relative">
+            <summary>Releative Reference</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlCellReference.Absolute">
+            <summary>Absolute Reference</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlVersion">
+            <summary>Excel version number</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel5">
+            <summary>5</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel95">
+            <summary>95</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel97">
+            <summary>97</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel2000">
+            <summary>2000</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel2002">
+            <summary>2002</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel2003">
+            <summary>2003</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel2007">
+            <summary>2007</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel2010">
+            <summary>2010</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel2013">
+            <summary>2013</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlVersion.Excel2016">
+            <summary>2016</summary>
+        </member>
+        <member name="T:OfficeLib.XLS.XlChartType">
+            <summary>Specifies the chart type</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DArea">
+            <summary>3D Area.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DAreaStacked">
+            <summary>3D Stacked Area.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DAreaStacked100">
+            <summary>100% Stacked Area.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DBarClustered">
+            <summary>3D Clustered Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DBarStacked">
+            <summary>3D Stacked Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DBarStacked100">
+            <summary>3D 100% Stacked Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DColumn">
+            <summary>3D Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DColumnClustered">
+            <summary>3D Clustered Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DColumnStacked">
+            <summary>3D Stacked Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DColumnStacked100">
+            <summary>3D 100% Stacked Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DLine">
+            <summary>3D Line.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DPie">
+            <summary>3D Pie.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xl3DPieExploded">
+            <summary>Exploded 3D Pie.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlArea">
+            <summary>Area</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlAreaStacked">
+            <summary>Stacked Area.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlAreaStacked100">
+            <summary>100% Stacked Area.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlBarClustered">
+            <summary>Clustered Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlBarOfPie">
+            <summary>Bar of Pie.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlBarStacked">
+            <summary>Stacked Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlBarStacked100">
+            <summary>100% Stacked Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlBubble">
+            <summary>Bubble.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlBubble3DEffect">
+            <summary>Bubble with 3D effects.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlColumnClustered">
+            <summary>Clustered Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlColumnStacked">
+            <summary>Stacked Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlColumnStacked100">
+            <summary>100% Stacked Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlConeBarClustered">
+            <summary>Clustered Cone Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlConeBarStacked">
+            <summary>Stacked Cone Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlConeBarStacked100">
+            <summary>100% Stacked Cone Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlConeCol">
+            <summary>3D Cone Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlConeColClustered">
+            <summary>Clustered Cone Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlConeColStacked">
+            <summary>Stacked Cone Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlConeColStacked100">
+            <summary>100% Stacked Cone Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlCylinderBarClustered">
+            <summary>Clustered Cylinder Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlCylinderBarStacked">
+            <summary>Stacked Cylinder Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlCylinderBarStacked100">
+            <summary>100% Stacked Cylinder Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlCylinderCol">
+            <summary>3D Cylinder Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlCylinderColClustered">
+            <summary>Clustered Cone Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlCylinderColStacked">
+            <summary>Stacked Cone Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlCylinderColStacked100">
+            <summary>100% Stacked Cylinder Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlDoughnut">
+            <summary>Doughnut.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlDoughnutExploded">
+            <summary>Exploded Doughnut.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlLine">
+            <summary>Line.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlLineMarkers">
+            <summary>Line with Markers.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlLineMarkersStacked">
+            <summary>Stacked Line with Markers.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlLineMarkersStacked100">
+            <summary>100% Stacked Line with Markers.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlLineStacked">
+            <summary>Stacked Line.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlLineStacked100">
+            <summary>100% Stacked Line.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPie">
+            <summary>Pie.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPieExploded">
+            <summary>Exploded Pie.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPieOfPie">
+            <summary>Pie of Pie.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPyramidBarClustered">
+            <summary>Clustered Pyramid Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPyramidBarStacked">
+            <summary>Stacked Pyramid Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPyramidBarStacked100">
+            <summary>100% Stacked Pyramid Bar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPyramidCol">
+            <summary>3D Pyramid Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPyramidColClustered">
+            <summary>Clustered Pyramid Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPyramidColStacked">
+            <summary>Stacked Pyramid Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlPyramidColStacked100">
+            <summary>100% Stacked Pyramid Column.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlRadar">
+            <summary>Radar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlRadarFilled">
+            <summary>Filled Radar.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlRadarMarkers">
+            <summary>Radar with Data Markers.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlRegionMap">
+            <summary>Map chart.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlStockHLC">
+            <summary>High-Low-Close.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlStockOHLC">
+            <summary>Open-High-Low-Close.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlStockVHLC">
+            <summary>Volume-High-Low-Close.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlStockVOHLC">
+            <summary>Volume-Open-High-Low-Close.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlSurface">
+            <summary>3D Surface.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlSurfaceTopView">
+            <summary>Surface (Top View).</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlSurfaceTopViewWireframe">
+            <summary>Surface (Top View wireframe).</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlSurfaceWireframe">
+            <summary>3D Surface (wireframe).</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlXYScatter">
+            <summary>Scatter.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlXYScatterLines">
+            <summary>Scatter with Lines.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlXYScatterLinesNoMarkers">
+            <summary>Scatter with Lines and No Data Markers.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlXYScatterSmooth">
+            <summary>Scatter with Smoothed Lines.</summary>
+        </member>
+        <member name="F:OfficeLib.XLS.XlChartType.xlXYScatterSmoothNoMarkers">
+            <summary>Scatter with Smoothed Lines and No Data Markers.</summary>
+        </member>
         <member name="T:OfficeLib.XLS.ExcelSheetAttribute">
             <summary>Excel sheet attribute</summary>
         </member>
@@ -1142,16 +1513,6 @@
             
             </summary>
             <param name="sheet"></param>
-        </member>
-        <member name="P:OfficeLib.XLS.SheetObject.ComObject">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:OfficeLib.XLS.SheetObject.Dispose">
-            <summary>
-            
-            </summary>
         </member>
         <member name="T:OfficeLib.XLS.Thickness">
             <summary>
@@ -1259,6 +1620,9 @@
         <member name="P:OfficeLib.XLS.Excel.SheetNames">
             <summary>Sheet names in the Book</summary>
         </member>
+        <member name="P:OfficeLib.XLS.Excel.IsAutoSave">
+            <summary>Auto Save</summary>
+        </member>
         <member name="M:OfficeLib.XLS.Excel.#ctor">
             <summary>
             Constructor
@@ -1269,6 +1633,14 @@
             Excel file open
             </summary>
             <param name="file">File path</param>
+            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.Open(System.String,System.Boolean)">
+            <summary>
+            Excel file open (optional auto save)
+            </summary>
+            <param name="file">File path</param>
+            <param name="isAutoSave">true : Auto, false : Manual</param>
             <returns></returns>
         </member>
         <member name="M:OfficeLib.XLS.Excel.Open(System.Object[])">
@@ -1373,7 +1745,7 @@
         </member>
         <member name="M:OfficeLib.XLS.Excel.SetSheetProperty(System.String,System.String,System.Object[])">
             <summary>
-            
+            Set sheet properties
             </summary>
             <param name="sheetName"></param>
             <param name="propertyName"></param>
@@ -1381,7 +1753,7 @@
         </member>
         <member name="M:OfficeLib.XLS.Excel.GetSheetProperty(System.String,System.String,System.Object[])">
             <summary>
-            
+            Get sheet properties
             </summary>
             <param name="sheetName"></param>
             <param name="propertyName"></param>
@@ -1390,7 +1762,7 @@
         </member>
         <member name="M:OfficeLib.XLS.Excel.GetSheet(System.String)">
             <summary>
-            
+            Get Sheet Object class
             </summary>
             <param name="sheetName"></param>
             <returns></returns>
@@ -1469,16 +1841,51 @@
         </member>
         <member name="M:OfficeLib.XLS.Excel.GetSetFormat(OfficeLib.XLS.XlGetValueFormat)">
             <summary>
-            
+            Get cell refarence format string
             </summary>
-            <param name="referenceFormat"></param>
-            <returns></returns>
+            <param name="referenceFormat">Value format type</param>
+            <returns>Format String</returns>
         </member>
         <member name="M:OfficeLib.XLS.Excel.GetLastCell">
             <summary>
-            
+            Get the largest cell of the edited range
             </summary>
-            <returns></returns>
+            <returns>largest cell string</returns>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.CellCopy(System.String,System.String,System.String)">
+            <summary>
+            Cell Copy
+            </summary>
+            <param name="sheetName">Sheet name</param>
+            <param name="startAdress">Start adress</param>
+            <param name="endAdress">End adress</param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.CellPaste(System.String,System.String,System.String)">
+            <summary>
+            Cell Paste
+            </summary>
+            <param name="sheetName">Sheet Name</param>
+            <param name="startAdress">Start adress</param>
+            <param name="endAdress">End adress</param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.AtherBookCellPaste(System.String,System.String,System.String,System.String)">
+            <summary>
+            Paste to another book
+            </summary>
+            <param name="bookName">Book path</param>
+            <param name="sheetName">Sheet name</param>
+            <param name="startAdress">Start adress</param>
+            <param name="endAdress">End adress</param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.AtherBookCellPaste(System.String,System.String,System.String,System.String,OfficeLib.XLS.XlPasteType)">
+            <summary>
+            Paste to another book
+            </summary>
+            <param name="bookName">Book path</param>
+            <param name="sheetName">Sheet name</param>
+            <param name="startAdress">Start adress</param>
+            <param name="endAdress">End adress</param>
+            <param name="pasteType"></param>
         </member>
         <member name="M:OfficeLib.XLS.Excel.Save">
             <summary>
@@ -1511,6 +1918,40 @@
             <param name="startCol">Start column</param>
             <param name="endRow">End row</param>
             <param name="endCol">End colmun</param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.SetChartSeriesName(System.Int32,System.String[])">
+            <summary>
+            Set ChartSeries Name
+            </summary>
+            <param name="chartIndex">chart object index</param>
+            <param name="names">series names</param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.AddChart">
+            <summary>
+            Active sheet add chart
+            </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.SetChartType(System.Int32,OfficeLib.XLS.XlChartType)">
+            <summary>
+            Set chart type
+            </summary>
+            <param name="chartIndex"></param>
+            <param name="xlType"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.SetChartTypeSeries(System.Int32,OfficeLib.XLS.XlChartType[])">
+            <summary>
+            
+            </summary>
+            <param name="chartIndex"></param>
+            <param name="xlTypes"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.SetChartTypeSeries(System.Int32,System.Int32,OfficeLib.XLS.XlChartType)">
+            <summary>
+            
+            </summary>
+            <param name="chartIndex"></param>
+            <param name="seriesIndex"></param>
+            <param name="xlType"></param>
         </member>
         <member name="M:OfficeLib.XLS.Excel.ToString">
             <summary>
@@ -1683,6 +2124,12 @@
             Get the cell Value
             </summary>
         </member>
+        <member name="M:OfficeLib.XLS.Field`1.Set(`0[][])">
+            <summary>
+            Data setter (first cell at A1 -> last)
+            </summary>
+            <param name="data"></param>
+        </member>
         <member name="T:OfficeLib.XLS.Address">
             <summary>Cell address class</summary>
         </member>
@@ -1832,6 +2279,14 @@
             <param name="path"></param>
             <returns></returns>
         </member>
+        <member name="M:OfficeLib.XLS.WorkBook.GetInstance(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="path"></param>
+            <param name="isAutoSave"></param>
+            <returns></returns>
+        </member>
         <member name="M:OfficeLib.XLS.WorkBook.GetInstance">
             <summary>
             Get Excel instance
@@ -1922,6 +2377,13 @@
             <summary>
             Get this worksheet names
             </summary>
+        </member>
+        <member name="M:OfficeLib.XLS.WorkBook.SheetHide(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sheetName"></param>
+            <returns></returns>
         </member>
         <member name="T:OfficeLib.XLS.WorkSheet">
             <summary>Worksheet class</summary>
@@ -2745,6 +3207,9 @@
         <member name="P:OfficeLib.OfficeCore.WorkArea">
             <summary>Work area</summary>
         </member>
+        <member name="P:OfficeLib.OfficeCore.ClipBoard">
+            <summary>Copy and Paste Buffer</summary>
+        </member>
         <member name="P:OfficeLib.OfficeCore.Version">
             <summary>Version of Application</summary>
         </member>
@@ -2799,8 +3264,17 @@
         <member name="F:OfficeLib.PPT.PowerPoint.OBJECT_PRESENTATIONS">
             <summary>Presentations object ID</summary>
         </member>
+        <member name="F:OfficeLib.PPT.PowerPoint.PROP_SLIDES">
+            <summary>Property Slides</summary>
+        </member>
+        <member name="F:OfficeLib.PPT.PowerPoint.PROP_NOTESPAGE">
+            <summary>Property NotesPage</summary>
+        </member>
         <member name="P:OfficeLib.PPT.PowerPoint.Presentation">
             <summary>Presentation object</summary>
+        </member>
+        <member name="P:OfficeLib.PPT.PowerPoint.Slide">
+            <summary>Slide object</summary>
         </member>
         <member name="M:OfficeLib.PPT.PowerPoint.#ctor">
             <summary>Constructor</summary>
@@ -2818,6 +3292,12 @@
             </summary>
             <param name="filePath"></param>
             <returns></returns>
+        </member>
+        <member name="M:OfficeLib.PPT.PowerPoint.SelectSlide(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="slideNo"></param>
         </member>
         <member name="M:OfficeLib.PPT.PowerPoint.Save">
             <summary>Save</summary>

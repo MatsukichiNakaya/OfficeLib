@@ -67,6 +67,6 @@ namespace OfficeLib
         /// <summary>Weight</summary>
         public const String PROP_WEIGHT = "Weight";
         /// <summary>CutCopyMode</summary>
-        public const String PROP_CUTCOPY_MODE = "CutCopyMode";
+        public static String PROP_CUTCOPY_MODE => "CutCopyMode";
     }
 }
