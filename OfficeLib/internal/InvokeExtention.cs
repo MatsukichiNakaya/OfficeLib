@@ -71,7 +71,7 @@ namespace OfficeLib
         /// </summary>
         public static Object GetProperty(this Object src, String command, Binder binder, Object target, Object[] args)
         {
-            if(src == null) { return null; }
+            if (src == null) { return null; }
             return src.GetType().InvokeMember(command, BindingFlags.GetProperty, binder, target, args);
         }
         #endregion

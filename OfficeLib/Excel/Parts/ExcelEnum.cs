@@ -772,4 +772,19 @@ namespace OfficeLib.XLS
         /// <summary>Scatter with Smoothed Lines and No Data Markers.</summary>
         xlXYScatterSmoothNoMarkers = 73,
     }
+
+    /// <summary> Specifies the worksheet type. </summary>
+    public enum XlSheetType
+    {
+        /// <summary>Chart.</summary>
+        xlChart = -4109,
+        /// <summary>Dialog sheet.</summary>
+        xlDialogSheet = -4116,
+        /// <summary>Excel version 4 international macro sheet.</summary>
+        xlExcel4IntlMacroSheet = 4,
+        /// <summary>Excel version 4 macro sheet.</summary>
+        xlExcel4MacroSheet = 3,
+        /// <summary>Worksheet.</summary>
+        xlWorksheet = -4167,
+    }
 }

@@ -287,6 +287,7 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 /LibTester/LibTester.csproj
+/LibTester/Program.cs
 /exe/LibTester.vshost.exe.manifest
 /exe/LibTester.vshost.exe.config
 /exe/LibTester.vshost.exe

@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using System.Reflection.Emit;
+using System.Runtime.Remoting.Messaging;
 using static OfficeLib.Commands;
 using static OfficeLib.XLS.ExcelCommands;
 
@@ -292,8 +294,25 @@ namespace OfficeLib.XLS
         /// <param name="sheetName">Sheet name</param>
         public Boolean AddSheet(String sheetName)
         {
-            // Todo: Add sheet method
-            throw new Exception("work in progress");
+            if (this.SheetNames.Contains(sheetName)) { return false; }
+            Object sheets = null;
+            Object newSheet = null;
+            Boolean result = false;
+            try {
+                sheets = this.Book.GetProperty(OBJECT_SHEET);
+                newSheet = sheets.Method(METHOD_ADD, new Object[] { Type.Missing, Type.Missing, 1, XlSheetType.xlWorksheet });
+                newSheet.SetProperty(PROP_NAME, new Object[] { sheetName });
+                result = true;
+            }
+            catch (Exception) {
+                result = false;
+            }
+            finally
+            {
+                ReleaseObjects(sheets, newSheet);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -1023,6 +1042,70 @@ namespace OfficeLib.XLS
                     chart = this.Sheet.Method(METHOD_CHART_OBJECTS, new Object[] { chartIndex })
                                       .GetProperty(PROP_CHART).Method(METHOD_SERIES_COLLECTION, new Object[] { seriesIndex });
                     chart.SetProperty(PROP_CHART_TYPE, new Object[] { xlType });
+                }
+                else {
+                    // 2003 VBA code sample
+                    // ActiveSheet.ChartObjects(1).Activate
+                    // ActiveChart.ChartArea.Select
+                    // ActiveChart.ChartType = xlLine
+                    throw new Exception("Functions not supported in this version");
+                }
+            }
+            finally {
+                ReleaseObject(chart);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="chartIndex"></param>
+        /// <returns></returns>
+        public Int32[] GetChartPosition(Int32 chartIndex)
+        {
+            var result = new Int32[4];
+            Object chart = null;
+            try {
+                Double.TryParse(this.Version, out var ver);
+                if ((Int32)XlVersion.Excel2007 <= ver) {
+                    // 2007
+                    chart = this.Sheet.Method(METHOD_CHART_OBJECTS, new Object[] { chartIndex });
+                    result[0] = chart.GetProperty(PROP_TOP).To<Int32>();
+                    result[1] = chart.GetProperty(PROP_LEFT).To<Int32>();
+                    result[2] = chart.GetProperty(PROP_HEIGHT).To<Int32>();
+                    result[3] = chart.GetProperty(PROP_WIDTH).To<Int32>();
+                }
+                else {
+                    // 2003 VBA code sample
+                    // ActiveSheet.ChartObjects(1).Activate
+                    // ActiveChart.ChartArea.Select
+                    // ActiveChart.ChartType = xlLine
+                    throw new Exception("Functions not supported in this version");
+                }
+            }
+            finally {
+                ReleaseObject(chart);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="chartIndex"></param>
+        /// <param name="location"></param>
+        public void SetChartPosition(Int32 chartIndex, Int32[] location)
+        {
+            Object chart = null;
+            try {
+                Double.TryParse(this.Version, out var ver);
+                if ((Int32)XlVersion.Excel2007 <= ver) {
+                    // 2007
+                    chart = this.Sheet.Method(METHOD_CHART_OBJECTS, new Object[] { chartIndex });
+                    chart.SetProperty(PROP_TOP, new Object[] { location[0] });
+                    chart.SetProperty(PROP_LEFT, new Object[] { location[1] });
+                    chart.SetProperty(PROP_HEIGHT, new Object[] { location[2] });
+                    chart.SetProperty(PROP_WIDTH, new Object[] { location[3] });
                 }
                 else {
                     // 2003 VBA code sample

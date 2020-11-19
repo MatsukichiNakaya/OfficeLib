@@ -63,6 +63,9 @@
         <member name="F:OfficeLib.Commands.PROP_DISP_ALERT">
             <summary>Display alert</summary>
         </member>
+        <member name="F:OfficeLib.Commands.PROP_HEIGHT">
+            <summary>Height</summary>
+        </member>
         <member name="F:OfficeLib.Commands.PROP_ITEM">
             <summary>Item</summary>
         </member>
@@ -92,6 +95,9 @@
         </member>
         <member name="F:OfficeLib.Commands.PROP_WEIGHT">
             <summary>Weight</summary>
+        </member>
+        <member name="F:OfficeLib.Commands.PROP_WIDTH">
+            <summary>Width</summary>
         </member>
         <member name="P:OfficeLib.Commands.PROP_CUTCOPY_MODE">
             <summary>CutCopyMode</summary>
@@ -1952,6 +1958,20 @@
             <param name="chartIndex"></param>
             <param name="seriesIndex"></param>
             <param name="xlType"></param>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.GetChartPosition(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="chartIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OfficeLib.XLS.Excel.SetChartPosition(System.Int32,System.Int32[])">
+            <summary>
+            
+            </summary>
+            <param name="chartIndex"></param>
+            <param name="location"></param>
         </member>
         <member name="M:OfficeLib.XLS.Excel.ToString">
             <summary>

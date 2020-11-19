@@ -14,10 +14,9 @@ namespace OfficeLib
         /// <typeparam name="TOutput">Type after conversion</typeparam>
         /// <param name="value">Value of conversion source</param>
         public static TOutput To<TOutput>(this Object value)
-        {   
-            if(value == null) { return default; }
-            try
-            {
+        {
+            if (value == null) { return default; }
+            try {
                 TypeConverter converter = TypeDescriptor.GetConverter(typeof(TOutput));
 
                 return converter != null
@@ -35,10 +34,9 @@ namespace OfficeLib
         /// <remarks>Cast of return value required</remarks>
         public static Object To(this Object value, Type type)
         {
-            Object result = type.IsValueType ? Activator.CreateInstance(type) : null;
+            var result = type.IsValueType ? Activator.CreateInstance(type) : null;
             if (value == null) { return result; }
-            try
-            {
+            try {
                 var converter = TypeDescriptor.GetConverter(type);
                 return converter != null
                         ? converter.ConvertTo(value, type) : result;
@@ -107,9 +105,8 @@ namespace OfficeLib
             if (values == null) { return null; }
 
             var result = new TOutput[values.Count()][];
-            Int32 count = 0;
-            foreach (var val in values)
-            {
+            var count = 0;
+            foreach (var val in values) {
                 result[count] = val?.ConvertAll<TInput, TOutput>();
                 count++;
             }
@@ -135,5 +132,3 @@ namespace OfficeLib
         }
     }
 }
-
-

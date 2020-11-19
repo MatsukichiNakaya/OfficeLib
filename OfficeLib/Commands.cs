@@ -46,6 +46,8 @@ namespace OfficeLib
         public const String PROP_COUNT = "Count";
         /// <summary>Display alert</summary>
         public const String PROP_DISP_ALERT = "DisplayAlerts";
+        /// <summary>Height</summary>
+        public const String PROP_HEIGHT = "Height";
         /// <summary>Item</summary>
         public const String PROP_ITEM = "Item";
         /// <summary>Items</summary>
@@ -66,6 +68,8 @@ namespace OfficeLib
         public const String PROP_VERSION = "Version";
         /// <summary>Weight</summary>
         public const String PROP_WEIGHT = "Weight";
+        /// <summary>Width</summary>
+        public const String PROP_WIDTH = "Width";
         /// <summary>CutCopyMode</summary>
         public static String PROP_CUTCOPY_MODE => "CutCopyMode";
     }
